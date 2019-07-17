@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {shallow, configure} from 'enzyme';
+import {mount, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ResistorSVG from '../components/ResistorSVG';
 
@@ -33,8 +33,11 @@ const TestCodes = [
 describe('<ResistorSVG />', () => {
   it('renders stripes', () => {
     TestCodes.forEach(({code}) => {
-      const wrapper = shallow(<ResistorSVG code={code} />);
+      const wrapper = mount(<ResistorSVG code={code} />);
       const selectors = code.map(color => `Band--${color.toLowerCase()}`);
+      const bands = wrapper.find('rect[className^="Band"]').map(tags => tags.props().className);
+      expect(bands).toEqual(selectors);
+      wrapper.unmount();
     });
   });
 });

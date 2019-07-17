@@ -17,6 +17,7 @@ function Rect({
       width={width}
       id={id}
       style={{fill, fillOpacity:1}}
+      className={`Band--${fill}`}
     />
   );
 }
