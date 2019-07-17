@@ -1,33 +1,105 @@
 .App {
-  text-align: center;
+  width: 80%;
+  margin: 1em auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App .container {
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.ColorSelect {
+  display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-right: 5px;
+}
+
+.ColorSelect p {
+  margin: 0;
+  font-size: 75%;
+  font-weight: bold;
+}
+
+.is-black {
+  background-color: rgb(32, 32, 32);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.is-brown {
+  background-color: rgb(155, 57, 0);
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.is-red {
+  background-color: red;
+}
+
+.is-orange {
+  background-color: orange;
+}
+
+.is-yellow {
+  background-color: yellow;
+}
+
+.is-green {
+  background-color: green;
+  color: white;
+}
+
+.is-blue {
+  background-color: blue;
+  color: white;
+}
+
+.is-violet {
+  background-color: violet;
+}
+
+.is-grey {
+  background-color: grey;
+  color: white;
+}
+
+.is-white {
+  background-color: white;
+}
+
+.is-gold {
+  background-color: gold;
+}
+
+.is-silver {
+  background-color: silver;
+}
+
+.Chart td {
+  border: 1px solid black;
+}
+
+.resistor-svg {
+  width: 20em;
+  height: 30%;
+  display: block;
+  margin: 0 auto;
+}
+
+.resistor-stats {
+  margin: 0;
+  text-align: center;
+}
+
+.Resistance {
+  display: flex;
+  justify-content: space-around;
+}
+
+.Bands {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Calculator {
+  margin-bottom: 1.5rem;
 }
