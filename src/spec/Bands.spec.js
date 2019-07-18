@@ -1,10 +1,9 @@
 import React from 'react';
-import Bands, {ColorSelect} from '../components/Bands';
+import Bands, {ColorSelect, pluckSecond} from '../components/Bands';
 import {valueAndColor, multiplierAndColor, toleranceAndColor} from '../lib/ColorCode';
 
 import {shallow, configure} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { pluckSecond } from '../lib/util';
 
 configure({adapter: new Adapter()});
 

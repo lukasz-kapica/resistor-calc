@@ -8,8 +8,8 @@ import ESeries from './ESeries';
 import {
   resistorToCode,
   codeToResistor,
+  getMagnitude,
 } from '../lib/ColorCode';
-import {getMagnitude} from "../lib/util";
 
 function Calculator() {
 

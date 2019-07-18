@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {valueAndColor, toleranceAndColor, multiplierAndColor} from '../lib/ColorCode';
-import {pluckSecond} from '../lib/util';
+
+export const pluckSecond = (xs) => xs.map(([_, x]) => x);
 
 export default function Bands({
   code,

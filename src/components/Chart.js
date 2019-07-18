@@ -1,7 +1,6 @@
 import React from 'react';
 
-import {Chart as ch, colorNames} from '../lib/ColorCode';
-import {getMagnitude} from '../lib/util';
+import {Chart as ch, colorNames, getMagnitude} from '../lib/ColorCode';
 
 export default function Chart() {
   return (
