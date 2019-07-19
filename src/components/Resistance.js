@@ -9,6 +9,7 @@ function ResistanceInput({
   return (
     <label>
       <input
+        className="Resistance__resistance-input"
         type="text"
         size={12}
         value={value}
@@ -26,7 +27,11 @@ function ToleranceInput({
   const tolerances = toleranceAndColor.map(tc => tc[0]);
 
   return (
-    <select value={value} onChange={(e) => onToleranceChange(+e.target.value)}>
+    <select
+      className="Resistance__tolerance-input"
+      value={value}
+      onChange={(e) => onToleranceChange(+e.target.value)}
+    >
       {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
     </select>
   );
@@ -38,7 +43,11 @@ function BandSelection({
 }) {
 
   return (
-    <select value={value} onChange={(e) => onBandsChange(+e.target.value)}>
+    <select
+      className="Resistance__bands-input"
+      value={value}
+      onChange={(e) => onBandsChange(+e.target.value)}
+    >
       <option value="4">4 bands</option>
       <option value="5">5 bands</option>
     </select>
@@ -75,18 +84,15 @@ function Resistance({
   return (
     <div className="Resistance">
       <ResistanceInput
-        className="Resistance__resistance-input"
         value={resistance}
         onResistanceChange={handleResistanceChange}
       />
       <span style={{fontVariantPosition: 'sub'}}>±</span>
       <ToleranceInput
-        className="Resistance__tolerance-input"
         value={tolerance}
         onToleranceChange={handleToleranceChange}
       />
       <BandSelection
-        className="Resistance__bands-input"
         value={bands}
         onBandsChange={handleBandsChange}
       />

@@ -29,7 +29,7 @@ function Calculator() {
 
   return (
     <div className="Calculator">
-      <h2 className="resistor-stats">{resistance_str}Ω ± {tolerance}%</h2>
+      <h2 className="Calculator__resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
       <ResistorSVG code={code} />
       <h3>Resistance</h3>
       <Resistance
