@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {mount, configure} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {render, cleanup} from '@testing-library/react';
 import ResistorSVG from '../components/ResistorSVG';
+import _ from "lodash";
 
-configure({adapter: new Adapter()});
+beforeEach(cleanup);
 
 const TestCodes = [
   {
@@ -30,14 +30,18 @@ const TestCodes = [
   },
 ];
 
-describe('<ResistorSVG />', () => {
-  it('renders stripes', () => {
-    TestCodes.forEach(({code}) => {
-      const wrapper = mount(<ResistorSVG code={code} />);
-      const selectors = code.map(color => `Band--${color.toLowerCase()}`);
-      const bands = wrapper.find('rect[className^="Band"]').map(tags => tags.props().className);
-      expect(bands).toEqual(selectors);
-      wrapper.unmount();
-    });
+TestCodes.forEach(({code}) => {
+  test(`renders stripes for ${code}`, () => {
+    const {container} = render(<ResistorSVG code={code} />);
+    const resistorSVG = container.querySelector('.resistor-svg');
+    const bands = getResistorSVGBands(resistorSVG);
+    expect(bands).toEqual(code);
   });
 });
+
+function getResistorSVGBands(resistorSVG) {
+  return Array.from(resistorSVG.querySelectorAll('[class^="Band--"]'))
+    .map(tag => tag.classList.value)
+    .map(className => className.replace('Band--', ''))
+    .map(className => _.capitalize(className));
+}
