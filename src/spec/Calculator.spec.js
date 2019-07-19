@@ -47,40 +47,42 @@ const helpers = {
 };
 
 test('everything changes accordingly when the resistance fields are changed', () => {
-  const {resistanceInput, toleranceInput, bandsInput, resistorInfo} = Elements;
+  const {resistanceInput, toleranceInput, bandsInput} = Elements;
 
   fireEvent.change(resistanceInput, { target: { value: '150' } });
   fireEvent.change(toleranceInput, { target: { value: '2' } });
   fireEvent.change(bandsInput, { target: { value: '4' } });
 
-  expect(resistorInfo.innerHTML).toBe("150Ω ± 2%");
-  expect(helpers.getResistorSVGBands())
-    .toEqual(['Brown', 'Green', 'Brown', 'Red']);
-  expect(helpers.getResistanceInputValues())
-    .toEqual(['150', '2', '4']);
-  expect(helpers.getSelectionBands())
-    .toEqual(['Brown', 'Green', 'Brown', 'Red']);
-  expect(helpers.getESeries())
-    .toEqual(['E6', 'E12', 'E24', 'E96']);
+  assertResistor({
+    resistance: '150',
+    tolerance: '2',
+    bands: '4',
+    code: ['Brown', 'Green', 'Brown', 'Red'],
+    eseries: ['E6', 'E12', 'E24', 'E96'],
+  });
 });
 
 test('everything changes accordingly when color bands are changed', () => {
-  const {bandsInput, resistorInfo} = Elements;
-
-  fireEvent.change(bandsInput, { target: { value: '4' } });
+  fireEvent.change(Elements.bandsInput, { target: { value: '4' } });
   const colorSelects = helpers.getColorSelects();
   fireEvent.change(colorSelects[0], { target: { value: 'Brown' } });
   fireEvent.change(colorSelects[1], { target: { value: 'Green' } });
   fireEvent.change(colorSelects[2], { target: { value: 'Brown' } });
   fireEvent.change(colorSelects[3], { target: { value: 'Red' } });
 
-  expect(resistorInfo.innerHTML).toBe("150Ω ± 2%");
-  expect(helpers.getResistorSVGBands())
-    .toEqual(['Brown', 'Green', 'Brown', 'Red']);
-  expect(helpers.getResistanceInputValues())
-    .toEqual(['150', '2', '4']);
-  expect(helpers.getSelectionBands())
-    .toEqual(['Brown', 'Green', 'Brown', 'Red']);
-  expect(helpers.getESeries())
-    .toEqual(['E6', 'E12', 'E24', 'E96']);
+  assertResistor({
+    resistance: '150',
+    tolerance: '2',
+    bands: '4',
+    code: ['Brown', 'Green', 'Brown', 'Red'],
+    eseries: ['E6', 'E12', 'E24', 'E96'],
+  });
 });
+
+function assertResistor({resistance, tolerance, bands, code, eseries}) {
+  expect(Elements.resistorInfo.innerHTML).toBe(`${resistance}Ω ± ${tolerance}%`);
+  expect(helpers.getResistorSVGBands()).toEqual(code);
+  expect(helpers.getResistanceInputValues()).toEqual([resistance, tolerance, bands]);
+  expect(helpers.getSelectionBands()).toEqual(code);
+  expect(helpers.getESeries()).toEqual(eseries);
+}
