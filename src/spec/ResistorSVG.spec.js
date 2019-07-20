@@ -39,6 +39,7 @@ TestCodes.forEach(({code}) => {
   });
 });
 
+// TODO: code repetition
 function getResistorSVGBands(resistorSVG) {
   return Array.from(resistorSVG.querySelectorAll('[class^="Band--"]'))
     .map(tag => tag.classList.value)

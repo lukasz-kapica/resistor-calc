@@ -1,12 +1,6 @@
 import React from 'react';
 import ESeries, {mapResistanceToSeries, mapSeriesToContent} from '../components/ESeries';
-
-import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-configure({
-  adapter: new Adapter(),
-});
+import { render, cleanup } from '@testing-library/react';
 
 const TestCases = [
   {
@@ -36,22 +30,22 @@ const TestCases = [
 ];
 
 describe('<ESeries />', () => {
-  it('renders series for given resistance', () => {
-    TestCases.forEach(test => {
-      const wrapper = shallow(<ESeries resistance={test.resistance} />);
-      const actual = wrapper.find('.ESeries__content').text();
-      const expected = mapSeriesToContent(test.want);
+  beforeEach(cleanup);
+  TestCases.forEach(({resistance, want}) => {
+    test(`renders ${want} ESeries for ${resistance} resistance`, () => {
+      const { container } = render(<ESeries resistance={resistance} />);
+      const actual = container.querySelector('.ESeries__content').innerHTML;
+      const expected = mapSeriesToContent(want);
       expect(actual).toBe(expected);
     });
   });
 });
 
 describe("mapResistanceToSeries", () => {
-  it('returns all possible ESeries in ascending order for given resistance', () => {
-    TestCases.forEach(test => {
-      const actual = mapResistanceToSeries(test.resistance);
-      expect(actual).toEqual(test.want);
+  TestCases.forEach(({resistance, want}) => {
+    it(`returns ${want} for ${resistance}`, () => {
+      const actual = mapResistanceToSeries(resistance);
+      expect(actual).toEqual(want);
     });
   });
 });
-
