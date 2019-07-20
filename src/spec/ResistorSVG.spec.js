@@ -39,6 +39,12 @@ TestCodes.forEach(({code}) => {
   });
 });
 
+test('renders nothing if code is not valid', () => {
+  const {container} = render(<ResistorSVG code={[]} />);
+  const resistorSVG = container.querySelector('.resistor-svg');
+  expect(resistorSVG).toBeNull();
+});
+
 // TODO: code repetition
 function getResistorSVGBands(resistorSVG) {
   return Array.from(resistorSVG.querySelectorAll('[class^="Band--"]'))

@@ -85,20 +85,14 @@ export const Chart = colorNames.reduce(
  * @returns {Resistor} resistor - decoded instance of the Resitor
  */
 export function codeToResistor(code) {
-  let len = code.length;
-
   // We can properly decode only 3, 4 and 5 band resistors
-  if (len < 3 || len > 5) {
+  if (!code || !code.length || code.length < 3 || code.length > 5) {
     throw new Error(
-      `codeToResistor function takes only 3, 4 or 5 arguments and ${len} arguments were given.`
+      `codeToResistor function takes only 3, 4 or 5 arguments`
     );
   }
 
-  // Blank band stands for tolerance of 20%
-  if (len === 3) {
-    code.push("Blank");
-    len += 1;
-  }
+  let len = code.length;
 
   // So that if we have digits a, b, c - the whole number is 100*a + 10*b + c
   // if a, b the whole number is 10*a + b
@@ -175,11 +169,10 @@ export const toleranceAndColor = Object.keys(toleranceArray).map(key => [
   toleranceArray[key]
 ]);
 
-export function validResistance(resistance_str, bands) {
-  if (typeof resistance_str !== 'string') {
-    resistance_str = String(resistance_str);
-  }
-  const resistance = +resistance_str;
+export function validResistance(resistance, bands) {
+  resistance = +resistance;
+  let resistanceStr = String(resistance);
+
   if (typeof resistance !== 'number' || Number.isNaN(resistance)) {
     return false;
   }
@@ -193,9 +186,9 @@ export function validResistance(resistance_str, bands) {
     return false;
   }
 
-  resistance_str = resistance_str.replace('.', '');
+  resistanceStr = resistanceStr.replace('.', '');
 
-  return Array.from(resistance_str.slice(bands-2)).every(char => char === '0');
+  return Array.from(resistanceStr.slice(bands-2)).every(char => char === '0');
 }
 
 export function getMagnitude(number) {

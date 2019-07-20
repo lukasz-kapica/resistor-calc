@@ -23,9 +23,11 @@ test('renders ColorSelect for every color in the code array', () => {
 });
 
 test('calls onCodeChange when the code is changed', () => {
-  const firstDigit = rootContainer.querySelector('.ColorSelect__colors');
-  fireEvent.change(firstDigit, { target: { value: "Brown" } });
+  const bands = rootContainer.querySelectorAll('.ColorSelect__colors');
+  fireEvent.change(bands[0], { target: { value: "Brown" } });
   expect(props.onCodeChange).toHaveBeenCalledTimes(0);
-  fireEvent.change(firstDigit, { target: { value: "Red" } });
-  expect(props.onCodeChange).toBeCalledWith(["Red", ...props.code.slice(1)]);
+  fireEvent.change(bands[0], { target: { value: "Red" } });
+  expect(props.onCodeChange).toBeCalledWith(["Red", "Orange", "Black", "Black", "Gold"]);
+  fireEvent.change(bands[3], { target: { value: "Brown" } });
+  expect(props.onCodeChange).toBeCalledWith(["Brown", "Orange", "Black", "Brown", "Gold"]);
 });

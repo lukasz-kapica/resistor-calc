@@ -49,6 +49,10 @@ describe("ColorCode", () => {
         expect(actual).toEqual(resistor);
       });
     });
+
+    it('should throw an exception when code is not valid', () => {
+      expect(() => codeToResistor()).toThrowError(Error);
+    });
   });
 
   describe("resistorToCode", () => {
@@ -59,6 +63,10 @@ describe("ColorCode", () => {
         const actual = resistorToCode(resistor);
         expect(actual).toEqual(code);
       });
+    });
+
+    it('should throw an exception when resistor is not valid', () => {
+      expect(() => resistorToCode({resistance: -1, tolerance: 5, bands: 1})).toThrowError(Error);
     });
 
     it('should trim the resistance if necessary', () => {
@@ -106,6 +114,16 @@ describe("validResistance", () => {
       resistance: "2.2",
       bands: 4,
       want: true
+    },
+    {
+      resistance: undefined,
+      bands: 4,
+      want: false
+    },
+    {
+      resistance: -1,
+      bands: 4,
+      want: false
     },
   ];
 
