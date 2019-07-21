@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import _ from 'lodash';
+
 import {digitColors, toleranceColors, multiplierColors} from '../lib/ColorCode';
 
 export default function Bands({
@@ -11,7 +13,7 @@ export default function Bands({
   const handleCodeChange = (index) => (color) => {
     const newCode = [...code];
     newCode[index] = color;
-    if (newCode.join(",") !== code.join(",")) {
+    if (!_.isEqual(code, newCode)) {
       onCodeChange(newCode);
     }
   };

@@ -81,8 +81,8 @@ export const Chart = colorNames.reduce(
 
 /**
  * Create a resistor instance from the color code
- * @param  {...any} code - 3, 4 or 5 arguments each of which is a color from the colorNames array
- * @returns {Resistor} resistor - decoded instance of the Resitor
+ * @param  {string[]} code - 3, 4 or 5 arguments each of which is a color from the colorNames array
+ * @returns {Resistor} resistor - decoded instance of the Resistor
  */
 export function codeToResistor(code) {
   // We can properly decode only 3, 4 and 5 band resistors

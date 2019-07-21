@@ -61,23 +61,17 @@ function Resistance({
   onToleranceChange,
 }) {
 
-  const handleResistanceChange = (newResistance) => {
-    if (validResistance(newResistance, resistor.bands) && +newResistance !== resistor.resistance) {
-      onResistanceChange(+newResistance);
+  const handleResistanceChange = (resistance) => {
+    if (validResistance(resistance, resistor.bands) && +resistance !== resistor.resistance) {
+      onResistanceChange(+resistance);
     }
   };
 
-  const handleToleranceChange = (newTolerance) => {
-    if (newTolerance !== resistor.tolerance) {
-      onToleranceChange(newTolerance);
-    }
-  };
+  const handleToleranceChange = tolerance =>
+    tolerance !== resistor.tolerance && onToleranceChange(tolerance);
 
-  const handleBandsChange = (newBands) => {
-    if (newBands !== resistor.bands) {
-      onBandsChange(newBands);
-    }
-  };
+  const handleBandsChange = bands =>
+    bands !== resistor.bands && onBandsChange(bands);
 
   const {resistance, tolerance, bands} = resistor;
 
