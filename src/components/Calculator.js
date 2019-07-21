@@ -4,6 +4,7 @@ import Bands from './Bands';
 import Resistance from './Resistance';
 import ResistorSVG from './ResistorSVG';
 import ESeries from './ESeries';
+import Chart from './Chart';
 
 import {
   resistorToCode,
@@ -16,7 +17,7 @@ function Calculator() {
   const [code, setCode] = useState(["Brown", "Orange", "Black", "Black", "Gold"]);
 
   const resistor = codeToResistor(code);
-  const {resistance, tolerance} = resistor;
+  const {resistance, tolerance, bands} = resistor;
 
   const handleResistorChange = (property) => (newValue) => {
     const newCode = resistorToCode({...resistor, [property]: newValue});
@@ -29,22 +30,25 @@ function Calculator() {
 
   return (
     <div className="Calculator">
-      <h2 className="Calculator__resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
-      <ResistorSVG code={code} />
-      <h3>Resistance</h3>
-      <Resistance
-        resistor={resistor}
-        onBandsChange={handleResistorChange('bands')}
-        onResistanceChange={handleResistorChange('resistance')}
-        onToleranceChange={handleResistorChange('tolerance')}
-      />
-      <h3>Bands</h3>
-      <Bands
-        code={code}
-        onCodeChange={handleCodeChange}
-      />
-      <h3>E-Series</h3>
-      <ESeries resistance={resistance} />
+      <div>
+        <h2 className="Calculator__resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
+        <ResistorSVG code={code} />
+        <h3>Resistance</h3>
+        <Resistance
+          resistor={resistor}
+          onBandsChange={handleResistorChange('bands')}
+          onResistanceChange={handleResistorChange('resistance')}
+          onToleranceChange={handleResistorChange('tolerance')}
+        />
+        <h3>Bands</h3>
+        <Bands
+          code={code}
+          onCodeChange={handleCodeChange}
+        />
+        <h3>E-Series</h3>
+        <ESeries resistance={resistance} />
+      </div>
+      <Chart bands={bands} />
     </div>
   );
 }

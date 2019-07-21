@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Chart as ch, colorNames, getMagnitude} from '../lib/ColorCode';
 
-export default function Chart() {
+export default function Chart({bands}) {
   return (
     <div className="Chart">
       <h3>Resistor Color Chart</h3>
@@ -12,7 +12,7 @@ export default function Chart() {
             <th>Color</th>
             <th>Band #1</th>
             <th>Band #2</th>
-            <th>Band #3</th>
+            {bands === 5 && <th>Band #3</th>}
             <th>Multiplier</th>
             <th>Tolerance</th>
           </tr>
@@ -26,7 +26,7 @@ export default function Chart() {
                 <td style={{padding: '0 10px'}}>{color}</td>
                 <td style={{textAlign: 'center'}}>{value}</td>
                 <td style={{textAlign: 'center'}}>{value}</td>
-                <td style={{textAlign: 'center'}}>{value}</td>
+                {bands === 5 && <td style={{textAlign: 'center'}}>{value}</td>}
                 <td style={{textAlign: 'center'}}>
                   {multiplier && getMagnitude(multiplier) + 'Ω'}
                 </td>
