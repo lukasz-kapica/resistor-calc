@@ -32,7 +32,6 @@ export const colorNames = [
   "White",
   "Gold",
   "Silver",
-  "Blank"
 ];
 
 // Colors with indices from 0 to 9 in colorNames
