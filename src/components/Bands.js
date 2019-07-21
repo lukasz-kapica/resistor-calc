@@ -1,17 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {valueAndColor, toleranceAndColor, multiplierAndColor} from '../lib/ColorCode';
-
-export const pluckSecond = (xs) => xs.map(([_, x]) => x);
+import {digitColors, toleranceColors, multiplierColors} from '../lib/ColorCode';
 
 export default function Bands({
   code,
   onCodeChange,
 }) {
-  const digitColors = pluckSecond(valueAndColor);
-  const toleranceColors = pluckSecond(toleranceAndColor);
-  const multiplierColors = pluckSecond(multiplierAndColor);
+
+  const handleCodeChange = (index) => (color) => {
+    const newCode = [...code];
+    newCode[index] = color;
+    if (newCode.join(",") !== code.join(",")) {
+      onCodeChange(newCode);
+    }
+  };
 
   return (
     <div className="Bands">
@@ -21,20 +24,20 @@ export default function Bands({
           value={color}
           colors={digitColors}
           title={`Digit #${index+1}`} 
-          onColorChange={(color) => handleCodeChange(color, index, code, onCodeChange)}
+          onColorChange={handleCodeChange(index)}
         />)}
-        <ColorSelect 
-          value={code[code.length-2]}
-          title="Multiplier"
-          colors={multiplierColors}
-          onColorChange={(color) => handleCodeChange(color, code.length-2, code, onCodeChange)}
-        />
-        <ColorSelect 
-          value={code[code.length-1]}
-          title="Tolerance"
-          colors={toleranceColors}
-          onColorChange={(color) => handleCodeChange(color, code.length-1, code, onCodeChange)}
-        />
+      <ColorSelect
+        value={code[code.length-2]}
+        title="Multiplier"
+        colors={multiplierColors}
+        onColorChange={handleCodeChange(code.length-2)}
+      />
+      <ColorSelect
+        value={code[code.length-1]}
+        title="Tolerance"
+        colors={toleranceColors}
+        onColorChange={handleCodeChange(code.length-1)}
+      />
     </div>
   );
 }
@@ -44,38 +47,28 @@ Bands.propTypes = {
   onCodeChange: PropTypes.func.isRequired,
 };
 
-function handleCodeChange(newColor, newIndex, oldCode, callback) {
-  const newCode = [...oldCode];
-  newCode[newIndex] = newColor;
-  if (newCode.join(",") !== oldCode.join(",")) {
-    callback(newCode);
-  }
-}
-
 export function ColorSelect({
   value,
   onColorChange,
   title,
   colors,
 }) {
+
+  const handleColorChange = (newValue) =>
+    newValue !== value && onColorChange(newValue);
+
   return (
     <div className="ColorSelect">
       <p className="ColorSelect__title">{title}</p>
       <select
         className="ColorSelect__colors"
         value={value}
-        onChange={(e) => handleColorChange(e.target.value, value, onColorChange)}
+        onChange={(e) => handleColorChange(e.target.value)}
       >
         {colors.map(color => <option key={color} value={color}>{color}</option>)}
       </select>
     </div>
   );
-}
-
-function handleColorChange(newValue, oldValue, callback) {
-  if (newValue !== oldValue) { 
-    callback(newValue);
-  }
 }
 
 ColorSelect.propTypes = {

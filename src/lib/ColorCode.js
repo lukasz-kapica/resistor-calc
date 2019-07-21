@@ -222,3 +222,9 @@ export function getMagnitude(number) {
 
   return number.toString();
 }
+
+const valuesFromPairs = (xs) => _.unzip(xs)[1];
+
+export const digitColors = valuesFromPairs(valueAndColor);
+export const toleranceColors = valuesFromPairs(toleranceAndColor);
+export const multiplierColors = valuesFromPairs(multiplierAndColor);
