@@ -15,10 +15,6 @@ describe("ColorCode", () => {
       code: ["Yellow", "Violet", "Orange", "Gold"],
     },
     {
-      resistor: new Resistor(97, 20, 4),
-      code: ["White", "Violet", "Black", "Blank"],
-    },
-    {
       resistor: new Resistor(3300, 0.1, 5),
       code: ["Orange", "Orange", "Black", "Brown", "Violet"],
     },

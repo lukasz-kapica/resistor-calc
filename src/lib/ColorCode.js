@@ -59,7 +59,7 @@ function mapIndexToMultiplier(index) {
 // Some colors in the array have tolerance associated with them
 function mapIndexToTolerance(index) {
   const indices = [1, 2, 5, 6, 7, 8, 10, 11, 12];
-  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10, 20];
+  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10];
   const indexOf = indices.indexOf(index);
   return indexOf !== -1 ? tolerances[indexOf] : undefined;
 }
@@ -84,10 +84,10 @@ export const Chart = colorNames.reduce(
  * @returns {Resistor} resistor - decoded instance of the Resistor
  */
 export function codeToResistor(code) {
-  // We can properly decode only 3, 4 and 5 band resistors
-  if (!code || !code.length || code.length < 3 || code.length > 5) {
+  // We can properly decode only 4 and 5 band resistors
+  if (!code || !code.length || code.length < 4 || code.length > 5) {
     throw new Error(
-      `codeToResistor function takes only 3, 4 or 5 arguments`
+      `codeToResistor function takes an array which consists of 4 or 5 colors`
     );
   }
 
@@ -144,19 +144,16 @@ export function resistorToCode({ resistance, tolerance, bands }) {
 
   const resistanceNumber = Math.floor((resistance / multiplier).toFixed(2));
 
-  const digits = _.chain(String(resistanceNumber).padStart(numberOfDigits, '0'))
+  const digits = String(resistanceNumber)
+    .padStart(numberOfDigits, '0')
     .split("")
     .map(i => parseInt(i))
-    .map(i => mapValueToColor(i))
-    .value();
+    .map(i => mapValueToColor(i));
 
   return [...digits, multiplierArray[multiplier], toleranceArray[tolerance]];
 }
 
-export const valueAndColor = _.chain(0)
-  .range(10)
-  .map(i => [i, colorNames[i]])
-  .value();
+export const valueAndColor = _.range(10).map(i => [i, colorNames[i]]);
 
 export const multiplierAndColor = Object.keys(multiplierArray).map(key => [
   key,
@@ -222,7 +219,7 @@ export function getMagnitude(number) {
   return number.toString();
 }
 
-const valuesFromPairs = (xs) => _.unzip(xs)[1];
+const valuesFromPairs = pairs => _.unzip(pairs)[1];
 
 export const digitColors = valuesFromPairs(valueAndColor);
 export const toleranceColors = valuesFromPairs(toleranceAndColor);
