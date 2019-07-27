@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 
+// Bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+
 import Calculator from './components/Calculator';
 
 function App() {
   return (
     <div className="App">
-      <h1>Resistor Color Code Calculator</h1>
       <Calculator />
     </div>
   );

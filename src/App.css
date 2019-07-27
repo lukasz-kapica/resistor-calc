@@ -1,28 +1,5 @@
-.App {
-  width: 80%;
-  margin: 1em auto;
-}
-
-.Calculator {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.ColorSelect {
-  display: inline-flex;
-  flex-direction: column;
-  margin-right: 5px;
-}
-
-.ColorSelect p {
-  margin: 0;
-  font-size: 75%;
-  font-weight: bold;
-}
-
 .is-black {
-  background-color: rgb(32, 32, 32);
+  background-color: #212529;
   color: white;
 }
 
@@ -32,38 +9,38 @@
 }
 
 .is-red {
-  background-color: red;
+  background-color: #dc1b15;
 }
 
 .is-orange {
-  background-color: orange;
+  background-color: #fd7e14;
 }
 
 .is-yellow {
-  background-color: yellow;
+  background-color: #ffc107;
 }
 
 .is-green {
-  background-color: green;
+  background-color: #28a745;
   color: white;
 }
 
 .is-blue {
-  background-color: blue;
+  background-color: #007bff;
   color: white;
 }
 
 .is-violet {
-  background-color: violet;
+  background-color: #e83e8c;
 }
 
 .is-grey {
-  background-color: grey;
+  background-color: #6c757d;
   color: white;
 }
 
 .is-white {
-  background-color: white;
+  background-color: #fff;
 }
 
 .is-gold {
@@ -85,21 +62,27 @@
   margin: 0 auto;
 }
 
-.Calculator__resistor-info {
+.resistor-info {
   margin: 0;
   text-align: center;
 }
 
-.Resistance {
-  display: flex;
-  justify-content: space-around;
+.Calculator > .container {
+  margin-top: 1rem;
 }
 
-.Bands {
-  display: flex;
-  justify-content: space-between;
+.Chart table {
+  width: 100%;
 }
 
-.Calculator > div {
-  margin-bottom: 1.5rem;
+.Chart .is-checked {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  border: 2px dashed black;
 }
+
+.resistor-icon {
+  width: 2rem;
+  margin-right: 0.75rem;
+}
+

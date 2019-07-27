@@ -2,7 +2,8 @@ import React from 'react';
 
 import {Chart as ch, colorNames, getMagnitude} from '../lib/ColorCode';
 
-export default function Chart({bands}) {
+export default function Chart({code}) {
+  const bands = code.length;
   return (
     <div className="Chart">
       <h3>Resistor Color Chart</h3>
@@ -21,16 +22,24 @@ export default function Chart({bands}) {
           {colorNames.map((color) => {
             const {value, multiplier, tolerance} = ch[color];
             const className = `is-${color.toLocaleLowerCase()}`;
+
+            const isChecked = (index) => {
+              if (code[index] === color) {
+                return 'is-checked';
+              }
+              return '';
+            };
+
             return (
               <tr key={color} className={className}>
                 <td style={{padding: '0 10px'}}>{color}</td>
-                <td style={{textAlign: 'center'}}>{value}</td>
-                <td style={{textAlign: 'center'}}>{value}</td>
-                {bands === 5 && <td style={{textAlign: 'center'}}>{value}</td>}
-                <td style={{textAlign: 'center'}}>
+                <td className={isChecked(0)} style={{textAlign: 'center'}}>{value}</td>
+                <td className={isChecked(1)} style={{textAlign: 'center'}}>{value}</td>
+                {bands === 5 && <td className={isChecked(2)} style={{textAlign: 'center'}}>{value}</td>}
+                <td className={isChecked(3)} style={{textAlign: 'center'}}>
                   {multiplier && getMagnitude(multiplier) + 'Ω'}
                 </td>
-                <td style={{padding: '0 10px'}}>{tolerance && `± ${tolerance}%`}</td>
+                <td className={isChecked(4)} style={{padding: '0 10px'}}>{tolerance && `± ${tolerance}%`}</td>
               </tr>
             );
           })

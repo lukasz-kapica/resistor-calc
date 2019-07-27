@@ -2,62 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toleranceAndColor, validResistance } from "../lib/ColorCode";
 
-function ResistanceInput({
-  value,
-  onResistanceChange,
-}) {
-  return (
-    <label>
-      <input
-        className="Resistance__resistance-input"
-        type="text"
-        size={12}
-        value={value}
-        onChange={(e) => onResistanceChange(e.target.value)}
-      />
-      Ω
-    </label>
-  );
-}
-
-function ToleranceInput({
-  value,
-  onToleranceChange,
-}) {
-  const tolerances = toleranceAndColor.map(tc => tc[0]);
-
-  return (
-    <select
-      className="Resistance__tolerance-input"
-      value={value}
-      onChange={(e) => onToleranceChange(+e.target.value)}
-    >
-      {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
-    </select>
-  );
-}
-
-function BandSelection({
-  value,
-  onBandsChange,
-}) {
-
-  return (
-    <select
-      className="Resistance__bands-input"
-      value={value}
-      onChange={(e) => onBandsChange(+e.target.value)}
-    >
-      <option value="4">4 bands</option>
-      <option value="5">5 bands</option>
-    </select>
-  );
-}
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
 
 function Resistance({
   resistor,
   onResistanceChange,
-  onBandsChange,
   onToleranceChange,
 }) {
 
@@ -70,26 +22,42 @@ function Resistance({
   const handleToleranceChange = tolerance =>
     tolerance !== resistor.tolerance && onToleranceChange(tolerance);
 
-  const handleBandsChange = bands =>
-    bands !== resistor.bands && onBandsChange(bands);
+  const {resistance, tolerance} = resistor;
 
-  const {resistance, tolerance, bands} = resistor;
+  const tolerances = toleranceAndColor.map(tc => tc[0]);
 
   return (
     <div className="Resistance">
-      <ResistanceInput
-        value={resistance}
-        onResistanceChange={handleResistanceChange}
-      />
-      <span style={{fontVariantPosition: 'sub'}}>±</span>
-      <ToleranceInput
-        value={tolerance}
-        onToleranceChange={handleToleranceChange}
-      />
-      <BandSelection
-        value={bands}
-        onBandsChange={handleBandsChange}
-      />
+      <Form>
+        <Form.Row>
+
+          <Form.Group as={Col} md="8">
+            <Form.Label>Resistance [Ω]</Form.Label>
+            <InputGroup>
+              <FormControl
+                className="mb-3 resistance-input"
+                value={resistance}
+                onChange={(e) => handleResistanceChange(e.target.value)}
+                placeholder="Resistance"
+                aria-label="Resistance"
+              />
+            </InputGroup>
+          </Form.Group>
+
+          <Form.Group as={Col} md="4">
+            <Form.Label>Tolerance</Form.Label>
+            <FormControl
+              as="select"
+              className="tolerance-input"
+              value={tolerance}
+              onChange={(e) => handleToleranceChange(+e.target.value)}
+            >
+              {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
+            </FormControl>
+          </Form.Group>
+
+        </Form.Row>
+      </Form>
     </div>
   );
 }
@@ -97,7 +65,6 @@ function Resistance({
 Resistance.propTypes = {
   resistor: PropTypes.object.isRequired,
   onResistanceChange: PropTypes.func.isRequired,
-  onBandsChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };
 

@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 
-import Bands from './Bands';
 import Resistance from './Resistance';
 import ResistorSVG from './ResistorSVG';
 import ESeries from './ESeries';
 import Chart from './Chart';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import ReactSVG from 'react-svg';
 
 import {
   resistorToCode,
   codeToResistor,
   getMagnitude,
 } from '../lib/ColorCode';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+
+const ResistorIcon = () => <ReactSVG
+  className="resistor-icon"
+  src={`${process.env.PUBLIC_URL}/resistor-icon.svg`}
+/>;
 
 function Calculator() {
 
@@ -24,31 +36,42 @@ function Calculator() {
     setCode(newCode);
   };
 
-  const handleCodeChange = (newCode) => setCode(newCode);
-
   const resistance_str = getMagnitude(resistance);
 
   return (
     <div className="Calculator">
-      <div>
-        <h2 className="Calculator__resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
-        <ResistorSVG code={code} />
-        <h3>Resistance</h3>
-        <Resistance
-          resistor={resistor}
-          onBandsChange={handleResistorChange('bands')}
-          onResistanceChange={handleResistorChange('resistance')}
-          onToleranceChange={handleResistorChange('tolerance')}
-        />
-        <h3>Bands</h3>
-        <Bands
-          code={code}
-          onCodeChange={handleCodeChange}
-        />
-        <h3>E-Series</h3>
-        <ESeries resistance={resistance} />
-      </div>
-      <Chart bands={bands} />
+      <Navbar bg="dark" variant="dark">
+        <ResistorIcon />
+        <Navbar.Brand href="#">Resistor Color Code Calculator</Navbar.Brand>
+        <Nav
+          activeKey={bands}
+          onSelect={(selectedKey, e) => {
+            e.preventDefault();
+            handleResistorChange('bands')(selectedKey);
+          }}
+        >
+          <Nav.Link href="4">4 bands</Nav.Link>
+          <Nav.Link href="5">5 bands</Nav.Link>
+        </Nav>
+      </Navbar>
+      <Container>
+        <Row>
+          <Col>
+            <h2 className="resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
+            <ResistorSVG code={code} />
+            <Resistance
+              resistor={resistor}
+              onResistanceChange={handleResistorChange('resistance')}
+              onToleranceChange={handleResistorChange('tolerance')}
+            />
+            <h5>E-Series</h5>
+            <ESeries resistance={resistance} />
+          </Col>
+          <Col>
+            <Chart code={code} />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
