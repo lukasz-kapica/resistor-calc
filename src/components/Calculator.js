@@ -42,7 +42,7 @@ function Calculator() {
     <div className="Calculator">
       <Navbar bg="dark" variant="dark">
         <ResistorIcon />
-        <Navbar.Brand href="#">Resistor Color Code Calculator</Navbar.Brand>
+        <Navbar.Brand href="#" className="navbar-title">Resistor Color Code Calculator</Navbar.Brand>
         <Nav
           activeKey={bands}
           onSelect={(selectedKey, e) => {

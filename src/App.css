@@ -1,54 +1,66 @@
 .is-black {
   background-color: #212529;
+  fill: #212529;
   color: white;
 }
 
 .is-brown {
   background-color: rgb(155, 57, 0);
+  fill: rgb(155, 57, 0);
   color: white;
 }
 
 .is-red {
   background-color: #dc1b15;
+  fill: #dc1b15;
 }
 
 .is-orange {
   background-color: #fd7e14;
+  fill: #fd7e14;
 }
 
 .is-yellow {
   background-color: #ffc107;
+  fill: #ffc107;
 }
 
 .is-green {
   background-color: #28a745;
+  fill: #28a745;
   color: white;
 }
 
 .is-blue {
+  background-color: #007bff;
   background-color: #007bff;
   color: white;
 }
 
 .is-violet {
   background-color: #e83e8c;
+  fill: #e83e8c;
 }
 
 .is-grey {
   background-color: #6c757d;
+  fill: #6c757d;
   color: white;
 }
 
 .is-white {
   background-color: #fff;
+  fill: #fff;
 }
 
 .is-gold {
   background-color: gold;
+  fill: gold;
 }
 
 .is-silver {
   background-color: silver;
+  fill: silver;
 }
 
 .Chart td {
@@ -83,6 +95,17 @@
 
 .resistor-icon {
   width: 2rem;
+  position: relative;
+  top: -3px;
   margin-right: 0.75rem;
 }
 
+a.navbar-brand {
+  font-family: 'Lobster Two';
+  font-size: 1.5rem;
+  padding-top: 0;
+}
+
+a.nav-link.active {
+  font-weight: bold;
+}
