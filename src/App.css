@@ -13,6 +13,7 @@
 .is-red {
   background-color: #dc1b15;
   fill: #dc1b15;
+  color: white;
 }
 
 .is-orange {
@@ -33,13 +34,14 @@
 
 .is-blue {
   background-color: #007bff;
-  background-color: #007bff;
+  fill: #007bff;
   color: white;
 }
 
 .is-violet {
   background-color: #e83e8c;
   fill: #e83e8c;
+  color: white;
 }
 
 .is-grey {
@@ -91,6 +93,22 @@
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
   font-weight: bold;
   border: 2px dashed black;
+}
+
+.Chart table td:first-child {
+  padding: 0 10px;
+}
+
+.Chart .band, .Chart .multiplier {
+  text-align: center;
+}
+
+.Chart .tolerance {
+  padding: 0 10px;
+}
+
+.is-clickable:hover {
+  cursor: pointer;
 }
 
 .resistor-icon {

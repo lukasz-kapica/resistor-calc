@@ -68,7 +68,8 @@ function Calculator() {
             <ESeries resistance={resistance} />
           </Col>
           <Col>
-            <Chart code={code} />
+            <Chart code={code}
+                   onCodeChange={(code) => setCode(code)}/>
           </Col>
         </Row>
       </Container>
