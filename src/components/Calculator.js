@@ -24,15 +24,26 @@ const ResistorIcon = () => <ReactSVG
   src={`${process.env.PUBLIC_URL}/resistor-icon.svg`}
 />;
 
-function Calculator() {
+function Calculator({
+  code: initialCode = ["Orange", "Orange", "Brown", "Gold"], // 330 Ohms
+}) {
 
-  const [code, setCode] = useState(["Brown", "Orange", "Black", "Black", "Gold"]);
+  const [code, setCode] = useState(initialCode);
 
   const resistor = codeToResistor(code);
   const {resistance, tolerance, bands} = resistor;
 
-  const handleResistorChange = (property) => (newValue) => {
-    const newCode = resistorToCode({...resistor, [property]: newValue});
+  const handleResistorChange = property => value =>
+    setCode(resistorToCode({
+      ...resistor,
+      [property]: value,
+    }));
+
+  const handleBaseChange = (base) => {
+    const baseCode = resistorToCode({resistance: base, tolerance, bands});
+    const newCode = baseCode.slice(0, bands-2);
+    newCode.push(code[bands-2]);
+    newCode.push(code[bands-1]);
     setCode(newCode);
   };
 
@@ -64,8 +75,9 @@ function Calculator() {
               onResistanceChange={handleResistorChange('resistance')}
               onToleranceChange={handleResistorChange('tolerance')}
             />
-            <h5>E-Series</h5>
-            <ESeries resistance={resistance} />
+            <ESeries
+              onBaseChange={handleBaseChange}
+              resistance={resistance} />
           </Col>
           <Col>
             <Chart code={code}

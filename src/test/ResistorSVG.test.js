@@ -45,10 +45,9 @@ test('renders nothing if code is not valid', () => {
   expect(resistorSVG).toBeNull();
 });
 
-// TODO: code repetition
 function getResistorSVGBands(resistorSVG) {
-  return Array.from(resistorSVG.querySelectorAll('[class^="Band--"]'))
-    .map(tag => tag.classList.value)
-    .map(className => className.replace('Band--', ''))
+  return Array.from(resistorSVG.querySelectorAll('.Band'))
+    .map(tag => tag.classList.value.split(" ")[1])
+    .map(className => className.replace('is-', ''))
     .map(className => _.capitalize(className));
 }

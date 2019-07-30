@@ -105,11 +105,6 @@ export function codeToResistor(code) {
   return new Resistor(resistance * multiplier, tolerance, len);
 }
 
-// We need a fast conversions from values to colors
-function mapValueToColor(value) {
-  return _.inRange(value, 10) ? colorNames[value] : undefined;
-}
-
 const makeMapFromProperty = property =>
   _.chain(colorNames)
     .groupBy(color => Chart[color][property])
@@ -119,6 +114,8 @@ const makeMapFromProperty = property =>
 
 const multiplierArray = makeMapFromProperty("multiplier");
 const toleranceArray = makeMapFromProperty("tolerance");
+
+export const tolerances = Object.keys(toleranceArray);
 
 export function resistorToCode({ resistance, tolerance, bands }) {
   if (bands < 4 || bands > 5 || resistance <= 0) {
@@ -142,28 +139,17 @@ export function resistorToCode({ resistance, tolerance, bands }) {
     multiplier *= 10;
   }
 
-  const resistanceNumber = Math.floor((resistance / multiplier).toFixed(2));
+  const intermid = (resistance / multiplier).toFixed(2);
+  const resistanceNumber = Math.floor(parseFloat(intermid));
 
   const digits = String(resistanceNumber)
     .padStart(numberOfDigits, '0')
     .split("")
     .map(i => parseInt(i))
-    .map(i => mapValueToColor(i));
+    .map(i => colorNames[i]);
 
   return [...digits, multiplierArray[multiplier], toleranceArray[tolerance]];
 }
-
-export const valueAndColor = _.range(10).map(i => [i, colorNames[i]]);
-
-export const multiplierAndColor = Object.keys(multiplierArray).map(key => [
-  key,
-  multiplierArray[key]
-]);
-
-export const toleranceAndColor = Object.keys(toleranceArray).map(key => [
-  key,
-  toleranceArray[key]
-]);
 
 export function validResistance(resistance, bands) {
   resistance = +resistance;
@@ -218,9 +204,3 @@ export function getMagnitude(number) {
 
   return number.toString();
 }
-
-const valuesFromPairs = pairs => _.unzip(pairs)[1];
-
-export const digitColors = valuesFromPairs(valueAndColor);
-export const toleranceColors = valuesFromPairs(toleranceAndColor);
-export const multiplierColors = valuesFromPairs(multiplierAndColor);

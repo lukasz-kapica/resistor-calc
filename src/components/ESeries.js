@@ -1,14 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+
+import Table from 'react-bootstrap/Table';
+
+const ResistanceLink = ({base, onBaseChange}) => {
+  return (
+    <a onClick={(e) => {
+      e.preventDefault();
+      onBaseChange(base);
+    }}
+       href="#">{base}</a>
+  );
+};
 
 export default function ESeries({
   resistance,
+  onBaseChange,
 }) {
-  const series = mapResistanceToSeries(resistance);
-  const content = mapSeriesToContent(series);
+  const base = baseResistance(resistance);
   return (
     <div className="ESeries">
-      <p className="ESeries__content">{content}</p>
+
+      <Table striped hover size="sm">
+        <thead>
+          <tr>
+            <th>E-Series</th>
+            <th>Less</th>
+            <th>Equal</th>
+            <th>Greater</th>
+          </tr>
+        </thead>
+        <tbody>
+        {Object.keys(eseriesToValues).map(eseries => {
+          const [smaller, equal, greater] = getTriple(base, eseries);
+          return (
+            <tr key={eseries}>
+              <td>{eseries}</td>
+              <td>{smaller ? <ResistanceLink base={smaller} onBaseChange={onBaseChange} /> : '—'}</td>
+              <td>{equal ? equal : '—'}</td>
+              <td>{greater ? <ResistanceLink base={greater} onBaseChange={onBaseChange} /> : '—'}</td>
+            </tr>
+          );
+        })}
+        </tbody>
+      </Table>
     </div>
   );
 }
@@ -16,10 +52,6 @@ export default function ESeries({
 ESeries.propTypes = {
   resistance: PropTypes.number.isRequired,
 };
-
-export function mapSeriesToContent(series) {
-  return series.length > 0 ? series.join(", ") : "None";
-}
 
 const eseriesToValues = {
   'E3': [1.0, 2.2, 4.7],
@@ -45,17 +77,29 @@ const eseriesToValues = {
     8.66, 8.87, 9.09, 9.31, 9.53, 9.76]
 };
 
-function inSeries(series, resistance) {
-  if (resistance <= 0) {
-    return false;
-  }
+function getTriple(base, series) {
   const values = eseriesToValues[series];
-  while (resistance > 10) resistance /= 10;
-  while (resistance < 1) resistance *= 10;
+  const index = _.sortedIndex(values, base);
 
-  return values.includes(resistance);
+  const smaller = index > 0 ? values[index-1] : null;
+  const equal = base === values[index] ? base : null;
+  let greater = index < values.length ? values[index] : null;
+
+  if (greater === base) {
+    greater = null;
+    if (index < values.length-1) {
+      greater = values[index+1];
+    }
+  }
+
+  return [smaller, equal, greater];
 }
 
-export function mapResistanceToSeries(resistance) {
-  return Object.keys(eseriesToValues).filter(series => inSeries(series, resistance));
+function baseResistance(resistance) {
+  if (resistance <= 0) {
+    return 0;
+  }
+  while (resistance > 10) resistance /= 10;
+  while (resistance < 1) resistance *= 10;
+  return resistance;
 }
