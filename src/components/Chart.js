@@ -70,7 +70,7 @@ export default function Chart({
   onCodeChange,
 }) {
   return (
-    <div className="Chart">
+    <div className="Chart d-flex align-items-center">
       <table>
         <THead bands={code.length} />
         <TBody code={code} onCodeChange={onCodeChange} />

@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot for Green,Blue,Yellow,Gold 1`] = `
+<svg
+  class="resistor-svg"
+  height="42.473526mm"
+  id="svg2"
+  viewBox="0 0 619.03099 150.49675"
+  width="174.7043mm"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    height="27.869762"
+    id="rect3292"
+    ry="13.934881"
+    style="fill: #808080; fill-opacity: 1;"
+    width="100.33115"
+    x="522.83673"
+    y="-764169.5"
+  />
+  <g
+    id="g3298"
+    transform="translate(-68.002197,-193.97351)"
+  >
+    <rect
+      height="27.869762"
+      id="rect3296"
+      ry="13.934881"
+      style="fill: #808080; fill-opacity: 1;"
+      width="619.03101"
+      x="68.002197"
+      y="254.49246"
+    />
+    <g
+      id="g3284"
+      style="fill: #ffd189; fill-opacity: 1;"
+      transform="translate(-15.607067,3.3443722)"
+    >
+      <g
+        id="g3272"
+        style="fill: #ffd189; fill-opacity: 1;"
+        transform="translate(189.51438,3.3443714)"
+      >
+        <rect
+          height="112.59386"
+          id="rect3274"
+          ry="0"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="162.7594"
+          x="152.72629"
+          y="206.23622"
+        />
+        <rect
+          height="150.49673"
+          id="rect3276"
+          ry="30.099342"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="153.84108"
+          x="294.30466"
+          y="187.28477"
+        />
+      </g>
+      <g
+        id="g3278"
+        style="fill: #ffd189; fill-opacity: 1;"
+        transform="matrix(-1,0,0,-1,595.29807,528.41065)"
+      >
+        <rect
+          height="112.59386"
+          id="rect3280"
+          ry="0"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="162.7594"
+          x="152.72629"
+          y="206.23622"
+        />
+        <rect
+          height="150.49673"
+          id="rect3282"
+          ry="30.099342"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="153.84108"
+          x="294.30466"
+          y="187.28477"
+        />
+      </g>
+    </g>
+  </g>
+  <g
+    transform="translate(-68.002197,-193.97351)"
+  >
+    <rect
+      class="is-green"
+      height="150.48511"
+      ry="0"
+      width="45"
+      x="185.05522"
+      y="193.97354"
+    />
+  </g>
+  <rect
+    class="is-blue"
+    height="112.64787"
+    ry="0"
+    width="45"
+    x="226.65579"
+    y="18.901487"
+  />
+  <rect
+    class="is-yellow"
+    height="112.64787"
+    ry="0"
+    width="45"
+    x="338.36636"
+    y="18.901487"
+  />
+  <rect
+    class="is-gold"
+    height="150.48511"
+    ry="0"
+    width="45"
+    x="447.96912"
+    y="0.0264872"
+  />
+</svg>
+`;
+
+exports[`matches snapshot for Red,Orange,Violet,Black,Brown 1`] = `
+<svg
+  class="resistor-svg"
+  height="42.473526mm"
+  id="svg2"
+  viewBox="0 0 619.03099 150.49675"
+  width="174.7043mm"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <rect
+    height="27.869762"
+    id="rect3292"
+    ry="13.934881"
+    style="fill: #808080; fill-opacity: 1;"
+    width="100.33115"
+    x="522.83673"
+    y="-764169.5"
+  />
+  <g
+    id="g3298"
+    transform="translate(-68.002197,-193.97351)"
+  >
+    <rect
+      height="27.869762"
+      id="rect3296"
+      ry="13.934881"
+      style="fill: #808080; fill-opacity: 1;"
+      width="619.03101"
+      x="68.002197"
+      y="254.49246"
+    />
+    <g
+      id="g3284"
+      style="fill: #ffd189; fill-opacity: 1;"
+      transform="translate(-15.607067,3.3443722)"
+    >
+      <g
+        id="g3272"
+        style="fill: #ffd189; fill-opacity: 1;"
+        transform="translate(189.51438,3.3443714)"
+      >
+        <rect
+          height="112.59386"
+          id="rect3274"
+          ry="0"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="162.7594"
+          x="152.72629"
+          y="206.23622"
+        />
+        <rect
+          height="150.49673"
+          id="rect3276"
+          ry="30.099342"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="153.84108"
+          x="294.30466"
+          y="187.28477"
+        />
+      </g>
+      <g
+        id="g3278"
+        style="fill: #ffd189; fill-opacity: 1;"
+        transform="matrix(-1,0,0,-1,595.29807,528.41065)"
+      >
+        <rect
+          height="112.59386"
+          id="rect3280"
+          ry="0"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="162.7594"
+          x="152.72629"
+          y="206.23622"
+        />
+        <rect
+          height="150.49673"
+          id="rect3282"
+          ry="30.099342"
+          style="fill: #ffd189; fill-opacity: 1;"
+          width="153.84108"
+          x="294.30466"
+          y="187.28477"
+        />
+      </g>
+    </g>
+  </g>
+  <g
+    transform="translate(-68.002197,-193.97351)"
+  >
+    <rect
+      class="is-red"
+      height="150.48511"
+      ry="0"
+      width="35"
+      x="160"
+      y="193.97354"
+    />
+  </g>
+  <rect
+    class="is-orange"
+    height="150.48511"
+    ry="0"
+    width="35"
+    x="155"
+    y="0"
+  />
+  <rect
+    class="is-violet"
+    height="112.64787"
+    ry="0"
+    width="35"
+    x="245"
+    y="18.901487"
+  />
+  <rect
+    class="is-black"
+    height="112.64787"
+    ry="0"
+    width="35"
+    x="330"
+    y="18.901487"
+  />
+  <rect
+    class="is-brown"
+    height="150.48511"
+    ry="0"
+    width="35"
+    x="447.96912"
+    y="0.0264872"
+  />
+</svg>
+`;

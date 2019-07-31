@@ -14,13 +14,10 @@ function Resistance({
 }) {
 
   const handleResistanceChange = (resistance) => {
-    if (validResistance(resistance, resistor.bands) && +resistance !== resistor.resistance) {
+    if (validResistance(resistance, resistor.bands)) {
       onResistanceChange(+resistance);
     }
   };
-
-  const handleToleranceChange = tolerance =>
-    tolerance !== resistor.tolerance && onToleranceChange(tolerance);
 
   const {resistance, tolerance} = resistor;
 
@@ -54,7 +51,7 @@ function Resistance({
               className="tolerance-input"
               aria-label="Tolerance"
               value={tolerance}
-              onChange={(e) => handleToleranceChange(+e.target.value)}
+              onChange={(e) => onToleranceChange(+e.target.value)}
             >
               {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
             </FormControl>

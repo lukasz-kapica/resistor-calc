@@ -1,35 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 
-function Rect({
-  x,
-  y,
-  height,
-  width,
-  id,
-  fill,
-}) {
-  return (
-    <rect
-      ry="0"
-      y={y}
-      x={x}
-      height={height}
-      width={width}
-      id={id}
-      className={`Band is-${fill}`}
-    />
-  );
-}
+function ResistorSVG({ code }) {
 
-function ResistorSVG({code}) {
+  const bands = code.length;
 
-  if (!code || code.length < 4 || code.length > 5) {
-    return null;
+  if (!_.inRange(bands, 4, 6)) {
+    throw new Error(`ResistorSVG: expected array of 4 or 5 elements, got: ${bands}`);
   }
 
   code = code.map(color => color.toLowerCase());
 
-  const bands = code.length;
   const width = (bands === 4) ? 45 : 35;
 
   const bandsArr = {
@@ -93,6 +75,14 @@ function ResistorSVG({code}) {
     ],
   };
 
+  const rects = code.map((color, index) =>
+    <rect ry="0"
+      key={index}
+      {...bandsArr[bands][index]}
+      className={`is-${color}`}
+    />
+  );
+
   return (
 
     <svg
@@ -101,8 +91,7 @@ function ResistorSVG({code}) {
       height="42.473526mm"
       width="174.7043mm"
       viewBox="0 0 619.03099 150.49675"
-      id="svg2"
-      version="1.1">
+      id="svg2">
 
       <rect
         style={{fill: '#808080', fillOpacity: 1}}
@@ -173,37 +162,16 @@ function ResistorSVG({code}) {
       </g>
       <g
         transform="translate(-68.002197,-193.97351)">
-        <Rect
-          {...bandsArr[bands][0]}
-          id="band1"
-          fill={code[0]}
-        />
+        { rects[0] }
       </g>
-      <Rect
-        {...bandsArr[bands][1]}
-        id="band2"
-        fill={code[1]}
-      />
-      <Rect
-        {...bandsArr[bands][2]}
-        id="band3"
-        fill={code[2]}
-      />
-      <Rect
-        {...bandsArr[bands][3]}
-        id="band4"
-        fill={code[3]}
-      />
-      {bands === 5 &&
-        <Rect
-          {...bandsArr[bands][4]}
-          id="band5"
-          fill={code[4]}
-        />
-      }
+      { rects.slice(1) }
     </svg>
 
   );
 }
+
+ResistorSVG.propTypes = {
+  code: PropTypes.array.isRequired,
+};
 
 export default ResistorSVG;

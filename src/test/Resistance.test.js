@@ -7,7 +7,7 @@ import {render, cleanup, fireEvent} from "@testing-library/react";
 
 afterEach(cleanup);
 
-let rootContainer, props;
+let resistanceInput, toleranceInput, props;
 
 const sampleProps = () => ({
   onResistanceChange: jest.fn(),
@@ -17,22 +17,22 @@ const sampleProps = () => ({
 
 beforeEach(() => {
   props = sampleProps();
-  const {container} = render(<Resistance {...props} />);
-  rootContainer = container;
+  const { getByLabelText } = render(<Resistance {...props} />);
+  resistanceInput = getByLabelText('Resistance');
+  toleranceInput = getByLabelText('Tolerance');
+});
+
+test('renders proper resistance and tolerance values', () => {
+  expect(resistanceInput.value).toBe(String(props.resistor.resistance));
+  expect(toleranceInput.value).toBe(String(props.resistor.tolerance));
 });
 
 test('calls onResistanceChange when the resistance is changed', () => {
-  const resistanceInput = rootContainer.querySelector('.resistance-input');
-  fireEvent.change(resistanceInput, { target: { value: props.resistor.resistance }}); // nothing changes
-  expect(props.onResistanceChange).toHaveBeenCalledTimes(0);
-  fireEvent.change(resistanceInput, { target: { value: 100 }}); // now we have a change
+  fireEvent.change(resistanceInput, { target: { value: 100 }});
   expect(props.onResistanceChange).toHaveBeenCalledWith(100);
 });
 
 test('calls onToleranceChange when the tolerance is changed', () => {
-  const toleranceInput = rootContainer.querySelector('.tolerance-input');
-  fireEvent.change(toleranceInput, { target: { value: props.resistor.tolerance }}); // nothing changes
-  expect(props.onToleranceChange).toHaveBeenCalledTimes(0);
   fireEvent.change(toleranceInput, { target: { value: 10 }});
   expect(props.onToleranceChange).toHaveBeenCalledWith(10);
 });

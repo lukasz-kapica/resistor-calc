@@ -51,23 +51,27 @@ function Calculator({
 
   return (
     <div className="Calculator">
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" expand="md">
         <ResistorIcon />
         <Navbar.Brand href="#" className="navbar-title">Resistor Color Code Calculator</Navbar.Brand>
-        <Nav
-          activeKey={bands}
-          onSelect={(selectedKey, e) => {
-            e.preventDefault();
-            handleResistorChange('bands')(selectedKey);
-          }}
-        >
-          <Nav.Link href="4">4 bands</Nav.Link>
-          <Nav.Link href="5">5 bands</Nav.Link>
-        </Nav>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav
+            className="mr-auto"
+            activeKey={bands}
+            onSelect={(selectedKey, e) => {
+              e.preventDefault();
+              handleResistorChange('bands')(selectedKey);
+            }}
+          >
+            <Nav.Link href="4">4 bands</Nav.Link>
+            <Nav.Link href="5">5 bands</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
       <Container>
         <Row>
-          <Col>
+          <Col className="first-column">
             <h2 className="resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
             <ResistorSVG code={code} />
             <Resistance
