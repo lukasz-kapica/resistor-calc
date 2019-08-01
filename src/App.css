@@ -69,6 +69,10 @@
   height: 100%;
 }
 
+.Chart th {
+  text-align: center;
+}
+
 .Chart td {
   border: 1px solid black;
 }

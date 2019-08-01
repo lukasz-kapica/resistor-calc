@@ -33,6 +33,10 @@ describe("ColorCode", () => {
     {
       resistor: new Resistor(4.3, 5, 4),
       code: ["Yellow", "Orange", "Gold", "Gold"],
+    },
+    {
+      resistor: new Resistor(34.8, 5, 5),
+      code: ["Orange", "Yellow", "Grey", "Gold", "Gold"],
     }
   ];
 

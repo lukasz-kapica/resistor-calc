@@ -40,8 +40,14 @@ function Calculator({
     }));
 
   const handleBaseChange = (base) => {
-    const baseCode = resistorToCode({resistance: base, tolerance, bands});
-    const newCode = baseCode.slice(0, bands-2);
+    let newBands = bands;
+    if (String(base).length === 4 && bands === 4) {
+      newBands = 5;
+    }
+    const newResistor = {resistance: base, tolerance, bands: newBands};
+    debugger;
+    const baseCode = resistorToCode(newResistor);
+    const newCode = baseCode.slice(0, newBands-2);
     newCode.push(code[bands-2]);
     newCode.push(code[bands-1]);
     setCode(newCode);
@@ -80,6 +86,7 @@ function Calculator({
               onToleranceChange={handleResistorChange('tolerance')}
             />
             <ESeries
+              bands={bands}
               onBaseChange={handleBaseChange}
               resistance={resistance} />
           </Col>

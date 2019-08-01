@@ -102,7 +102,7 @@ export function codeToResistor(code) {
   const multiplier = Chart[code[len - 2]].multiplier;
   const tolerance = Chart[code[len - 1]].tolerance;
 
-  return new Resistor(resistance * multiplier, tolerance, len);
+  return new Resistor(parseFloat((resistance * multiplier).toFixed(2)), tolerance, len);
 }
 
 const makeMapFromProperty = property =>
