@@ -7,9 +7,9 @@ const THead = ({bands}) => (
   <thead>
     <tr>
       <th>Color</th>
-      <th>Band #1</th>
-      <th>Band #2</th>
-      {bands === 5 && <th>Band #3</th>}
+      <th>Figure #1</th>
+      <th>Figure #2</th>
+      {bands === 5 && <th>Figure #3</th>}
       <th>Multiplier</th>
       <th>Tolerance</th>
     </tr>
