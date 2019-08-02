@@ -73,6 +73,15 @@ ESeries.propTypes = {
   resistance: PropTypes.number.isRequired,
 };
 
+const eseriesToTolerances = {
+  'E6': [20],
+  'E12': [10],
+  'E24': [5],
+  'E48': [2],
+  'E96': [1],
+  'E192': [0.5, 0.25, 0.1, 0.05],
+};
+
 const eseriesToValues = {
   'E6': [1.0, 1.5, 2.2, 3.3, 4.7, 6.8],
   'E12': [1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2],

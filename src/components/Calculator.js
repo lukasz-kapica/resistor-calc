@@ -24,6 +24,11 @@ const ResistorIcon = () => <ReactSVG
   src={`${process.env.PUBLIC_URL}/resistor-icon.svg`}
 />;
 
+const GithubIcon = () => <ReactSVG
+  className="github-icon"
+  src={`${process.env.PUBLIC_URL}/github-brands.svg`}
+/>;
+
 function Calculator({
   code: initialCode = ["Orange", "Orange", "Brown", "Gold"], // 330 Ohms
 }) {
@@ -67,6 +72,11 @@ function Calculator({
           >
             <Nav.Link href="4">4 bands</Nav.Link>
             <Nav.Link href="5">5 bands</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+        <Navbar.Collapse className="justify-content-end">
+          <Nav className="ml-auto">
+            <Nav.Link active={false} target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc"><GithubIcon /></Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
