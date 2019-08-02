@@ -45,7 +45,6 @@ function Calculator({
       newBands = 5;
     }
     const newResistor = {resistance: base, tolerance, bands: newBands};
-    debugger;
     const baseCode = resistorToCode(newResistor);
     const newCode = baseCode.slice(0, newBands-2);
     newCode.push(code[bands-2]);

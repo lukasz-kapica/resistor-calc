@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import Table from 'react-bootstrap/Table';
-import Badge from 'react-bootstrap/Badge';
+//import Badge from 'react-bootstrap/Badge';
 
 const ResistanceLink = ({base, onBaseChange}) => {
   return (
@@ -54,7 +54,6 @@ export default function ESeries({
         <tbody>
         {eseries.map(series => {
           const [smaller, equal, greater] = getTriple(base, series);
-          debugger;
           return (
             <tr key={series}>
               <td>{series}</td>
