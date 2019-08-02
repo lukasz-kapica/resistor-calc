@@ -11,12 +11,6 @@ exports[`matches snapshot for resistance: 100 1`] = `
       <tr>
         <th>
           E-Series 
-          <span
-            class="badge badge-pill badge-info"
-            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
-          >
-            ?
-          </span>
         </th>
         <th>
           Less
@@ -100,12 +94,6 @@ exports[`matches snapshot for resistance: 931 1`] = `
       <tr>
         <th>
           E-Series 
-          <span
-            class="badge badge-pill badge-info"
-            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
-          >
-            ?
-          </span>
         </th>
         <th>
           Less

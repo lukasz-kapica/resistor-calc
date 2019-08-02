@@ -184,21 +184,19 @@ export function getMagnitude(number) {
     return number.toString();
   }
 
-  let leadingZeros = 0;
-  for (let i = decimals.length-1; i > 0 && decimals[i] === '0'; i--) {
-    leadingZeros++;
-  }
+  const len = decimals.length;
 
   const ordersOfMagnitude = [
-    {zeros: 9, symbol: "G"},
-    {zeros: 6, symbol: "M"},
-    {zeros: 3, symbol: "K"},
+    {zeros: 12, symbol: "T"},
+    {zeros:  9, symbol: "G"},
+    {zeros:  6, symbol: "M"},
+    {zeros:  3, symbol: "K"},
   ];
 
   for (let i = 0; i < ordersOfMagnitude.length; i++) {
     const {zeros, symbol} = ordersOfMagnitude[i];
-    if (leadingZeros >= zeros) {
-      return decimals.slice(0, decimals.length-zeros).join("") + symbol;
+    if (len > zeros) {
+      return String(parseFloat((number / Math.pow(10, zeros)).toFixed(2))) + symbol;
     }
   }
 

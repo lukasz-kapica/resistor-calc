@@ -145,7 +145,7 @@ describe("getMagnitude", () => {
     },
     {
       number: 1500,
-      want: '1500'
+      want: '1.5K'
     },
     {
       number: 15000,
@@ -158,6 +158,10 @@ describe("getMagnitude", () => {
     {
       number: 11000000000,
       want: '11G'
+    },
+    {
+      number: 1110000000000,
+      want: '1.11T'
     },
     {
       number: 0,
