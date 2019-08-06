@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Resistance from '../components/Resistance';
-import { Resistor } from '../lib/ColorCode';
+import { Resistor, bandsToTolerances } from '../lib/ColorCode';
 
 import {render, cleanup, fireEvent} from "@testing-library/react";
 
@@ -12,7 +12,8 @@ let resistanceInput, toleranceInput, props;
 const sampleProps = () => ({
   onResistanceChange: jest.fn(),
   onToleranceChange: jest.fn(),
-  resistor: new Resistor(130, 5, 5),
+  tolerances: bandsToTolerances[5],
+  resistor: new Resistor(130, 2, 5),
 });
 
 beforeEach(() => {
@@ -33,6 +34,6 @@ test('calls onResistanceChange when the resistance is changed', () => {
 });
 
 test('calls onToleranceChange when the tolerance is changed', () => {
-  fireEvent.change(toleranceInput, { target: { value: 10 }});
-  expect(props.onToleranceChange).toHaveBeenCalledWith(10);
+  fireEvent.change(toleranceInput, { target: { value: 0.25 }});
+  expect(props.onToleranceChange).toHaveBeenCalledWith(0.25);
 });

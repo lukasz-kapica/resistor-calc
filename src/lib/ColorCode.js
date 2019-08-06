@@ -32,7 +32,13 @@ export const colorNames = [
   "White",
   "Gold",
   "Silver",
+  "Blank",
 ];
+
+export const bandsToTolerances = {
+  4: [5, 10, 20],
+  5: [2, 1, 0.5, 0.25, 0.1, 0.05],
+};
 
 // Colors with indices from 0 to 9 in colorNames
 // have values equal to their positions in the array
@@ -59,7 +65,7 @@ function mapIndexToMultiplier(index) {
 // Some colors in the array have tolerance associated with them
 function mapIndexToTolerance(index) {
   const indices = [1, 2, 5, 6, 7, 8, 10, 11, 12];
-  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10];
+  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10, 20];
   const indexOf = indices.indexOf(index);
   return indexOf !== -1 ? tolerances[indexOf] : undefined;
 }

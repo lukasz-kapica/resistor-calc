@@ -22,6 +22,10 @@ const TBody = ({
 }) => (
   <tbody>
   {colorNames.map((color) => {
+    if (color === "Blank" && code.length === 5) {
+      return null;
+    }
+
     const {value, multiplier, tolerance} = ch[color];
 
     const isChecked = (index) =>

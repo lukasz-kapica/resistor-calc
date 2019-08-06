@@ -11,6 +11,15 @@ exports[`matches snapshot for resistance: 100 1`] = `
       <tr>
         <th>
           E-Series 
+          <span
+            class="badge badge-pill badge-info"
+            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
+          >
+            ?
+          </span>
+        </th>
+        <th>
+          Tolerances [%]
         </th>
         <th>
           Less
@@ -27,6 +36,14 @@ exports[`matches snapshot for resistance: 100 1`] = `
       <tr>
         <td>
           E6
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            20
+          </a>
+          
         </td>
         <td>
           —
@@ -47,6 +64,14 @@ exports[`matches snapshot for resistance: 100 1`] = `
           E12
         </td>
         <td>
+          <a
+            href="#"
+          >
+            10
+          </a>
+          
+        </td>
+        <td>
           —
         </td>
         <td>
@@ -63,6 +88,14 @@ exports[`matches snapshot for resistance: 100 1`] = `
       <tr>
         <td>
           E24
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            5
+          </a>
+          
         </td>
         <td>
           —
@@ -94,6 +127,15 @@ exports[`matches snapshot for resistance: 931 1`] = `
       <tr>
         <th>
           E-Series 
+          <span
+            class="badge badge-pill badge-info"
+            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
+          >
+            ?
+          </span>
+        </th>
+        <th>
+          Tolerances [%]
         </th>
         <th>
           Less
@@ -110,6 +152,14 @@ exports[`matches snapshot for resistance: 931 1`] = `
       <tr>
         <td>
           E48
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            2
+          </a>
+          
         </td>
         <td>
           <a
@@ -137,6 +187,14 @@ exports[`matches snapshot for resistance: 931 1`] = `
           <a
             href="#"
           >
+            1
+          </a>
+          
+        </td>
+        <td>
+          <a
+            href="#"
+          >
             9.09
           </a>
         </td>
@@ -154,6 +212,32 @@ exports[`matches snapshot for resistance: 931 1`] = `
       <tr>
         <td>
           E192
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            .5
+          </a>
+          , 
+          <a
+            href="#"
+          >
+            .25
+          </a>
+          , 
+          <a
+            href="#"
+          >
+            .1
+          </a>
+          , 
+          <a
+            href="#"
+          >
+            .05
+          </a>
+          
         </td>
         <td>
           <a

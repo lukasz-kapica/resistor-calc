@@ -15,6 +15,7 @@ import {
   resistorToCode,
   codeToResistor,
   getMagnitude,
+  bandsToTolerances,
 } from '../lib/ColorCode';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -87,12 +88,14 @@ function Calculator({
             <ResistorSVG code={code} />
             <Resistance
               resistor={resistor}
+              tolerances={bandsToTolerances[bands]}
               onResistanceChange={handleResistorChange('resistance')}
               onToleranceChange={handleResistorChange('tolerance')}
             />
             <ESeries
               bands={bands}
               onBaseChange={handleBaseChange}
+              onToleranceChange={handleResistorChange('tolerance')}
               resistance={resistance} />
           </Col>
           <Col>

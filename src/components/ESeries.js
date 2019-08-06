@@ -3,75 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import Table from 'react-bootstrap/Table';
-//import Badge from 'react-bootstrap/Badge';
-
-const ResistanceLink = ({base, onBaseChange}) => {
-  return (
-    <a onClick={(e) => {
-      e.preventDefault();
-      onBaseChange(base);
-    }}
-       href="#">{base}</a>
-  );
-};
-
-/*
-const QuestionBadge = () => (
-  <Badge pill variant="info"
-    style={{
-      display: 'inline',
-      lineHeight: 2,
-      verticalAlign: 'top',
-      cursor: 'pointer',
-    }}
-  >
-    ?
-  </Badge>
-);
-*/
-
-export default function ESeries({
-  resistance,
-  bands,
-  onBaseChange,
-}) {
-  const base = baseResistance(resistance);
-  const eseries = bands === 4 ? Object.keys(eseriesToValues).slice(0, 3) :
-    Object.keys(eseriesToValues).slice(3);
-
-  return (
-    <div className="ESeries">
-
-      <Table striped hover size="sm">
-        <thead>
-          <tr>
-            <th>E-Series {/*<QuestionBadge />*/}</th>
-            <th>Less</th>
-            <th>Equal</th>
-            <th>Greater</th>
-          </tr>
-        </thead>
-        <tbody>
-        {eseries.map(series => {
-          const [smaller, equal, greater] = getTriple(base, series);
-          return (
-            <tr key={series}>
-              <td>{series}</td>
-              <td>{smaller ? <ResistanceLink base={smaller} onBaseChange={onBaseChange} /> : '—'}</td>
-              <td>{equal ? equal : '—'}</td>
-              <td>{greater ? <ResistanceLink base={greater} onBaseChange={onBaseChange} /> : '—'}</td>
-            </tr>
-          );
-        })}
-        </tbody>
-      </Table>
-    </div>
-  );
-}
-
-ESeries.propTypes = {
-  resistance: PropTypes.number.isRequired,
-};
+import Badge from 'react-bootstrap/Badge';
 
 const eseriesToTolerances = {
   'E6': [20],
@@ -116,6 +48,96 @@ const eseriesToValues = {
     5.97, 6.04, 6.12, 6.19, 6.26, 6.34, 6.42, 6.49, 6.57, 6.65, 6.73, 6.81, 6.9, 6.98, 7.06,
     7.15, 7.23, 7.32, 7.41, 7.5, 7.59, 7.68, 7.77, 7.87, 7.96, 8.06, 8.16, 8.25, 8.35, 8.45,
     8.56, 8.66, 8.76, 8.87, 8.98, 9.09, 9.2, 9.31, 9.42, 9.53, 9.65, 9.76, 9.88],
+};
+
+const ResistanceLink = ({base, onBaseChange}) => {
+  return (
+    <a onClick={(e) => {
+      e.preventDefault();
+      onBaseChange(base);
+    }}
+       href="#">{base}</a>
+  );
+};
+
+const ToleranceLink = ({tolerance, onToleranceChange}) => {
+  let tolStr = String(tolerance);
+  if (tolStr.startsWith('0.')) {
+    tolStr = tolStr.substr(1);
+  }
+  return (
+    <a onClick={(e) => {
+      e.preventDefault();
+      onToleranceChange(tolerance);
+    }}
+       href="#">{tolStr}</a>
+  );
+};
+
+const QuestionBadge = () => (
+  <Badge pill variant="info"
+    style={{
+      display: 'inline',
+      lineHeight: 2,
+      verticalAlign: 'top',
+      cursor: 'pointer',
+    }}
+  >
+    ?
+  </Badge>
+);
+
+
+export default function ESeries({
+  resistance,
+  bands,
+  onBaseChange,
+  onToleranceChange,
+}) {
+  const base = baseResistance(resistance);
+  const eseries = bands === 4 ? Object.keys(eseriesToValues).slice(0, 3) :
+    Object.keys(eseriesToValues).slice(3);
+
+  return (
+    <div className="ESeries">
+
+      <Table striped hover size="sm">
+        <thead>
+          <tr>
+            <th>E-Series <QuestionBadge /></th>
+            <th>Tolerances [%]</th>
+            <th>Less</th>
+            <th>Equal</th>
+            <th>Greater</th>
+          </tr>
+        </thead>
+        <tbody>
+        {eseries.map(series => {
+          const [smaller, equal, greater] = getTriple(base, series);
+          return (
+            <tr key={series}>
+              <td>{series}</td>
+              <td>{eseriesToTolerances[series].map((tolerance, index) => (
+                <React.Fragment key={index}>
+                  <ToleranceLink tolerance={tolerance} onToleranceChange={onToleranceChange}/>
+                  {index < eseriesToTolerances[series].length - 1 ? ', ' : ''}
+                </React.Fragment>
+              ))}
+              </td>
+              <td>{smaller ? <ResistanceLink base={smaller} onBaseChange={onBaseChange} /> : '—'}</td>
+              <td>{equal ? equal : '—'}</td>
+              <td>{greater ? <ResistanceLink base={greater} onBaseChange={onBaseChange} /> : '—'}</td>
+            </tr>
+          );
+        })}
+        </tbody>
+      </Table>
+    </div>
+  );
+}
+
+ESeries.propTypes = {
+  resistance: PropTypes.number.isRequired,
 };
 
 export function getTriple(base, series) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { tolerances, validResistance } from "../lib/ColorCode";
+import { validResistance } from "../lib/ColorCode";
 
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 
 function Resistance({
   resistor,
+  tolerances,
   onResistanceChange,
   onToleranceChange,
 }) {
@@ -65,6 +66,7 @@ function Resistance({
 
 Resistance.propTypes = {
   resistor: PropTypes.object.isRequired,
+  tolerances: PropTypes.array.isRequired,
   onResistanceChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };
