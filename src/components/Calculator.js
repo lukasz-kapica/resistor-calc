@@ -8,6 +8,7 @@ import Chart from './Chart';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/Badge';
 
 import ReactSVG from 'react-svg';
 
@@ -15,7 +16,7 @@ import {
   resistorToCode,
   codeToResistor,
   getMagnitude,
-  bandsToTolerances,
+  bandsToTolerances, getBounds,
 } from '../lib/ColorCode';
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -55,6 +56,8 @@ function Calculator({
   };
 
   const resistance_str = getMagnitude(resistance);
+  const [lowerBound, upperBound] = getBounds(resistance, tolerance);
+  const boundsStr = `${getMagnitude(lowerBound)}Ω - ${getMagnitude(upperBound)}Ω`;
 
   return (
     <div className="Calculator">
@@ -84,7 +87,9 @@ function Calculator({
       <Container>
         <Row>
           <Col className="first-column">
-            <h2 className="resistor-info">{resistance_str}Ω ± {tolerance}%</h2>
+            <h2 className="resistor-info">{resistance_str}Ω ± {tolerance}%
+              <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
+            </h2>
             <ResistorSVG code={code} />
             <Resistance
               resistor={resistor}

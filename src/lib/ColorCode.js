@@ -208,3 +208,10 @@ export function getMagnitude(number) {
 
   return number.toString();
 }
+
+export function getBounds(resistance, tolerance) {
+  const d = (resistance * tolerance) / 100.00;
+  const lowerBound = Math.floor(resistance - d);
+  const upperBound = Math.ceil(resistance + d);
+  return [lowerBound, upperBound];
+}
