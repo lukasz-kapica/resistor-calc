@@ -48,20 +48,25 @@ const TBody = ({
 
         {_.times(bands-2, index => (
           <td key={index}
-              className={`band ${isChecked(index)} ${isClickable(value)}`}
-              onClick={() => value !== undefined && handleCodeChange(index)}
           >
-            {value}
+            <div className={`inner band ${isChecked(index)} ${isClickable(value)}`}
+                 onClick={() => value !== undefined && handleCodeChange(index)}>
+              {value}
+            </div>
           </td>
         ))}
 
-        <td className={`multiplier ${isChecked(bands-2)} ${isClickable(multiplier)}`}
-            onClick={() => multiplier && handleCodeChange(bands-2)}>
-          {multiplier && getMagnitude(multiplier) + 'Ω'}
+        <td>
+          <div className={`inner multiplier ${isChecked(bands-2)} ${isClickable(multiplier)}`}
+               onClick={() => multiplier && handleCodeChange(bands-2)}>
+            {multiplier && getMagnitude(multiplier) + 'Ω'}
+          </div>
         </td>
-        <td className={`tolerance ${isChecked(bands-1)} ${isClickable(tolerance)}`}
-            onClick={() => tolerance && handleCodeChange(bands-1)}>
-          {tolerance && `± ${tolerance}%`}
+        <td>
+          <div className={`inner ${isChecked(bands-1)} ${isClickable(tolerance)}`}
+               onClick={() => tolerance && handleCodeChange(bands-1)}>
+            {tolerance && `± ${tolerance}%`}
+          </div>
         </td>
       </tr>
     );
