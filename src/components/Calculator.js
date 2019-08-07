@@ -84,31 +84,36 @@ function Calculator({
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container>
-        <Row>
-          <Col className="first-column">
-            <h2 className="resistor-info">{resistance_str}Ω ± {tolerance}%
-              <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
-            </h2>
-            <ResistorSVG code={code} />
-            <Resistance
-              resistor={resistor}
-              tolerances={bandsToTolerances[bands]}
-              onResistanceChange={handleResistorChange('resistance')}
-              onToleranceChange={handleResistorChange('tolerance')}
-            />
-            <ESeries
-              bands={bands}
-              onBaseChange={handleBaseChange}
-              onToleranceChange={handleResistorChange('tolerance')}
-              resistance={resistance} />
-          </Col>
-          <Col>
-            <Chart code={code}
-                   onCodeChange={(code) => setCode(code)}/>
-          </Col>
-        </Row>
-      </Container>
+      <div className="background-wrapper">
+        <div className="wrapper">
+          <Container>
+            <Row>
+              <Col className="first-column">
+                <h2 className="resistor-info">
+                  <span style={{verticalAlign: 'middle'}}>{resistance_str}Ω ± {tolerance}%</span>
+                  <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
+                </h2>
+                <ResistorSVG code={code} />
+                <Resistance
+                  resistor={resistor}
+                  tolerances={bandsToTolerances[bands]}
+                  onResistanceChange={handleResistorChange('resistance')}
+                  onToleranceChange={handleResistorChange('tolerance')}
+                />
+                <ESeries
+                  bands={bands}
+                  onBaseChange={handleBaseChange}
+                  onToleranceChange={handleResistorChange('tolerance')}
+                  resistance={resistance} />
+              </Col>
+              <Col>
+                <Chart code={code}
+                       onCodeChange={setCode}/>
+              </Col>
+            </Row>
+          </Container>
+        </div>
+      </div>
     </div>
   );
 }
