@@ -62,57 +62,57 @@ function Calculator({
   return (
     <div className="Calculator">
       <Navbar bg="dark" variant="dark" expand="md">
-        <ResistorIcon />
-        <Navbar.Brand href="#" className="navbar-title">Resistor Color Code Calculator</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav
-            className="mr-auto"
-            activeKey={bands}
-            onSelect={(selectedKey, e) => {
-              e.preventDefault();
-              handleResistorChange('bands')(selectedKey);
-            }}
-          >
-            <Nav.Link href="4">4 bands</Nav.Link>
-            <Nav.Link href="5">5 bands</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-        <Navbar.Collapse className="justify-content-end">
-          <Nav className="ml-auto">
-            <Nav.Link active={false} target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc"><GithubIcon /></Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        <Container>
+          <ResistorIcon />
+          <Navbar.Brand href="#" className="navbar-title">Resistor Color Code Calculator</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav
+              className="mr-auto"
+              activeKey={bands}
+              onSelect={(selectedKey, e) => {
+                e.preventDefault();
+                handleResistorChange('bands')(selectedKey);
+              }}
+            >
+              <Nav.Link href="4">4 bands</Nav.Link>
+              <Nav.Link href="5">5 bands</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Navbar.Collapse className="justify-content-end">
+            <Nav className="ml-auto">
+              <Nav.Link active={false} target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc"><GithubIcon /></Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
-      <div className="background-wrapper">
-        <div className="wrapper">
-          <Container>
-            <Row>
-              <Col className="first-column">
-                <h2 className="resistor-info">
-                  <span style={{verticalAlign: 'middle'}}>{resistance_str}Ω ± {tolerance}%</span>
-                  <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
-                </h2>
-                <ResistorSVG code={code} />
-                <Resistance
-                  resistor={resistor}
-                  tolerances={bandsToTolerances[bands]}
-                  onResistanceChange={handleResistorChange('resistance')}
-                  onToleranceChange={handleResistorChange('tolerance')}
-                />
-                <ESeries
-                  bands={bands}
-                  onBaseChange={handleBaseChange}
-                  onToleranceChange={handleResistorChange('tolerance')}
-                  resistance={resistance} />
-              </Col>
-              <Col>
-                <Chart code={code}
-                       onCodeChange={setCode}/>
-              </Col>
-            </Row>
-          </Container>
-        </div>
+      <div className="wrapper">
+        <Container className="main-container">
+          <Row>
+            <Col className="first-column">
+              <h2 className="resistor-info">
+                <span style={{verticalAlign: 'middle'}}>{resistance_str}Ω ± {tolerance}%</span>
+                <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
+              </h2>
+              <ResistorSVG code={code} />
+              <Resistance
+                resistor={resistor}
+                tolerances={bandsToTolerances[bands]}
+                onResistanceChange={handleResistorChange('resistance')}
+                onToleranceChange={handleResistorChange('tolerance')}
+              />
+              <ESeries
+                bands={bands}
+                onBaseChange={handleBaseChange}
+                onToleranceChange={handleResistorChange('tolerance')}
+                resistance={resistance} />
+            </Col>
+            <Col>
+              <Chart code={code}
+                     onCodeChange={setCode}/>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </div>
   );
