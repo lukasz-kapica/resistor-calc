@@ -6,7 +6,7 @@ import {Chart as ch, colorNames, getMagnitude} from '../lib/ColorCode';
 const THead = ({bands}) => (
   <thead>
     <tr>
-      <th>Color</th>
+      <th className="d-none d-sm-table-cell">Color</th>
       <th>Figure #1</th>
       <th>Figure #2</th>
       {bands === 5 && <th>Figure #3</th>}
@@ -44,7 +44,7 @@ const TBody = ({
 
     return (
       <tr key={color} className={`is-${color.toLowerCase()}`}>
-        <td>{color}</td>
+        <td className="d-none d-sm-table-cell">{color}</td>
 
         {_.times(bands-2, index => (
           <td key={index}
