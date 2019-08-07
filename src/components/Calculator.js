@@ -64,7 +64,9 @@ function Calculator({
       <Navbar bg="dark" variant="dark" expand="md">
         <Container>
           <ResistorIcon />
-          <Navbar.Brand href="#" className="navbar-title">Resistor Color Code Calculator</Navbar.Brand>
+          <Navbar.Brand href="#" className="navbar-title">
+            Resistor <span className="d-none d-sm-inline">Color Code</span> Calculator
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav
@@ -86,13 +88,13 @@ function Calculator({
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div className="wrapper">
+      <div className="wrapper letter">
         <Container className="main-container">
           <Row>
             <Col className="first-column">
               <h2 className="resistor-info">
                 <span style={{verticalAlign: 'middle'}}>{resistance_str}Ω ± {tolerance}%</span>
-                <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="secondary">{boundsStr}</Badge>
+                <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="info">{boundsStr}</Badge>
               </h2>
               <ResistorSVG code={code} />
               <Resistance

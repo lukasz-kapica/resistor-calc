@@ -24,7 +24,7 @@ function Resistance({
 
   return (
     <div className="Resistance">
-      <Form>
+      <Form onSubmit={e => e.preventDefault()}>
         <Form.Row>
 
           <Form.Group as={Col} xs="8">
