@@ -64,7 +64,9 @@ const TBody = ({
         </td>
         <td>
           <div className={`inner ${isChecked(bands-1)} ${isClickable(tolerance)}`}
-               onClick={() => tolerance && handleCodeChange(bands-1)}>
+               onClick={() => tolerance && handleCodeChange(bands-1)}
+               style={{paddingLeft: '5px'}}
+          >
             {tolerance && `± ${tolerance}%`}
           </div>
         </td>
