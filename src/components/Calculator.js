@@ -118,6 +118,7 @@ function Calculator({
               />
               <ESeries
                 bands={bands}
+                tolerance={tolerance}
                 onBaseChange={handleBaseChange}
                 onToleranceChange={handleResistorChange('tolerance')}
                 resistance={resistance} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {Chart as ch, colorNames} from '../lib/ColorCode';
+import {Chart as ch, colorNames, bandsToTolerances} from '../lib/ColorCode';
 import {getMagnitude} from "../lib/utils";
 
 const THead = ({bands}) => (
@@ -61,11 +61,12 @@ const TBody = ({
           </div>
         </td>
         {len !== 3 && <td>
-          <div className={`inner noselect ${isChecked(digits+1)} ${isClickable(tolerance)}`}
-               onClick={() => tolerance && handleCodeChange(digits+1)}
-          >
-            {tolerance && `± ${tolerance}%`}
-          </div>
+          {bandsToTolerances[code.length].includes(tolerance) &&
+            <div className={`inner noselect ${isChecked(digits+1)} ${isClickable(tolerance)}`}
+                 onClick={() => tolerance && handleCodeChange(digits+1)}
+            >
+              {tolerance && `± ${tolerance}%`}
+            </div>}
         </td>}
       </tr>
     );

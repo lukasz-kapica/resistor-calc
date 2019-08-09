@@ -1,12 +1,14 @@
 import React from 'react';
 import ESeries, { getTriple, baseResistance } from '../components/ESeries';
 import { render, cleanup, fireEvent } from '@testing-library/react';
+import _ from 'lodash';
 
 beforeEach(cleanup);
 
 test('calls onBaseChange when a new base is clicked', () => {
   const props = {
     resistance: 150,
+    tolerance: 5,
     onBaseChange: jest.fn(),
     onToleranceChange: jest.fn(),
     bands: 4,
@@ -21,17 +23,18 @@ test('calls onBaseChange when a new base is clicked', () => {
 [{
   resistance: 931,
   bands: 5,
+  tolerance: 2,
 }, {
   resistance: 100,
   bands: 4,
+  tolerance: 5,
 },
-].forEach(({resistance, bands}) => {
-  test(`matches snapshot for resistance: ${resistance}`, () => {
+].forEach((props) => {
+  test(`matches snapshot for resistance: ${props.resistance}`, () => {
     const { container } = render(
-      <ESeries resistance={resistance}
-               bands={bands}
-               onBaseChange={jest.fn()}
-               onToleranceChange={jest.fn()}
+      <ESeries {...props}
+               onBaseChange={_.noop}
+               onToleranceChange={_.noop}
       />);
     expect(container.firstChild).toMatchSnapshot();
   });

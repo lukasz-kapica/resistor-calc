@@ -60,19 +60,20 @@ const ResistanceLink = ({base, onBaseChange}) => {
   );
 };
 
-const ToleranceLink = ({tolerance, onToleranceChange}) => {
-  let tolStr = String(tolerance);
-  if (tolStr.startsWith('0.')) {
-    tolStr = tolStr.substr(1);
+const stripZero = (value) => {
+  let vStr = String(value);
+  if (vStr.startsWith('0.')) {
+    vStr = vStr.substr(1);
   }
-  return (
+  return vStr;
+};
+
+const ToleranceLink = ({tolerance, onToleranceChange}) =>
     <a onClick={(e) => {
       e.preventDefault();
       onToleranceChange(tolerance);
     }}
-       href="#">{tolStr}</a>
-  );
-};
+       href="#">{stripZero(tolerance)}</a>;
 
 const QuestionBadge = () => (
   <Badge pill variant="info"
@@ -90,6 +91,7 @@ const QuestionBadge = () => (
 
 export default function ESeries({
   resistance,
+  tolerance,
   bands,
   onBaseChange,
   onToleranceChange,
@@ -125,9 +127,10 @@ export default function ESeries({
           return (
             <tr key={series}>
               <td>{series}</td>
-              <td>{eseriesToTolerances[series].map((tolerance, index) => (
+              <td>{eseriesToTolerances[series].map((tol, index) => (
                 <React.Fragment key={index}>
-                  <ToleranceLink tolerance={tolerance} onToleranceChange={onToleranceChange}/>
+                  {tolerance !== tol ? <ToleranceLink tolerance={tol} onToleranceChange={onToleranceChange}/> :
+                    stripZero(tolerance)}
                   {index < eseriesToTolerances[series].length - 1 ? ', ' : ''}
                 </React.Fragment>
               ))}
@@ -147,6 +150,7 @@ export default function ESeries({
 ESeries.propTypes = {
   resistance: PropTypes.number.isRequired,
   bands: PropTypes.number.isRequired,
+  tolerance: PropTypes.number.isRequired,
   onBaseChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };

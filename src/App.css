@@ -18,7 +18,7 @@ nav.navbar {
 
 div.main-container {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   padding: 1.5rem;
 }
 
@@ -157,6 +157,14 @@ div.main-container {
 
 .inner {
   padding: 2px;
+}
+
+td:last-child .inner {
+  padding: 2px 7px;
+}
+
+td:last-child .inner.is-checked {
+  padding: 0 0 0 5px;
 }
 
 .Chart td {

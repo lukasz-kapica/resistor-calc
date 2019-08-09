@@ -53,6 +53,7 @@ function Resistance({
               aria-label="Tolerance"
               value={tolerance}
               onChange={(e) => onToleranceChange(+e.target.value)}
+              disabled={tolerances.length === 1}
             >
               {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
             </FormControl>
