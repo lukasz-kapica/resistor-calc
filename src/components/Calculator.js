@@ -9,7 +9,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+//import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import ReactSVG from 'react-svg';
 
@@ -90,12 +90,12 @@ function Calculator({
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav className="ml-auto">
-              <Nav.Item>
+              {/*<Nav.Item>
                 <NavDropdown title="Language" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#polish">Polski</NavDropdown.Item>
                   <NavDropdown.Item href="#english">English</NavDropdown.Item>
                 </NavDropdown>
-              </Nav.Item>
+              </Nav.Item>*/}
               <Nav.Link active={false} target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc"><GithubIcon /></Nav.Link>
             </Nav>
           </Navbar.Collapse>

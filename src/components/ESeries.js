@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 import Table from 'react-bootstrap/Table';
-import Badge from 'react-bootstrap/Badge';
+//import Badge from 'react-bootstrap/Badge';
 
 const eseriesToTolerances = {
   'E6': [20],
@@ -75,7 +75,7 @@ const ToleranceLink = ({tolerance, onToleranceChange}) =>
     }}
        href="#">{stripZero(tolerance)}</a>;
 
-const QuestionBadge = () => (
+/*const QuestionBadge = () => (
   <Badge pill variant="info"
     style={{
       display: 'inline',
@@ -86,7 +86,7 @@ const QuestionBadge = () => (
   >
     ?
   </Badge>
-);
+);*/
 
 
 export default function ESeries({
@@ -114,7 +114,7 @@ export default function ESeries({
       <Table striped hover size="sm">
         <thead>
           <tr>
-            <th>E-Series <QuestionBadge /></th>
+            <th>E-Series {/*<QuestionBadge />*/}</th>
             <th>Tolerances [%]</th>
             <th>Less</th>
             <th>Equal</th>
