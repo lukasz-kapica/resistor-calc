@@ -129,6 +129,11 @@ describe("validResistance", () => {
       bands: 4,
       want: false
     },
+    {
+      resistance: 150,
+      bands: 3,
+      want: true
+    },
   ];
 
   TestCases.forEach(({resistance, bands, want}) => {

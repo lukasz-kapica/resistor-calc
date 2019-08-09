@@ -51,11 +51,13 @@ function Calculator({
     }));
 
   const handleBaseChange = (base) => {
+    console.log('handleResistorChange', base);
     const newResistor = {resistance: base, tolerance, bands};
     const baseCode = resistorToCode(newResistor);
-    const newCode = baseCode.slice(0, bands-2);
-    newCode.push(code[bands-2]);
-    newCode.push(code[bands-1]);
+    const digits = (+bands === 5) ? 3 : 2;
+    const newCode = baseCode.slice(0, digits);
+    newCode.push(code[digits]);
+    +bands > 3 && newCode.push(code[digits+1]);
     setCode(newCode);
   };
 

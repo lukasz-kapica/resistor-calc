@@ -152,6 +152,8 @@ export function resistorToCode({ resistance, tolerance, bands }) {
 
 export function validResistance(resistance, bands) {
   resistance = +resistance;
+  bands = +bands;
+  const digits = (bands === 5) ? 3 : 2;
   let resistanceStr = String(resistance);
 
   if (typeof resistance !== 'number' || Number.isNaN(resistance)) {
@@ -164,6 +166,6 @@ export function validResistance(resistance, bands) {
 
   resistanceStr = resistanceStr.replace('.', '');
 
-  return Array.from(resistanceStr.slice(bands-2)).every(char => char === '0');
+  return Array.from(resistanceStr.slice(digits)).every(char => char === '0');
 }
 
