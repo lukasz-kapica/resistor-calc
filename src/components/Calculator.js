@@ -9,15 +9,19 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Badge from 'react-bootstrap/Badge';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import ReactSVG from 'react-svg';
 
 import {
   resistorToCode,
   codeToResistor,
-  getMagnitude,
-  bandsToTolerances, getBounds,
+  bandsToTolerances,
 } from '../lib/ColorCode';
+import {
+  getMagnitude,
+  getBounds,
+} from "../lib/utils";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -38,7 +42,7 @@ function Calculator({
   const [code, setCode] = useState(initialCode);
 
   const resistor = codeToResistor(code);
-  const {resistance, tolerance, bands} = resistor;
+  let {resistance, tolerance, bands} = resistor;
 
   const handleResistorChange = property => value =>
     setCode(resistorToCode({
@@ -77,12 +81,19 @@ function Calculator({
                 handleResistorChange('bands')(selectedKey);
               }}
             >
+              <Nav.Link href="3">3 bands</Nav.Link>
               <Nav.Link href="4">4 bands</Nav.Link>
               <Nav.Link href="5">5 bands</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Navbar.Collapse className="justify-content-end">
             <Nav className="ml-auto">
+              <Nav.Item>
+                <NavDropdown title="Language" id="basic-nav-dropdown">
+                  <NavDropdown.Item href="#polish">Polski</NavDropdown.Item>
+                  <NavDropdown.Item href="#english">English</NavDropdown.Item>
+                </NavDropdown>
+              </Nav.Item>
               <Nav.Link active={false} target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc"><GithubIcon /></Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -94,7 +105,7 @@ function Calculator({
             <Col className="first-column">
               <h2 className="resistor-info">
                 <span style={{verticalAlign: 'middle'}}>{resistance_str}Ω ± {tolerance}%</span>
-                <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} variant="info">{boundsStr}</Badge>
+                <Badge style={{verticalAlign: 'middle', marginLeft: '0.5rem', fontSize: '1.25rem'}} className="bounds">{boundsStr}</Badge>
               </h2>
               <ResistorSVG code={code} />
               <Resistance

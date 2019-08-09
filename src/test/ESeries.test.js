@@ -8,6 +8,7 @@ test('calls onBaseChange when a new base is clicked', () => {
   const props = {
     resistance: 150,
     onBaseChange: jest.fn(),
+    onToleranceChange: jest.fn(),
     bands: 4,
   };
   const { getByText } = render(<ESeries {...props} />);
@@ -29,7 +30,9 @@ test('calls onBaseChange when a new base is clicked', () => {
     const { container } = render(
       <ESeries resistance={resistance}
                bands={bands}
-               onBaseChange={jest.fn()} />);
+               onBaseChange={jest.fn()}
+               onToleranceChange={jest.fn()}
+      />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

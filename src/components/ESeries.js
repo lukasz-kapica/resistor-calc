@@ -95,8 +95,16 @@ export default function ESeries({
   onToleranceChange,
 }) {
   const base = baseResistance(resistance);
-  const eseries = bands === 4 ? Object.keys(eseriesToValues).slice(0, 3) :
-    Object.keys(eseriesToValues).slice(3);
+  let eseries = Object.keys(eseriesToValues);
+  if (bands === 3) {
+    eseries = eseries.slice(0, 1);
+  }
+  else if (bands === 4) {
+    eseries = eseries.slice(1, 3);
+  }
+  else {
+    eseries = eseries.slice(3);
+  }
 
   return (
     <div className="ESeries">
@@ -138,6 +146,9 @@ export default function ESeries({
 
 ESeries.propTypes = {
   resistance: PropTypes.number.isRequired,
+  bands: PropTypes.number.isRequired,
+  onBaseChange: PropTypes.func.isRequired,
+  onToleranceChange: PropTypes.func.isRequired,
 };
 
 export function getTriple(base, series) {

@@ -1,7 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import {Chart as ch, colorNames, getMagnitude} from '../lib/ColorCode';
+import {Chart as ch, colorNames} from '../lib/ColorCode';
+import {getMagnitude} from "../lib/utils";
 
 const THead = ({bands}) => (
   <thead>
@@ -11,7 +12,7 @@ const THead = ({bands}) => (
       <th>Figure #2</th>
       {bands === 5 && <th>Figure #3</th>}
       <th>Multiplier</th>
-      <th>Tolerance</th>
+      {bands !== 3 && <th>Tolerance</th>}
     </tr>
   </thead>
 );
@@ -22,10 +23,6 @@ const TBody = ({
 }) => (
   <tbody>
   {colorNames.map((color) => {
-    if (color === "Blank" && code.length === 5) {
-      return null;
-    }
-
     const {value, multiplier, tolerance} = ch[color];
 
     const isChecked = (index) =>
@@ -34,7 +31,8 @@ const TBody = ({
     const isClickable = (value) =>
       value !== undefined ? 'is-clickable' : '';
 
-    const bands = code.length;
+    const len = code.length;
+    const digits = len === 5 ? 3 : 2;
 
     const handleCodeChange = (index) => {
       const newCode = [...code];
@@ -46,7 +44,7 @@ const TBody = ({
       <tr key={color} className={`is-${color.toLowerCase()}`}>
         <td className="d-none d-sm-table-cell">{color}</td>
 
-        {_.times(bands-2, index => (
+        {_.times(digits, index => (
           <td key={index}
           >
             <div className={`inner noselect band ${isChecked(index)} ${isClickable(value)}`}
@@ -57,19 +55,18 @@ const TBody = ({
         ))}
 
         <td>
-          <div className={`inner noselect multiplier ${isChecked(bands-2)} ${isClickable(multiplier)}`}
-               onClick={() => multiplier && handleCodeChange(bands-2)}>
+          <div className={`inner noselect multiplier ${isChecked(digits)} ${isClickable(multiplier)}`}
+               onClick={() => multiplier && handleCodeChange(digits)}>
             {multiplier && getMagnitude(multiplier) + 'Ω'}
           </div>
         </td>
-        <td>
-          <div className={`inner noselect ${isChecked(bands-1)} ${isClickable(tolerance)}`}
-               onClick={() => tolerance && handleCodeChange(bands-1)}
-               style={{paddingLeft: '5px'}}
+        {len !== 3 && <td>
+          <div className={`inner noselect ${isChecked(digits+1)} ${isClickable(tolerance)}`}
+               onClick={() => tolerance && handleCodeChange(digits+1)}
           >
             {tolerance && `± ${tolerance}%`}
           </div>
-        </td>
+        </td>}
       </tr>
     );
   })}

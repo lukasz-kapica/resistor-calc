@@ -6,15 +6,35 @@ function ResistorSVG({ code }) {
 
   const bands = code.length;
 
-  if (!_.inRange(bands, 4, 6)) {
-    throw new Error(`ResistorSVG: expected array of 4 or 5 elements, got: ${bands}`);
+  if (!_.inRange(bands, 3, 6)) {
+    throw new Error(`ResistorSVG: expected array of 3, 4 or 5 elements, got: ${bands}`);
   }
 
   code = code.map(color => color.toLowerCase());
 
-  const width = (bands === 4) ? 45 : 35;
+  const width = (bands === 5) ? 35 : 45;
 
   const bandsArr = {
+    3: [
+      {
+        x: 185.05522,
+        y: 193.97354,
+        height: 150.48511,
+        width,
+      },
+      {
+        x: 226.65579,
+        y: 18.901487,
+        height: 112.64787,
+        width,
+      },
+      {
+        x: 338.36636,
+        y: 18.901487,
+        height: 112.64787,
+        width,
+      },
+    ],
     4: [
       {
         x: 185.05522,

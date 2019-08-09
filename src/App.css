@@ -1,19 +1,24 @@
 :root {
-  --theme-color: #044a90; /*#343a40;*/
-  --secondary-color: #fff;
+  --theme-color: #3E5151;
+  --secondary-color: #DECBA4;
 }
 
 .wrapper {
-  background-image: linear-gradient(to bottom, var(--theme-color), var(--secondary-color));
+  background-image: linear-gradient(to bottom, var(--theme-color) 10%, var(--secondary-color), white);
 }
 
 nav.navbar {
   background-color: var(--theme-color) !important;
 }
 
+.bounds {
+  background-color: var(--theme-color);
+  color: white;
+}
+
 div.main-container {
   background-color: white;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1.5rem;
 }
 
@@ -195,4 +200,9 @@ a.nav-link.active {
 
 .github-icon {
   width: 1.25rem;
+}
+
+.dropdown-toggle.nav-link::after {
+  margin-left: 0.355rem;
+  vertical-align: middle;
 }

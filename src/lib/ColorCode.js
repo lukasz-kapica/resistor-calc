@@ -1,7 +1,3 @@
-/**
- * Resistor Color Code Calculator
- */
-
 import _ from "lodash";
 
 /**
@@ -16,9 +12,6 @@ export function Resistor(resistance, tolerance, bands) {
   this.bands = bands;
 }
 
-// Create Chart
-// http://www.digikey.com/-/media/Images/Marketing/Resources/Calculators/resistor-color-chart.jpg
-
 export const colorNames = [
   "Black",
   "Brown",
@@ -32,57 +25,51 @@ export const colorNames = [
   "White",
   "Gold",
   "Silver",
-  "Blank",
 ];
 
 export const bandsToTolerances = {
-  4: [5, 10, 20],
+  3: [20],
+  4: [5, 10],
   5: [2, 1, 0.5, 0.25, 0.1, 0.05],
+};
+
+const bandsToBounds = {
+  3: 99  * 1000000000,
+  4: 99  * 1000000000,
+  5: 999 * 1000000000,
 };
 
 // Colors with indices from 0 to 9 in colorNames
 // have values equal to their positions in the array
-function mapIndexToValue(index) {
-  return _.inRange(index, 0, 10) ? index : undefined;
-}
+const mapIndexToValue = x => _.inRange(x, 0, 10) ? x : undefined;
 
 // Each color in the array has it's corresponding 'multiplier' value
-function mapIndexToMultiplier(index) {
-  if (_.inRange(index, 0, 10)) {
-    return Math.pow(10, index);
-  }
-  if (index === 10) {
-    // Gold
-    return 0.1;
-  }
-  if (index === 11) {
-    // Silver
-    return 0.01;
-  }
-  return undefined;
-}
+const mapIndexToMultiplier = _.cond([
+  [x => _.inRange(x, 0, 10), x => 10**x],
+  [x => x === 10, _.constant(0.1)], // Gold
+  [x => x === 11, _.constant(0.01)], // Silver
+  [_.stubTrue, _.noop],
+]);
 
 // Some colors in the array have tolerance associated with them
-function mapIndexToTolerance(index) {
-  const indices = [1, 2, 5, 6, 7, 8, 10, 11, 12];
-  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10, 20];
+const mapIndexToTolerance = index => {
+  const indices =    [1, 2, 5,   6,    7,   8,   10, 11];
+  const tolerances = [1, 2, 0.5, 0.25, 0.1, 0.05, 5, 10];
   const indexOf = indices.indexOf(index);
   return indexOf !== -1 ? tolerances[indexOf] : undefined;
-}
+};
 
 export const Chart = colorNames.reduce(
   (acc, color, index) => ({
     ...acc,
     [color]: {
-      value: mapIndexToValue(index),
+      value:      mapIndexToValue(index),
       multiplier: mapIndexToMultiplier(index),
-      tolerance: mapIndexToTolerance(index)
-    }
+      tolerance:  mapIndexToTolerance(index),
+    },
   }),
   {}
 );
-
-// ------ End of creating a chart ------
 
 /**
  * Create a resistor instance from the color code
@@ -90,25 +77,27 @@ export const Chart = colorNames.reduce(
  * @returns {Resistor} resistor - decoded instance of the Resistor
  */
 export function codeToResistor(code) {
-  // We can properly decode only 4 and 5 band resistors
-  if (!code || !code.length || code.length < 4 || code.length > 5) {
+  // We can properly decode only 3, 4 and 5 band resistors
+  if (!code || !code.length || code.length < 3 || code.length > 5) {
     throw new Error(
-      `codeToResistor function takes an array which consists of 4 or 5 colors`
+      `codeToResistor function takes an array which consists of 3, 4 or 5 colors`
     );
   }
 
-  let len = code.length;
+  const len = code.length;
+  const digits = (len === 5) ? 3 : 2;
 
   // So that if we have digits a, b, c - the whole number is 100*a + 10*b + c
   // if a, b the whole number is 10*a + b
   const resistance = code
-    .slice(0, len - 2)
+    .slice(0, digits)
     .reduce((acc, color) => acc * 10 + Chart[color].value, 0);
 
-  const multiplier = Chart[code[len - 2]].multiplier;
-  const tolerance = Chart[code[len - 1]].tolerance;
+  const multiplier = Chart[code[digits]].multiplier;
+  const tolerance = len === 3 ? 20 : Chart[code[digits+1]].tolerance;
+  const finalResistance = parseFloat((resistance * multiplier).toFixed(2));
 
-  return new Resistor(parseFloat((resistance * multiplier).toFixed(2)), tolerance, len);
+  return new Resistor(finalResistance, tolerance, len);
 }
 
 const makeMapFromProperty = property =>
@@ -121,24 +110,23 @@ const makeMapFromProperty = property =>
 const multiplierArray = makeMapFromProperty("multiplier");
 const toleranceArray = makeMapFromProperty("tolerance");
 
-export const tolerances = Object.keys(toleranceArray);
-
 export function resistorToCode({ resistance, tolerance, bands }) {
-  if (bands < 4 || bands > 5 || resistance <= 0) {
+  bands = +bands;
+
+  if (bands < 3 || bands > 5 || resistance <= 0) {
     throw new Error(`resistorToCode: incorrect input data`);
   }
 
-  const bounds = {
-    4: 99  * 1000000000,
-    5: 999 * 1000000000,
-  };
+  if (!bandsToTolerances[bands].includes(tolerance)) {
+    tolerance = bandsToTolerances[bands][0];
+  }
 
-  if (resistance > bounds[bands]) {
+  if (resistance > bandsToBounds[bands]) {
     resistance /= 10;
   }
 
-  const numberOfDigits = bands - 2;
-  const highest10Power = Math.pow(10, numberOfDigits);
+  const numberOfDigits = (bands === 5) ? 3 : 2;
+  const highest10Power = 10**numberOfDigits;
 
   let multiplier = 0.01;
   while (multiplier * highest10Power <= resistance) {
@@ -148,13 +136,18 @@ export function resistorToCode({ resistance, tolerance, bands }) {
   const intermid = (resistance / multiplier).toFixed(2);
   const resistanceNumber = Math.floor(parseFloat(intermid));
 
-  const digits = String(resistanceNumber)
+  const code = String(resistanceNumber)
     .padStart(numberOfDigits, '0')
     .split("")
     .map(i => parseInt(i))
     .map(i => colorNames[i]);
 
-  return [...digits, multiplierArray[multiplier], toleranceArray[tolerance]];
+  code.push(multiplierArray[multiplier]);
+  if (bands > 3) {
+    code.push(toleranceArray[tolerance]);
+  }
+
+  return code;
 }
 
 export function validResistance(resistance, bands) {
@@ -165,12 +158,7 @@ export function validResistance(resistance, bands) {
     return false;
   }
 
-  const bounds = {
-    4: 99  * 1000000000,
-    5: 999 * 1000000000,
-  };
-
-  if (resistance < 1 || resistance > bounds[bands]) {
+  if (resistance < 1 || resistance > bandsToBounds[bands]) {
     return false;
   }
 
@@ -179,39 +167,3 @@ export function validResistance(resistance, bands) {
   return Array.from(resistanceStr.slice(bands-2)).every(char => char === '0');
 }
 
-export function getMagnitude(number) {
-  if (number === 0) return '0';
-
-  if (!number) return undefined;
-
-  const decimals = number.toString().split('');
-
-  if (decimals.includes('.')) {
-    return number.toString();
-  }
-
-  const len = decimals.length;
-
-  const ordersOfMagnitude = [
-    {zeros: 12, symbol: "T"},
-    {zeros:  9, symbol: "G"},
-    {zeros:  6, symbol: "M"},
-    {zeros:  3, symbol: "K"},
-  ];
-
-  for (let i = 0; i < ordersOfMagnitude.length; i++) {
-    const {zeros, symbol} = ordersOfMagnitude[i];
-    if (len > zeros) {
-      return String(parseFloat((number / Math.pow(10, zeros)).toFixed(2))) + symbol;
-    }
-  }
-
-  return number.toString();
-}
-
-export function getBounds(resistance, tolerance) {
-  const d = (resistance * tolerance) / 100.00;
-  const lowerBound = Math.floor(resistance - d);
-  const upperBound = Math.ceil(resistance + d);
-  return [lowerBound, upperBound];
-}

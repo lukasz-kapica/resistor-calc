@@ -1,4 +1,4 @@
-import {codeToResistor, resistorToCode, Resistor, validResistance, getMagnitude} from "../lib/ColorCode";
+import {codeToResistor, resistorToCode, Resistor, validResistance} from "../lib/ColorCode";
 
 describe("ColorCode", () => {
   const TestCases = [
@@ -27,17 +27,21 @@ describe("ColorCode", () => {
       code: ["Blue", "Brown", "Green", "Silver", "Blue"],
     },
     {
-      resistor: new Resistor(10, 5, 5),
-      code: ["Brown", "Black", "Black", "Gold", "Gold"],
+      resistor: new Resistor(10, 2, 5),
+      code: ["Brown", "Black", "Black", "Gold", "Red"],
     },
     {
       resistor: new Resistor(4.3, 5, 4),
       code: ["Yellow", "Orange", "Gold", "Gold"],
     },
     {
-      resistor: new Resistor(34.8, 5, 5),
-      code: ["Orange", "Yellow", "Grey", "Gold", "Gold"],
-    }
+      resistor: new Resistor(34.8, 1, 5),
+      code: ["Orange", "Yellow", "Grey", "Gold", "Brown"],
+    },
+    {
+      resistor: new Resistor(150, 20, 3),
+      code: ["Brown", "Green", "Brown"],
+    },
   ];
 
   describe("codeToResistor", () => {
@@ -45,7 +49,7 @@ describe("ColorCode", () => {
       it(`should properly decode ${resistor.resistance} ${
         resistor.tolerance
       }% resistor`, () => {
-        const actual = codeToResistor(code);
+        const actual = codeToResistor([...code]);
         expect(actual).toEqual(resistor);
       });
     });
@@ -60,7 +64,7 @@ describe("ColorCode", () => {
       it(`should properly encode ${resistor.resistance} ${
         resistor.tolerance
       }% ${resistor.bands} bands resistor`, () => {
-        const actual = resistorToCode(resistor);
+        const actual = resistorToCode({...resistor});
         expect(actual).toEqual(code);
       });
     });
@@ -131,48 +135,4 @@ describe("validResistance", () => {
     const actual = validResistance(resistance, bands);
     expect(actual).toBe(want);
   });
-});
-
-describe("getMagnitude", () => {
-  const TestCases = [
-    {
-      number: 100,
-      want: '100'
-    },
-    {
-      number: 1000,
-      want: '1K'
-    },
-    {
-      number: 1500,
-      want: '1.5K'
-    },
-    {
-      number: 15000,
-      want: '15K'
-    },
-    {
-      number: 15000000,
-      want: '15M'
-    },
-    {
-      number: 11000000000,
-      want: '11G'
-    },
-    {
-      number: 1110000000000,
-      want: '1.11T'
-    },
-    {
-      number: 0,
-      want: '0'
-    },
-  ];
-
-  TestCases.forEach(({number, want}) => {
-    it(`should return ${want} for: {number}`, () => {
-      const actual = getMagnitude(number);
-      expect(actual).toBe(want);
-    });
-  })
 });
