@@ -30,7 +30,7 @@ export function getMagnitude(number) {
 
 export function getBounds(resistance, tolerance) {
   const d = (resistance * tolerance) / 100.00;
-  const lowerBound = Math.floor(resistance - d);
-  const upperBound = Math.ceil(resistance + d);
+  const lowerBound = parseFloat((resistance - d).toFixed(2));
+  const upperBound = parseFloat((resistance + d).toFixed(2));
   return [lowerBound, upperBound];
 }

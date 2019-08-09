@@ -1,4 +1,4 @@
-import {getMagnitude} from "../lib/utils";
+import {getMagnitude, getBounds} from "../lib/utils";
 
 describe("getMagnitude", () => {
   const TestCases = [
@@ -42,4 +42,26 @@ describe("getMagnitude", () => {
       expect(actual).toBe(want);
     });
   })
+});
+
+describe('getBounds', () => {
+  const TestCases = [
+    {
+      resistance: 1,
+      tolerance: 20,
+      want: [0.8, 1.2],
+    },
+    {
+      resistance: 10,
+      tolerance: 20,
+      want: [8, 12],
+    },
+  ];
+
+  TestCases.forEach(({resistance, tolerance, want}) => {
+    it(`returns ${want} for resistance: ${resistance} and tolerance: ${tolerance}`, () => {
+      const got = getBounds(resistance, tolerance);
+      expect(got).toEqual(want);
+    });
+  });
 });
