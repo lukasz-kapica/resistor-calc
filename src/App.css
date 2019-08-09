@@ -104,6 +104,7 @@ div.main-container {
 
 .Chart {
   height: 100%;
+  margin-top: 0.5rem;
 }
 
 .Chart th {
@@ -123,6 +124,20 @@ div.main-container {
   height: 30%;
   display: block;
   margin: 0 auto;
+}
+
+@media (max-width: 350px) {
+  .resistor-svg {
+    width: 90%;
+  }
+
+  div.main-container {
+    padding: 5px;
+  }
+
+  .Chart {
+    margin-top: 1rem;
+  }
 }
 
 .resistor-info {
