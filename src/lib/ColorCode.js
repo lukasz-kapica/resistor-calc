@@ -7,9 +7,9 @@ import _ from "lodash";
  * @param {Number} bands - number of bands
  */
 export function Resistor(resistance, tolerance, bands) {
-  this.resistance = resistance;
-  this.tolerance = tolerance;
-  this.bands = bands;
+  this.resistance = +resistance;
+  this.tolerance = +tolerance;
+  this.bands = +bands;
 }
 
 export const colorNames = [
@@ -38,6 +38,8 @@ const bandsToBounds = {
   4: 99  * 1000000000,
   5: 999 * 1000000000,
 };
+
+export const bandsToDigits = bands => (bands === 5) ? 3 : 2;
 
 // Colors with indices from 0 to 9 in colorNames
 // have values equal to their positions in the array
@@ -85,7 +87,7 @@ export function codeToResistor(code) {
   }
 
   const len = code.length;
-  const digits = (len === 5) ? 3 : 2;
+  const digits = bandsToDigits(len);
 
   // So that if we have digits a, b, c - the whole number is 100*a + 10*b + c
   // if a, b the whole number is 10*a + b
@@ -125,7 +127,7 @@ export function resistorToCode({ resistance, tolerance, bands }) {
     resistance /= 10;
   }
 
-  const numberOfDigits = (bands === 5) ? 3 : 2;
+  const numberOfDigits = bandsToDigits(bands);
   const highest10Power = 10**numberOfDigits;
 
   let multiplier = 0.01;
@@ -153,7 +155,7 @@ export function resistorToCode({ resistance, tolerance, bands }) {
 export function validResistance(resistance, bands) {
   resistance = +resistance;
   bands = +bands;
-  const digits = (bands === 5) ? 3 : 2;
+  const digits = bandsToDigits(bands);
   let resistanceStr = String(resistance);
 
   if (typeof resistance !== 'number' || Number.isNaN(resistance)) {

@@ -90,12 +90,11 @@ const ToleranceLink = ({tolerance, onToleranceChange}) =>
 
 
 export default function ESeries({
-  resistance,
-  tolerance,
-  bands,
+  resistor,
   onBaseChange,
   onToleranceChange,
 }) {
+  const {resistance, tolerance, bands} = resistor;
   const base = baseResistance(resistance);
   let eseries = Object.keys(eseriesToValues);
   if (bands === 3) {
@@ -148,9 +147,7 @@ export default function ESeries({
 }
 
 ESeries.propTypes = {
-  resistance: PropTypes.number.isRequired,
-  bands: PropTypes.number.isRequired,
-  tolerance: PropTypes.number.isRequired,
+  resistor: PropTypes.object.isRequired,
   onBaseChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };

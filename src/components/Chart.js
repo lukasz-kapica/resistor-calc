@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import '../styles/Chart.css';
 
 import {Chart as ch, colorNames, bandsToTolerances} from '../lib/ColorCode';
 import {getMagnitude} from "../lib/utils";

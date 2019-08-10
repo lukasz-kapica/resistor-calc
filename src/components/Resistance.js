@@ -14,13 +14,13 @@ function Resistance({
   onToleranceChange,
 }) {
 
-  const handleResistanceChange = (resistance) => {
-    if (validResistance(resistance, resistor.bands)) {
-      onResistanceChange(+resistance);
+  const {resistance, tolerance, bands} = resistor;
+
+  const handleResistanceChange = resistance => {
+    if (validResistance(resistance, bands)) {
+      onResistanceChange(resistance);
     }
   };
-
-  const {resistance, tolerance} = resistor;
 
   return (
     <div className="Resistance">
@@ -33,7 +33,7 @@ function Resistance({
               <FormControl
                 className="resistance-input"
                 value={resistance}
-                onChange={(e) => handleResistanceChange(e.target.value)}
+                onChange={(e) => handleResistanceChange(+e.target.value)}
                 placeholder="Resistance"
                 aria-label="Resistance"
                 aria-describedby="basic-addon1"

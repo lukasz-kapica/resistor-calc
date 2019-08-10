@@ -1,0 +1,62 @@
+
+.inner {
+    padding: 2px;
+}
+
+td:last-child .inner {
+    padding: 2px 7px;
+}
+
+td:last-child .inner.is-checked {
+    padding: 0 0 0 5px;
+}
+
+.Chart td {
+    margin: 2px;
+}
+
+.Chart table td:first-child {
+    padding: 0 10px;
+}
+
+.Chart .band, .Chart .multiplier {
+    text-align: center;
+}
+
+.is-clickable:hover {
+    cursor: pointer;
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+}
+
+.Chart table {
+    width: 100%;
+}
+
+.Chart .is-checked {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+    border: 2px dashed;
+    font-weight: bold;
+    padding: 0;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.Chart {
+    height: 100%;
+    margin-top: 0.5rem;
+}
+
+.Chart th {
+    text-align: center;
+}
+
+.Chart td {
+    border: 1px solid #000;
+}
