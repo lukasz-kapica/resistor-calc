@@ -19,8 +19,8 @@ import {
 } from '../lib/ColorCode';
 
 import {
-  getMagnitude,
-  getBounds,
+  magnitude,
+  boundaries,
 } from "../lib/utils";
 
 import '../styles/Calculator.css';
@@ -90,13 +90,13 @@ function ResistorInfo({
   resistance,
   tolerance,
 }) {
-  const resistance_str = getMagnitude(resistance);
-  const [lowerBound, upperBound] = getBounds(resistance, tolerance);
-  const boundsStr = `${getMagnitude(lowerBound)}Ω - ${getMagnitude(upperBound)}Ω`;
+  const resistanceStr = magnitude(resistance);
+  const [lowerBound, upperBound] = boundaries(resistance, tolerance);
+  const boundsStr = `${magnitude(lowerBound)}Ω - ${magnitude(upperBound)}Ω`;
 
   return (
     <h2 className="resistor-info">
-      <span>{resistance_str}Ω ± {tolerance}%</span>
+      <span>{resistanceStr}Ω ± {tolerance}%</span>
       <Badge className="bounds">{boundsStr}</Badge>
     </h2>
   );

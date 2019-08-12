@@ -1,6 +1,6 @@
 export const precision = x => parseFloat(x.toFixed(2));
 
-export function getMagnitude(number) {
+export const magnitude = number => {
   if (!number || number === 0) {
     return '0';
   }
@@ -10,24 +10,20 @@ export function getMagnitude(number) {
     {order:  9, symbol: "G"},
     {order:  6, symbol: "M"},
     {order:  3, symbol: "K"},
+    {order:  0, symbol:  ""},
   ];
 
   const lg = Math.floor(Math.log10(number));
 
-  for (let i = 0; i < ordersOfMagnitude.length; i++) {
-    const {order, symbol} = ordersOfMagnitude[i];
-    if (lg >= order) {
-      return String(precision(number / 10**order)) + symbol;
-    }
-  }
+  const {order, symbol} = ordersOfMagnitude.find(x => !x.order || lg >= x.order);
 
-  return number.toString();
-}
+  return String(precision(number / 10**order)) + symbol;
+};
 
-export function getBounds(resistance, tolerance) {
+export const boundaries = (resistance, tolerance) => {
   const fraction = (resistance * tolerance) / 100.00;
   return [
     precision(resistance - fraction),
-    precision(resistance + fraction)
+    precision(resistance + fraction),
   ];
-}
+};

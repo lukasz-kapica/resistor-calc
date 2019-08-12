@@ -3,7 +3,7 @@ import _ from 'lodash';
 import '../styles/Chart.css';
 
 import {Chart as ch, colorNames, bandsToTolerances} from '../lib/ColorCode';
-import {getMagnitude} from "../lib/utils";
+import {magnitude} from "../lib/utils";
 
 const THead = ({bands}) => (
   <thead>
@@ -57,7 +57,7 @@ const TBody = ({
         <td>
           <div className={`inner noselect multiplier ${isChecked(digits)} ${isClickable(multiplier)}`}
                onClick={() => multiplier && handleCodeChange(digits)}>
-            {multiplier && getMagnitude(multiplier) + 'Ω'}
+            {multiplier && magnitude(multiplier) + 'Ω'}
           </div>
         </td>
         {len !== 3 && <td>

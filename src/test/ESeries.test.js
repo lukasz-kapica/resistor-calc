@@ -2,16 +2,15 @@ import React from 'react';
 import ESeries, { getTriple, baseResistance } from '../components/ESeries';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import _ from 'lodash';
+import {Resistor} from "../lib/ColorCode";
 
 beforeEach(cleanup);
 
 test('calls onBaseChange when a new base is clicked', () => {
   const props = {
-    resistance: 150,
-    tolerance: 5,
+    resistor: new Resistor(150, 5, 4),
     onBaseChange: jest.fn(),
     onToleranceChange: jest.fn(),
-    bands: 4,
   };
   const { getByText } = render(<ESeries {...props} />);
   const base13 = getByText('1.3');
@@ -21,13 +20,9 @@ test('calls onBaseChange when a new base is clicked', () => {
 });
 
 [{
-  resistance: 931,
-  bands: 5,
-  tolerance: 2,
+  resistor: new Resistor(931, 2, 5),
 }, {
-  resistance: 100,
-  bands: 4,
-  tolerance: 5,
+  resistor: new Resistor(100, 5, 4),
 },
 ].forEach((props) => {
   test(`matches snapshot for resistance: ${props.resistance}`, () => {

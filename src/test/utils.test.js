@@ -1,6 +1,6 @@
-import {getMagnitude, getBounds} from "../lib/utils";
+import {magnitude, boundaries} from "../lib/utils";
 
-describe("getMagnitude", () => {
+describe("magnitude", () => {
   const TestCases = [
     {
       number: 100,
@@ -37,14 +37,14 @@ describe("getMagnitude", () => {
   ];
 
   TestCases.forEach(({number, want}) => {
-    it(`should return ${want} for: {number}`, () => {
-      const actual = getMagnitude(number);
+    it(`returns ${want} for ${number}`, () => {
+      const actual = magnitude(number);
       expect(actual).toBe(want);
     });
   })
 });
 
-describe('getBounds', () => {
+describe('boundaries', () => {
   const TestCases = [
     {
       resistance: 1,
@@ -59,8 +59,8 @@ describe('getBounds', () => {
   ];
 
   TestCases.forEach(({resistance, tolerance, want}) => {
-    it(`returns ${want} for resistance: ${resistance} and tolerance: ${tolerance}`, () => {
-      const got = getBounds(resistance, tolerance);
+    it(`returns [${want}] for ${resistance} ± ${tolerance}%`, () => {
+      const got = boundaries(resistance, tolerance);
       expect(got).toEqual(want);
     });
   });
