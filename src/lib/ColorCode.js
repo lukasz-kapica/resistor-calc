@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { precision } from "./utils";
 
 /**
  * Resistor is represented by two values
@@ -97,7 +98,7 @@ export function codeToResistor(code) {
 
   const multiplier = Chart[code[digits]].multiplier;
   const tolerance = len === 3 ? 20 : Chart[code[digits+1]].tolerance;
-  const finalResistance = parseFloat((resistance * multiplier).toFixed(2));
+  const finalResistance = precision(resistance * multiplier);
 
   return new Resistor(finalResistance, tolerance, len);
 }
@@ -135,8 +136,7 @@ export function resistorToCode({ resistance, tolerance, bands }) {
     multiplier *= 10;
   }
 
-  const intermid = (resistance / multiplier).toFixed(2);
-  const resistanceNumber = Math.floor(parseFloat(intermid));
+  const resistanceNumber = Math.floor(precision(resistance / multiplier));
 
   const code = String(resistanceNumber)
     .padStart(numberOfDigits, '0')
