@@ -1,27 +1,21 @@
 export function getMagnitude(number) {
-  if (number === 0) return '0';
-
-  if (!number) return undefined;
-
-  const decimals = number.toString().split('');
-
-  if (decimals.includes('.')) {
-    return number.toString();
+  if (!number || number === 0) {
+    return '0';
   }
 
-  const len = decimals.length;
-
   const ordersOfMagnitude = [
-    {zeros: 12, symbol: "T"},
-    {zeros:  9, symbol: "G"},
-    {zeros:  6, symbol: "M"},
-    {zeros:  3, symbol: "K"},
+    {order: 12, symbol: "T"},
+    {order:  9, symbol: "G"},
+    {order:  6, symbol: "M"},
+    {order:  3, symbol: "K"},
   ];
 
+  const lg = Math.floor(Math.log10(number));
+
   for (let i = 0; i < ordersOfMagnitude.length; i++) {
-    const {zeros, symbol} = ordersOfMagnitude[i];
-    if (len > zeros) {
-      return String(parseFloat((number / Math.pow(10, zeros)).toFixed(2))) + symbol;
+    const {order, symbol} = ordersOfMagnitude[i];
+    if (lg >= order) {
+      return String(parseFloat((number / 10**order).toFixed(2))) + symbol;
     }
   }
 

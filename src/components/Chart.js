@@ -46,8 +46,7 @@ const TBody = ({
         <td className="d-none d-sm-table-cell">{color}</td>
 
         {_.times(digits, index => (
-          <td key={index}
-          >
+          <td key={index}>
             <div className={`inner noselect band ${isChecked(index)} ${isClickable(value)}`}
                  onClick={() => value !== undefined && handleCodeChange(index)}>
               {value}
