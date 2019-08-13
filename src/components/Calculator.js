@@ -16,6 +16,7 @@ import {
   codeToResistor,
   bandsToTolerances,
   bandsToDigits,
+  figures,
 } from '../lib/ColorCode';
 
 import {
@@ -48,7 +49,7 @@ function Calculator({
     base = +base;
     const baseCode = resistorToCode({resistance: base, tolerance, bands});
     const digits = bandsToDigits(bands);
-    const newCode = baseCode.slice(0, digits);
+    const newCode = figures(baseCode);
     newCode.push(code[digits]);
     bands > 3 && newCode.push(code[digits+1]);
     setCode(newCode);

@@ -1,4 +1,4 @@
-import {magnitude, boundaries, precision} from "../lib/utils";
+import {magnitude, boundaries, precision, base} from "../lib/utils";
 
 describe("magnitude", () => {
   const TestCases = [
@@ -87,5 +87,20 @@ describe('precision', () => {
       const got = precision(x);
       expect(got).toEqual(want);
     });
+  });
+});
+
+
+[{
+  resistance: 100,
+  want: 1,
+}, {
+  resistance: 348,
+  want: 3.48,
+},
+].forEach(({resistance, want}) => {
+  test(`base(${resistance}) should return ${want}`, () => {
+    const got = base(resistance);
+    expect(got).toBe(want);
   });
 });

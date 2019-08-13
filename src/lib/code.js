@@ -7,7 +7,7 @@ import {Resistor, bandsToDigits} from "./resistor";
  * @param  {string[]} code - 3, 4 or 5 arguments each of which is a color from the colorNames array
  * @returns {Resistor} resistor - decoded instance of the Resistor
  */
-export function codeToResistor(code) {
+export const codeToResistor = code => {
   // We can properly decode only 3, 4 and 5 band resistors
   if (!code || !code.length || code.length < 3 || code.length > 5) {
     throw new Error(
@@ -15,18 +15,19 @@ export function codeToResistor(code) {
     );
   }
 
-  const len = code.length;
-  const digits = bandsToDigits(len);
+  const bands = code.length;
+  const digits = bandsToDigits(bands);
 
   // So that if we have digits a, b, c - the whole number is 100*a + 10*b + c
   // if a, b the whole number is 10*a + b
-  const resistance = code
-    .slice(0, digits)
-    .reduce((acc, color) => acc * 10 + Chart[color].value, 0);
+  const resistance = figures(code).reduce(
+    (acc, color) => acc * 10 + Chart[color].value, 0);
 
   const multiplier = Chart[code[digits]].multiplier;
-  const tolerance = len === 3 ? 20 : Chart[code[digits+1]].tolerance;
+  const tolerance = bands === 3 ? 20 : Chart[code[digits+1]].tolerance;
   const finalResistance = precision(resistance * multiplier);
 
-  return new Resistor(finalResistance, tolerance, len);
-}
+  return new Resistor(finalResistance, tolerance, bands);
+};
+
+export const figures = code => code.slice(0, bandsToDigits(code.length));

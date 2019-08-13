@@ -1,6 +1,6 @@
 import {Chart, colorNames} from "./chart";
 import {Resistor, resistorToCode, validResistance, bandsToDigits, bandsToTolerances} from "./resistor";
-import {codeToResistor} from "./code";
+import {codeToResistor, figures} from "./code";
 
 export {
   Resistor,
@@ -11,4 +11,5 @@ export {
   bandsToTolerances,
   Chart,
   colorNames,
+  figures,
 };

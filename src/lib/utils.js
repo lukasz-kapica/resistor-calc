@@ -29,3 +29,17 @@ export const boundaries = (resistance, tolerance) => {
     precision(resistance + fraction),
   ];
 };
+
+export const base = n => {
+  if (n <= 0) return 0;
+
+  const lg = Math.floor(Math.log10(n));
+  return precision(n / 10**lg);
+};
+
+export const stripZero = value => {
+  if (-1 < value && value < 1) {
+    return String(value).substr(1);
+  }
+  return String(value);
+};
