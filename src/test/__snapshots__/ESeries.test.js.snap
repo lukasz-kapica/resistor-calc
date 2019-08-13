@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matches snapshot for resistance: 100 1`] = `
+exports[`matches snapshot for resistance: undefined 1`] = `
 <div
   class="ESeries"
 >
@@ -11,98 +11,6 @@ exports[`matches snapshot for resistance: 100 1`] = `
       <tr>
         <th>
           E-Series 
-          <span
-            class="badge badge-pill badge-info"
-            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
-          >
-            ?
-          </span>
-        </th>
-        <th>
-          Tolerances [%]
-        </th>
-        <th>
-          Less
-        </th>
-        <th>
-          Equal
-        </th>
-        <th>
-          Greater
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          E12
-        </td>
-        <td>
-          <a
-            href="#"
-          >
-            10
-          </a>
-          
-        </td>
-        <td>
-          —
-        </td>
-        <td>
-          1
-        </td>
-        <td>
-          <a
-            href="#"
-          >
-            1.2
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          E24
-        </td>
-        <td>
-          5
-          
-        </td>
-        <td>
-          —
-        </td>
-        <td>
-          1
-        </td>
-        <td>
-          <a
-            href="#"
-          >
-            1.1
-          </a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-`;
-
-exports[`matches snapshot for resistance: 931 1`] = `
-<div
-  class="ESeries"
->
-  <table
-    class="table table-sm table-striped table-hover"
-  >
-    <thead>
-      <tr>
-        <th>
-          E-Series 
-          <span
-            class="badge badge-pill badge-info"
-            style="display: inline; line-height: 2; vertical-align: top; cursor: pointer;"
-          >
-            ?
-          </span>
         </th>
         <th>
           Tolerances [%]
@@ -220,6 +128,86 @@ exports[`matches snapshot for resistance: 931 1`] = `
             href="#"
           >
             9.42
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`matches snapshot for resistance: undefined 2`] = `
+<div
+  class="ESeries"
+>
+  <table
+    class="table table-sm table-striped table-hover"
+  >
+    <thead>
+      <tr>
+        <th>
+          E-Series 
+        </th>
+        <th>
+          Tolerances [%]
+        </th>
+        <th>
+          Less
+        </th>
+        <th>
+          Equal
+        </th>
+        <th>
+          Greater
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          E12
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            10
+          </a>
+          
+        </td>
+        <td>
+          —
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            1.2
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          E24
+        </td>
+        <td>
+          5
+          
+        </td>
+        <td>
+          —
+        </td>
+        <td>
+          1
+        </td>
+        <td>
+          <a
+            href="#"
+          >
+            1.1
           </a>
         </td>
       </tr>

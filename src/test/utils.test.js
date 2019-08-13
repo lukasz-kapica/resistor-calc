@@ -1,4 +1,4 @@
-import {magnitude, boundaries} from "../lib/utils";
+import {magnitude, boundaries, precision} from "../lib/utils";
 
 describe("magnitude", () => {
   const TestCases = [
@@ -61,6 +61,30 @@ describe('boundaries', () => {
   TestCases.forEach(({resistance, tolerance, want}) => {
     it(`returns [${want}] for ${resistance} ± ${tolerance}%`, () => {
       const got = boundaries(resistance, tolerance);
+      expect(got).toEqual(want);
+    });
+  });
+});
+
+describe('precision', () => {
+  const TestCases = [
+    {
+      x: 3.141592,
+      want: 3.14,
+    },
+    {
+      x: 1.011592,
+      want: 1.01,
+    },
+    {
+      x: 1.001592,
+      want: 1,
+    },
+  ];
+
+  TestCases.forEach(({x, want}) => {
+    it(`returns ${want} for ${x}`, () => {
+      const got = precision(x);
       expect(got).toEqual(want);
     });
   });

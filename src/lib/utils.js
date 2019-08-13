@@ -1,4 +1,6 @@
-export const precision = x => parseFloat(x.toFixed(2));
+import _ from 'lodash';
+
+export const precision = x => _.round(x, 2);
 
 export const magnitude = number => {
   if (!number || number === 0) {
@@ -15,9 +17,9 @@ export const magnitude = number => {
 
   const lg = Math.floor(Math.log10(number));
 
-  const {order, symbol} = ordersOfMagnitude.find(x => !x.order || lg >= x.order);
+  const {order, symbol} = ordersOfMagnitude.find(x => x.order === 0 || lg >= x.order);
 
-  return String(precision(number / 10**order)) + symbol;
+  return `${precision(number / 10**order)}${symbol}`;
 };
 
 export const boundaries = (resistance, tolerance) => {
