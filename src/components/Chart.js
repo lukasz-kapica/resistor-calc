@@ -1,9 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
-import '../styles/Chart.css';
 
-import {Chart as ch, colorNames, bandsToTolerances} from '../lib/ColorCode';
+import {Chart as ch, colorNames} from '../lib/chart';
+import {bandsToTolerances} from '../lib/resistor';
 import {magnitude} from "../lib/utils";
+
+import '../styles/Chart.css';
 
 const THead = ({bands}) => (
   <thead>

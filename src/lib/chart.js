@@ -46,3 +46,15 @@ export const Chart = colorNames.reduce(
   }),
   {}
 );
+
+export const figuresToColors = figures => figures.map(figure => colorNames[figure]);
+
+const makeMapFromProperty = property =>
+  _.chain(colorNames)
+    .groupBy(color => Chart[color][property])
+    .omit([undefined])
+    .mapValues(col => col[0])
+    .value();
+
+export const multiplierToColor = makeMapFromProperty("multiplier");
+export const toleranceToColor = makeMapFromProperty("tolerance");

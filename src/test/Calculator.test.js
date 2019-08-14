@@ -1,5 +1,5 @@
 import React from 'react';
-import {render, cleanup} from '@testing-library/react';
+import {render, fireEvent, cleanup} from '@testing-library/react';
 
 import Calculator from '../components/Calculator';
 
@@ -11,4 +11,12 @@ test('renders proper resistor', () => {
   expect(getByText("330Ω ± 5%")).toBeTruthy();
   expect(getByDisplayValue('330')).toBeTruthy();
   expect(getByDisplayValue('5%')).toBeTruthy();
+});
+
+test('changes bands', () => {
+  const { getByText } = render(<Calculator code={["Orange", "Orange", "Brown", "Gold"]} />); // 330 Ohms
+  const bands5 = getByText('5 bands');
+  fireEvent.click(bands5);
+  expect(getByText('2%')).toBeTruthy();
+  expect(getByText('E192')).toBeTruthy();
 });

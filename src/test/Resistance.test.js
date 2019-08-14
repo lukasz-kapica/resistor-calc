@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Resistance from '../components/Resistance';
-import { Resistor, bandsToTolerances } from '../lib/ColorCode';
+import { Resistor, bandsToTolerances } from '../lib/resistor';
 
 import {render, cleanup, fireEvent} from "@testing-library/react";
 

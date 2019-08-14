@@ -2,10 +2,10 @@ import _ from 'lodash';
 
 export const precision = x => _.round(x, 2);
 
+export const lg10 = x => Math.floor(Math.log10(x));
+
 export const magnitude = number => {
-  if (!number || number === 0) {
-    return '0';
-  }
+  if (!number) return '0';
 
   const ordersOfMagnitude = [
     {order: 12, symbol: "T"},
@@ -15,9 +15,8 @@ export const magnitude = number => {
     {order:  0, symbol:  ""},
   ];
 
-  const lg = Math.floor(Math.log10(number));
-
-  const {order, symbol} = ordersOfMagnitude.find(x => x.order === 0 || lg >= x.order);
+  const {order, symbol} = ordersOfMagnitude.find(
+    x => x.order === 0 || lg10(number) >= x.order);
 
   return `${precision(number / 10**order)}${symbol}`;
 };
@@ -30,16 +29,8 @@ export const boundaries = (resistance, tolerance) => {
   ];
 };
 
-export const base = n => {
-  if (n <= 0) return 0;
+export const base = n => (n === 0) ? n : precision(n / 10**lg10(n));
 
-  const lg = Math.floor(Math.log10(n));
-  return precision(n / 10**lg);
-};
+export const stripZero = value =>
+  String(value).substr(value < 1 ? 1 : 0);
 
-export const stripZero = value => {
-  if (-1 < value && value < 1) {
-    return String(value).substr(1);
-  }
-  return String(value);
-};

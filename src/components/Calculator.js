@@ -13,11 +13,11 @@ import Badge from 'react-bootstrap/Badge';
 
 import {
   resistorToCode,
-  codeToResistor,
   bandsToTolerances,
   bandsToDigits,
-  figures,
-} from '../lib/ColorCode';
+} from '../lib/resistor';
+
+import {figures, codeToResistor} from '../lib/code';
 
 import {
   magnitude,
@@ -38,7 +38,7 @@ function Calculator({
   const handleResistorChange = property => value =>
     setCode(resistorToCode({
       ...resistor,
-      [property]: value,
+      [property]: +value,
     }));
 
   const handleResistanceChange = handleResistorChange('resistance');

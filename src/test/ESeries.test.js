@@ -1,8 +1,8 @@
 import React from 'react';
-import ESeries, { getTriple, baseResistance } from '../components/ESeries';
+import ESeries from '../components/ESeries';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import _ from 'lodash';
-import {Resistor} from "../lib/ColorCode";
+import {Resistor} from "../lib/resistor";
 
 beforeEach(cleanup);
 

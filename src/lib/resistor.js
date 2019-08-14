@@ -1,7 +1,5 @@
-import _ from "lodash";
-
 import {precision} from "./utils";
-import {Chart, colorNames} from './chart';
+import {multiplierToColor, toleranceToColor, figuresToColors} from './chart';
 
 /**
  * Resistor is represented by two values
@@ -29,25 +27,7 @@ export const bandsToTolerances = {
   5: [2, 1, 0.5, 0.25, 0.1, 0.05],
 };
 
-
-const makeMapFromProperty = property =>
-  _.chain(colorNames)
-    .groupBy(color => Chart[color][property])
-    .omit([undefined])
-    .mapValues(col => col[0])
-    .value();
-
-const multiplierArray = makeMapFromProperty("multiplier");
-const toleranceArray = makeMapFromProperty("tolerance");
-
-
 export function resistorToCode({ resistance, tolerance, bands }) {
-  bands = +bands;
-
-  if (bands < 3 || bands > 5 || resistance <= 0) {
-    throw new Error(`resistorToCode: incorrect input data`);
-  }
-
   if (!bandsToTolerances[bands].includes(tolerance)) {
     tolerance = bandsToTolerances[bands][0];
   }
@@ -59,6 +39,8 @@ export function resistorToCode({ resistance, tolerance, bands }) {
   const numberOfDigits = bandsToDigits(bands);
   const highest10Power = 10**numberOfDigits;
 
+  //const multiplier = x => 10**Math.floor(Math.log10(x));
+
   let multiplier = 0.01;
   while (multiplier * highest10Power <= resistance) {
     multiplier *= 10;
@@ -66,16 +48,15 @@ export function resistorToCode({ resistance, tolerance, bands }) {
 
   const resistanceNumber = Math.floor(precision(resistance / multiplier));
 
-  const code = String(resistanceNumber)
+  const figures = String(resistanceNumber)
     .padStart(numberOfDigits, '0')
     .split("")
-    .map(i => parseInt(i))
-    .map(i => colorNames[i]);
+    .map(i => parseInt(i));
 
-  code.push(multiplierArray[multiplier]);
-  if (bands > 3) {
-    code.push(toleranceArray[tolerance]);
-  }
+  const code = figuresToColors(figures);
+
+  code.push(multiplierToColor[multiplier]);
+  bands > 3 && code.push(toleranceToColor[tolerance]);
 
   return code;
 }
