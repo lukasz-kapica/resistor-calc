@@ -8,13 +8,6 @@ import {Resistor, bandsToDigits} from "./resistor";
  * @returns {Resistor} resistor - decoded instance of the Resistor
  */
 export const codeToResistor = code => {
-  // We can properly decode only 3, 4 and 5 band resistors
-  if (!code || !code.length || code.length < 3 || code.length > 5) {
-    throw new Error(
-      `codeToResistor function takes an array which consists of 3, 4 or 5 colors`
-    );
-  }
-
   const bands = code.length;
   const digits = bandsToDigits(bands);
 

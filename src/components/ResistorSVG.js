@@ -1,20 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
 
-function ResistorSVG({ code }) {
-
+export default function ResistorSVG({ code }) {
   const bands = code.length;
-
-  if (!_.inRange(bands, 3, 6)) {
-    throw new Error(`ResistorSVG: expected array of 3, 4 or 5 elements, got: ${bands}`);
-  }
-
-  code = code.map(color => color.toLowerCase());
 
   const width = (bands === 5) ? 35 : 45;
 
-  const bandsArr = {
+  const bandsToProps = {
     3: [
       {
         x: 185.05522,
@@ -98,10 +90,12 @@ function ResistorSVG({ code }) {
   const rects = code.map((color, index) =>
     <rect ry="0"
       key={index}
-      {...bandsArr[bands][index]}
-      className={`is-${color}`}
+      {...bandsToProps[bands][index]}
+      className={`is-${color.toLowerCase()}`}
     />
   );
+
+  const [firstBand, ...rest] = rects;
 
   return (
 
@@ -182,9 +176,9 @@ function ResistorSVG({ code }) {
       </g>
       <g
         transform="translate(-68.002197,-193.97351)">
-        { rects[0] }
+        { firstBand }
       </g>
-      { rects.slice(1) }
+      { rest }
     </svg>
 
   );
@@ -193,5 +187,3 @@ function ResistorSVG({ code }) {
 ResistorSVG.propTypes = {
   code: PropTypes.array.isRequired,
 };
-
-export default ResistorSVG;

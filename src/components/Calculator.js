@@ -1,39 +1,28 @@
 import React, { useState } from 'react';
 
+import {resistorToCode, bandsToDigits} from '../lib/resistor';
+import {figures, codeToResistor} from '../lib/code';
+
+import NBar from './NBar';
+import ResistorInfo from './ResistorInfo';
+import ResistorSVG from './ResistorSVG';
 import Resistance from './Resistance';
 import ESeries from './ESeries';
 import Chart from './Chart';
-import NBar from './NBar';
-import ResistorSVG from './ResistorSVG';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Badge from 'react-bootstrap/Badge';
-
-import {
-  resistorToCode,
-  bandsToTolerances,
-  bandsToDigits,
-} from '../lib/resistor';
-
-import {figures, codeToResistor} from '../lib/code';
-
-import {
-  magnitude,
-  boundaries,
-} from "../lib/utils";
 
 import '../styles/Calculator.css';
 
-function Calculator({
+export default function Calculator({
   code: initialCode = ["Orange", "Orange", "Brown", "Gold"], // 330 Ohms
 }) {
 
   const [code, setCode] = useState(initialCode);
 
   const resistor = codeToResistor(code);
-  const {resistance, tolerance, bands} = resistor;
 
   const handleResistorChange = property => value =>
     setCode(resistorToCode({
@@ -42,14 +31,14 @@ function Calculator({
     }));
 
   const handleResistanceChange = handleResistorChange('resistance');
-  const handleToleranceChange = handleResistorChange('tolerance');
-  const handleBandsChange = handleResistorChange('bands');
+  const handleToleranceChange  = handleResistorChange('tolerance');
+  const handleBandsChange      = handleResistorChange('bands');
 
   const handleBaseChange = base => {
     base = +base;
-    const baseCode = resistorToCode({resistance: base, tolerance, bands});
+    const {bands} = resistor;
     const digits = bandsToDigits(bands);
-    const newCode = figures(baseCode);
+    const newCode = figures(resistorToCode({...resistor, resistance: base}));
     newCode.push(code[digits]);
     bands > 3 && newCode.push(code[digits+1]);
     setCode(newCode);
@@ -57,18 +46,16 @@ function Calculator({
 
   return (
     <div className="Calculator">
-      <NBar bands={bands}
+      <NBar bands={resistor.bands}
             onBandsChange={handleBandsChange} />
       <div className="wrapper">
         <Container className="main-container">
           <Row>
             <Col>
-              <ResistorInfo resistance={resistance}
-                            tolerance={tolerance} />
+              <ResistorInfo resistor={resistor} />
               <ResistorSVG code={code} />
               <Resistance
                 resistor={resistor}
-                tolerances={bandsToTolerances[bands]}
                 onResistanceChange={handleResistanceChange}
                 onToleranceChange={handleToleranceChange} />
               <ESeries
@@ -86,21 +73,3 @@ function Calculator({
     </div>
   );
 }
-
-function ResistorInfo({
-  resistance,
-  tolerance,
-}) {
-  const resistanceStr = magnitude(resistance);
-  const [lowerBound, upperBound] = boundaries(resistance, tolerance);
-  const boundsStr = `${magnitude(lowerBound)}Ω - ${magnitude(upperBound)}Ω`;
-
-  return (
-    <h2 className="resistor-info">
-      <span>{resistanceStr}Ω ± {tolerance}%</span>
-      <Badge className="bounds">{boundsStr}</Badge>
-    </h2>
-  );
-}
-
-export default Calculator;

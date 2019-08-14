@@ -53,7 +53,7 @@ const makeMapFromProperty = property =>
   _.chain(colorNames)
     .groupBy(color => Chart[color][property])
     .omit([undefined])
-    .mapValues(col => col[0])
+    .mapValues(_.first)
     .value();
 
 export const multiplierToColor = makeMapFromProperty("multiplier");

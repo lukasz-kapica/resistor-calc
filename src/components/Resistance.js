@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { validResistance } from "../lib/resistor";
+import {bandsToTolerances, validResistance} from "../lib/resistor";
 
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
@@ -9,12 +9,12 @@ import Col from 'react-bootstrap/Col';
 
 function Resistance({
   resistor,
-  tolerances,
   onResistanceChange,
   onToleranceChange,
 }) {
 
   const {resistance, tolerance, bands} = resistor;
+  const tolerances = bandsToTolerances[bands];
 
   const handleResistanceChange = resistance => {
     if (validResistance(resistance, bands)) {
@@ -67,7 +67,6 @@ function Resistance({
 
 Resistance.propTypes = {
   resistor: PropTypes.object.isRequired,
-  tolerances: PropTypes.array.isRequired,
   onResistanceChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };
