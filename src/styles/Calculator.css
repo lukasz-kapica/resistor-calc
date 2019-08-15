@@ -91,3 +91,7 @@ a.nav-link.active {
     margin-left: 0.355rem;
     vertical-align: middle;
 }
+
+.ESeries span {
+    vertical-align: middle;
+}

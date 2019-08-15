@@ -21,10 +21,6 @@ const THead = ({bands}) => (
   </thead>
 );
 
-THead.propTypes = {
-  bands: PropTypes.number.isRequired,
-};
-
 const TBody = ({
   code,
   onCodeChange,
@@ -85,11 +81,6 @@ const TBody = ({
   })}
   </tbody>
 );
-
-TBody.propTypes = {
-  code: PropTypes.array.isRequired,
-  onCodeChange: PropTypes.func.isRequired,
-};
 
 export default function Chart({
   code,
