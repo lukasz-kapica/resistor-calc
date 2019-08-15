@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import {Chart as ch, colorNames} from '../lib/chart';
-import {bandsToTolerances} from '../lib/resistor';
+import {chart, colorNames} from '../lib/chart';
+import {bandsToDigits, bandsToTolerances} from '../lib/resistor';
 import {magnitude} from "../lib/utils";
 
 import '../styles/Chart.css';
@@ -20,61 +21,75 @@ const THead = ({bands}) => (
   </thead>
 );
 
+THead.propTypes = {
+  bands: PropTypes.number.isRequired,
+};
+
 const TBody = ({
   code,
   onCodeChange,
 }) => (
   <tbody>
   {colorNames.map((color) => {
-    const {value, multiplier, tolerance} = ch[color];
+    const {value, multiplier, tolerance} = chart[color];
 
-    const isChecked = (index) =>
-      (code[index] === color) ? 'is-checked' : '';
+    const isChecked = index => (code[index] === color) ? 'is-checked' : '';
 
-    const isClickable = (value) =>
-      value !== undefined ? 'is-clickable' : '';
+    const isClickable = value => (value !== undefined) ? 'is-clickable' : '';
 
-    const len = code.length;
-    const digits = len === 5 ? 3 : 2;
+    const bands = code.length;
+    const digits = bandsToDigits(bands);
 
-    const handleCodeChange = (index) => {
+    const handleCodeChange = index => {
       const newCode = [...code];
       newCode[index] = color;
       onCodeChange(newCode);
     };
 
+    const FiguresTDs = () => _.times(digits, index => (
+      <td key={index}>
+        <div className={`inner band ${isChecked(index)} ${isClickable(value)}`}
+             onClick={() => value !== undefined && handleCodeChange(index)}>
+          {value}
+        </div>
+      </td>
+    ));
+
+    const MultiplierTD = () => (
+      <td>
+        <div className={`inner multiplier ${isChecked(digits)} ${isClickable(multiplier)}`}
+             onClick={() => multiplier && handleCodeChange(digits)}>
+          {multiplier && magnitude(multiplier) + 'Ω'}
+        </div>
+      </td>
+    );
+
+    const ToleranceTD = () => (
+      <td>
+        {bandsToTolerances[bands].includes(tolerance) &&
+        <div className={`inner ${isChecked(digits+1)} ${isClickable(tolerance)}`}
+             onClick={() => tolerance && handleCodeChange(digits+1)} >
+          {tolerance && `± ${tolerance}%`}
+        </div>}
+      </td>
+    );
+
     return (
       <tr key={color} className={`is-${color.toLowerCase()}`}>
         <td className="d-none d-sm-table-cell">{color}</td>
-
-        {_.times(digits, index => (
-          <td key={index}>
-            <div className={`inner noselect band ${isChecked(index)} ${isClickable(value)}`}
-                 onClick={() => value !== undefined && handleCodeChange(index)}>
-              {value}
-            </div>
-          </td>
-        ))}
-
-        <td>
-          <div className={`inner noselect multiplier ${isChecked(digits)} ${isClickable(multiplier)}`}
-               onClick={() => multiplier && handleCodeChange(digits)}>
-            {multiplier && magnitude(multiplier) + 'Ω'}
-          </div>
-        </td>
-        {len !== 3 && <td>
-          {bandsToTolerances[code.length].includes(tolerance) &&
-            <div className={`inner noselect ${isChecked(digits+1)} ${isClickable(tolerance)}`}
-                 onClick={() => tolerance && handleCodeChange(digits+1)}
-            >
-              {tolerance && `± ${tolerance}%`}
-            </div>}
-        </td>}
+        <FiguresTDs />
+        <MultiplierTD />
+        {bands !== 3 && <ToleranceTD />}
       </tr>
     );
   })}
   </tbody>
 );
+
+TBody.propTypes = {
+  code: PropTypes.array.isRequired,
+  onCodeChange: PropTypes.func.isRequired,
+};
 
 export default function Chart({
   code,
@@ -89,3 +104,8 @@ export default function Chart({
     </div>
   );
 }
+
+Chart.propTypes = {
+  code: PropTypes.array.isRequired,
+  onCodeChange: PropTypes.func.isRequired,
+};

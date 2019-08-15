@@ -1,4 +1,4 @@
-import {Chart} from "./chart";
+import {chart} from "./chart";
 import {precision} from "./utils";
 import {Resistor, bandsToDigits} from "./resistor";
 
@@ -14,10 +14,10 @@ export const codeToResistor = code => {
   // So that if we have digits a, b, c - the whole number is 100*a + 10*b + c
   // if a, b the whole number is 10*a + b
   const resistance = figures(code).reduce(
-    (acc, color) => acc * 10 + Chart[color].value, 0);
+    (acc, color) => acc * 10 + chart[color].value, 0);
 
-  const multiplier = Chart[code[digits]].multiplier;
-  const tolerance = bands === 3 ? 20 : Chart[code[digits+1]].tolerance;
+  const multiplier = chart[code[digits]].multiplier;
+  const tolerance = bands === 3 ? 20 : chart[code[digits+1]].tolerance;
   const finalResistance = precision(resistance * multiplier);
 
   return new Resistor(finalResistance, tolerance, bands);

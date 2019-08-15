@@ -35,7 +35,7 @@ const mapIndexToTolerance = index => {
   return indexOf !== -1 ? tolerances[indexOf] : undefined;
 };
 
-export const Chart = colorNames.reduce(
+export const chart = colorNames.reduce(
   (acc, color, index) => ({
     ...acc,
     [color]: {
@@ -51,7 +51,7 @@ export const figuresToColors = figures => figures.map(figure => colorNames[figur
 
 const makeMapFromProperty = property =>
   _.chain(colorNames)
-    .groupBy(color => Chart[color][property])
+    .groupBy(color => chart[color][property])
     .omit([undefined])
     .mapValues(_.first)
     .value();
