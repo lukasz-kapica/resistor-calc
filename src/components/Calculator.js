@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import {resistorToCode, bandsToDigits} from '../lib/resistor';
-import {figures, codeToResistor} from '../lib/code';
+import {resistorToCode} from '../lib/resistor';
+import {figures, properties, codeToResistor} from '../lib/code';
 
 import NBar from './NBar';
 import ResistorInfo from './ResistorInfo';
@@ -35,12 +35,8 @@ export default function Calculator({
   const handleBandsChange      = handleResistorChange('bands');
 
   const handleBaseChange = base => {
-    base = +base;
-    const {bands} = resistor;
-    const digits = bandsToDigits(bands);
-    const newCode = figures(resistorToCode({...resistor, resistance: base}));
-    newCode.push(code[digits]);
-    bands > 3 && newCode.push(code[digits+1]);
+    const auxCode = resistorToCode({...resistor, resistance: +base});
+    const newCode = [...figures(auxCode), ...properties(code)];
     setCode(newCode);
   };
 

@@ -24,3 +24,5 @@ export const codeToResistor = code => {
 };
 
 export const figures = code => code.slice(0, bandsToDigits(code.length));
+
+export const properties = code => code.slice(bandsToDigits(code.length));
