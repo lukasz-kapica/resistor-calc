@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {bandsToTolerances, validResistance} from "../lib/resistor";
 
@@ -7,7 +7,7 @@ import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
-function Resistance({
+export default function Resistance({
   resistor,
   onResistanceChange,
   onToleranceChange,
@@ -16,11 +16,17 @@ function Resistance({
   const {resistance, tolerance, bands} = resistor;
   const tolerances = bandsToTolerances[bands];
 
+  const [resInput, setResInput] = useState(resistance);
+
+  useEffect(() => setResInput(resistance), [resistance]);
+
   const handleResistanceChange = resistance => {
-    if (validResistance(resistance, bands)) {
-      onResistanceChange(resistance);
-    }
+    if (validResistance(+resistance, bands))
+      onResistanceChange(+resistance);
+    setResInput(resistance);
   };
+
+  const isValid = validResistance(+resInput, bands);
 
   return (
     <div className="Resistance">
@@ -32,11 +38,12 @@ function Resistance({
             <InputGroup size="sm">
               <FormControl
                 className="resistance-input"
-                value={resistance}
-                onChange={(e) => handleResistanceChange(+e.target.value)}
+                value={resInput}
+                onChange={e => handleResistanceChange(e.target.value)}
                 placeholder="Resistance"
                 aria-label="Resistance"
                 aria-describedby="basic-addon1"
+                style={{color: isValid ? '#000' : '#f00'}}
               />
               <InputGroup.Append>
                 <InputGroup.Text id="basic-addon1">Ω</InputGroup.Text>
@@ -52,7 +59,7 @@ function Resistance({
               className="tolerance-input"
               aria-label="Tolerance"
               value={tolerance}
-              onChange={(e) => onToleranceChange(+e.target.value)}
+              onChange={e => onToleranceChange(+e.target.value)}
               disabled={tolerances.length === 1}
             >
               {tolerances.map(t => <option key={t} value={t}>{t}%</option>)}
@@ -70,5 +77,3 @@ Resistance.propTypes = {
   onResistanceChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };
-
-export default Resistance;

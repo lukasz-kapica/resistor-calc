@@ -41,4 +41,8 @@ export const resistorsWithCodes = [
     resistor: new Resistor(150, 20, 3),
     code: ["Brown", "Green", "Brown"],
   },
+  {
+    resistor: new Resistor(0.33, 5, 4),
+    code: ["Orange", "Orange", "Silver", "Gold"],
+  },
 ];

@@ -1,4 +1,4 @@
-import {precision} from "./utils";
+import {precision, stripZero} from "./utils";
 import {multiplierToColor, toleranceToColor, figuresToColors} from './chart';
 
 /**
@@ -65,13 +65,13 @@ export function validResistance(resistance, bands) {
   resistance = +resistance;
   bands = +bands;
   const digits = bandsToDigits(bands);
-  let resistanceStr = String(resistance);
+  let resistanceStr = stripZero(resistance);
 
   if (typeof resistance !== 'number' || Number.isNaN(resistance)) {
     return false;
   }
 
-  if (resistance < 1 || resistance > bandsToBounds[bands]) {
+  if (resistance < 0 || resistance > bandsToBounds[bands]) {
     return false;
   }
 
