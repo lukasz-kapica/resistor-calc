@@ -43,7 +43,7 @@ export default function Resistance({
                 placeholder="Resistance"
                 aria-label="Resistance"
                 aria-describedby="basic-addon1"
-                style={{color: isValid ? '#000' : '#f00'}}
+                style={{color: isValid ? '' : '#f00'}}
               />
               <InputGroup.Append>
                 <InputGroup.Text id="basic-addon1">Ω</InputGroup.Text>

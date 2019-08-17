@@ -47,7 +47,7 @@ export default function Calculator({
       <div className="wrapper">
         <Container className="main-container">
           <Row>
-            <Col>
+            <Col lg={6} className="mb-3">
               <ResistorInfo resistor={resistor} />
               <ResistorSVG code={code} />
               <Resistance
@@ -59,7 +59,7 @@ export default function Calculator({
                 onBaseChange={handleBaseChange}
                 onToleranceChange={handleToleranceChange} />
             </Col>
-            <Col>
+            <Col lg={6} className="mb-3">
               <Chart code={code}
                      onCodeChange={setCode} />
             </Col>

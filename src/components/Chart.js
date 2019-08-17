@@ -12,11 +12,26 @@ const THead = ({bands}) => (
   <thead>
     <tr>
       <th className="d-none d-sm-table-cell">Color</th>
-      <th>Figure #1</th>
-      <th>Figure #2</th>
-      {bands === 5 && <th>Figure #3</th>}
-      <th>Multiplier</th>
-      {bands !== 3 && <th>Tolerance</th>}
+      <th>
+        <span className="d-none d-sm-inline">Figure #1</span>
+        <span className="d-sm-none">Fig. #1</span>
+      </th>
+      <th>
+        <span className="d-none d-sm-inline">Figure #2</span>
+        <span className="d-sm-none">Fig. #2</span>
+      </th>
+      {bands === 5 && <th>
+        <span className="d-none d-sm-inline">Figure #3</span>
+        <span className="d-sm-none">Fig. #3</span>
+      </th>}
+      <th>
+        <span className="d-none d-sm-inline">Multiplier</span>
+        <span className="d-sm-none">Mul.</span>
+      </th>
+      {bands !== 3 && <th>
+        <span className="d-none d-sm-inline">Tolerance</span>
+        <span className="d-sm-none">Tol.</span>
+      </th>}
     </tr>
   </thead>
 );

@@ -11,11 +11,11 @@
                                   supported by Chrome and Opera */
 }
 
-td:last-child .inner {
+td:last-child .tolerance {
     padding: 2px 7px;
 }
 
-td:last-child .inner.is-checked {
+td:last-child .tolerance.is-checked {
     padding: 0 0 0 5px;
 }
 

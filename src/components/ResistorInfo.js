@@ -14,7 +14,9 @@ export default function ResistorInfo({
 
   return (
     <h2 className="resistor-info">
-      <span>{resistanceStr}Ω ± {tolerance}%</span>
+      <span className="d-block d-md-inline">
+        {resistanceStr}Ω ± {tolerance}%
+      </span>
       <Badge className="bounds">{boundsStr}</Badge>
     </h2>
   );

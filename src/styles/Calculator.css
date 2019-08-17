@@ -17,10 +17,6 @@ div.main-container {
     padding: 1.5rem;
 }
 
-.col {
-    margin-bottom: 1.5rem;
-}
-
 .resistor-svg {
     width: 20em;
     height: 30%;
@@ -28,17 +24,21 @@ div.main-container {
     margin: 0 auto;
 }
 
-@media (max-width: 350px) {
+@media (max-width: 370px) {
     .resistor-svg {
         width: 90%;
     }
 
-    div.main-container {
-        padding: 5px;
+    .resistor-info .bounds {
+        margin-left: 0 !important;
     }
 
-    .Chart {
-        margin-top: 1rem;
+    div.main-container {
+        padding: 0.8rem 0 0 0;
+    }
+
+    .row {
+        margin: 0;
     }
 }
 
@@ -53,8 +53,8 @@ div.main-container {
 
 .resistor-info .bounds {
     vertical-align: middle;
-    margin-left: 0.5rem;
     font-size: 1.25rem;
+    margin-left: 0.5rem;
 }
 
 .Calculator > .container {

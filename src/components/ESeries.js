@@ -38,11 +38,27 @@ export default function ESeries({
       <Table striped hover size="sm">
         <thead>
           <tr>
-            <th>E-Series</th>
-            <th>Tolerances [%]</th>
-            <th>Less</th>
-            <th>Equal</th>
-            <th>Greater</th>
+            <th>
+              <span className="d-none d-sm-inline">E-Series</span>
+              <span className="d-sm-none">EIA</span>
+            </th>
+            <th>
+              <span className="d-none d-sm-inline">Tolerances </span>
+              <span className="d-sm-none">Tol. </span>
+              [%]
+            </th>
+            <th>
+              <span className="d-none d-sm-inline">Less</span>
+              <span className="d-sm-none">&lt;</span>
+            </th>
+            <th>
+              <span className="d-none d-sm-inline">Equal</span>
+              <span className="d-sm-none">=</span>
+            </th>
+            <th>
+              <span className="d-none d-sm-inline">Greater</span>
+              <span className="d-sm-none">&gt;</span>
+            </th>
           </tr>
         </thead>
         <tbody>
