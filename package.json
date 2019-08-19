@@ -2,7 +2,7 @@
   "name": "resistor-calc",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://loocash.github.io/resistor-calc",
+  "homepage": "https://resistor-calc.surge.sh/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
