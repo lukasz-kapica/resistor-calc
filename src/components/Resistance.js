@@ -7,6 +7,8 @@ import FormControl from 'react-bootstrap/FormControl';
 import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
+import styles from '../styles/Resistance.module.css';
+
 export default function Resistance({
   resistor,
   onResistanceChange,
@@ -37,13 +39,12 @@ export default function Resistance({
             <Form.Label>Resistance</Form.Label>
             <InputGroup size="sm">
               <FormControl
-                className="resistance-input"
+                className={isValid ? '' : styles.invalid}
                 value={resInput}
                 onChange={e => handleResistanceChange(e.target.value)}
                 placeholder="Resistance"
                 aria-label="Resistance"
                 aria-describedby="basic-addon1"
-                style={{color: isValid ? '' : '#f00'}}
               />
               <InputGroup.Append>
                 <InputGroup.Text id="basic-addon1">Ω</InputGroup.Text>
@@ -56,7 +57,6 @@ export default function Resistance({
             <FormControl
               size="sm"
               as="select"
-              className="tolerance-input"
               aria-label="Tolerance"
               value={tolerance}
               onChange={e => onToleranceChange(+e.target.value)}
