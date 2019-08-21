@@ -14,7 +14,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import '../styles/Calculator.css';
+import styles from '../styles/Calculator.module.css';
 
 export default function Calculator({
   code: initialCode = ["Orange", "Orange", "Brown", "Gold"], // 330 Ohms
@@ -44,8 +44,8 @@ export default function Calculator({
     <div className="Calculator">
       <NBar bands={resistor.bands}
             onBandsChange={handleBandsChange} />
-      <div className="wrapper">
-        <Container className="main-container">
+      <div className={styles.wrapper}>
+        <Container className={styles.Container}>
           <Row>
             <Col lg={6} className="mb-3">
               <ResistorInfo resistor={resistor} />

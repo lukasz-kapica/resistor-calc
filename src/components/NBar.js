@@ -6,29 +6,22 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import ReactSVG from 'react-svg';
 
-import '../styles/NBar.css';
+import styles from '../styles/NBar.module.css';
 
 const ResistorIcon = () =>
   <ReactSVG
-    className="resistor-icon"
+    className={styles.resistorIcon}
     src={`${process.env.PUBLIC_URL}/resistor-icon.svg`} />;
-
-/*
-const GithubIcon = () =>
-  <ReactSVG
-    className="github-icon"
-    src={`${process.env.PUBLIC_URL}/github-brands.svg`} />;
-*/
 
 export default function NBar({
   bands,
   onBandsChange,
 }) {
   return (
-    <Navbar bg="dark" variant="dark" expand="md">
+    <Navbar bg="dark" variant="dark" expand="md" className={styles.Navbar}>
       <Container>
         <ResistorIcon />
-        <Navbar.Brand href="#" className="navbar-title">
+        <Navbar.Brand href="#" className={styles.brand}>
           Resistor <span className="d-none d-sm-inline">Color Code</span> Calculator
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

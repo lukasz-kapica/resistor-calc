@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/ResistorSVG.css';
+import styles from '../styles/ResistorSVG.module.css';
 
 export default function ResistorSVG({ code }) {
   const bands = code.length;
@@ -102,7 +102,7 @@ export default function ResistorSVG({ code }) {
   return (
 
     <svg
-      className="resistor-svg"
+      className={styles.resistor}
       xmlns="http://www.w3.org/2000/svg"
       height="42.473526mm"
       width="174.7043mm"

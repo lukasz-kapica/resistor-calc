@@ -2,36 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
+import {TH} from './shared';
+
 import {chart, colorNames} from '../lib/chart';
 import {bandsToDigits, bandsToTolerances} from '../lib/resistor';
 import {magnitude} from "../lib/utils";
 
-import '../styles/Chart.css';
+import styles from '../styles/Chart.module.css';
 
 const THead = ({bands}) => (
   <thead>
-    <tr>
+    <tr className='text-center'>
       <th className="d-none d-sm-table-cell">Color</th>
-      <th>
-        <span className="d-none d-sm-inline">Figure #1</span>
-        <span className="d-sm-none">Fig. #1</span>
-      </th>
-      <th>
-        <span className="d-none d-sm-inline">Figure #2</span>
-        <span className="d-sm-none">Fig. #2</span>
-      </th>
-      {bands === 5 && <th>
-        <span className="d-none d-sm-inline">Figure #3</span>
-        <span className="d-sm-none">Fig. #3</span>
-      </th>}
-      <th>
-        <span className="d-none d-sm-inline">Multiplier</span>
-        <span className="d-sm-none">Mul.</span>
-      </th>
-      {bands !== 3 && <th>
-        <span className="d-none d-sm-inline">Tolerance</span>
-        <span className="d-sm-none">Tol.</span>
-      </th>}
+      <TH full='Figure #1' abbr='Fig. #1' />
+      <TH full='Figure #2' abbr='Fig. #2' />
+      {bands === 5  &&
+        <TH full='Figure #3' abbr='Fig. #3' />}
+      <TH full='Multiplier' abbr='Mul.' />
+      {bands !== 3 &&
+        <TH full='Tolerance' abbr='Tol.' />}
     </tr>
   </thead>
 );
@@ -44,9 +33,9 @@ const TBody = ({
   {colorNames.map((color) => {
     const {value, multiplier, tolerance} = chart[color];
 
-    const isChecked = index => (code[index] === color) ? 'is-checked' : '';
+    const isChecked = index => (code[index] === color) ? styles.checked : '';
 
-    const isClickable = value => (value !== undefined) ? 'is-clickable' : '';
+    const isClickable = value => (value !== undefined) ? styles.clickable : '';
 
     const bands = code.length;
     const digits = bandsToDigits(bands);
@@ -59,7 +48,7 @@ const TBody = ({
 
     const FiguresTDs = () => _.times(digits, index => (
       <td key={index}>
-        <div className={`inner band ${isChecked(index)} ${isClickable(value)}`}
+        <div className={`${styles.cell} text-center ${isChecked(index)} ${isClickable(value)}`}
              onClick={() => value !== undefined && handleCodeChange(index)}>
           {value}
         </div>
@@ -68,7 +57,7 @@ const TBody = ({
 
     const MultiplierTD = () => (
       <td>
-        <div className={`inner multiplier ${isChecked(digits)} ${isClickable(multiplier)}`}
+        <div className={`${styles.cell} text-center ${isChecked(digits)} ${isClickable(multiplier)}`}
              onClick={() => multiplier && handleCodeChange(digits)}>
           {multiplier && magnitude(multiplier) + 'Ω'}
         </div>
@@ -78,7 +67,7 @@ const TBody = ({
     const ToleranceTD = () => (
       <td>
         {bandsToTolerances[bands].includes(tolerance) &&
-        <div className={`inner ${isChecked(digits+1)} ${isClickable(tolerance)}`}
+        <div className={`${styles.cell} ${isChecked(digits+1)} ${isClickable(tolerance)}`}
              onClick={() => tolerance && handleCodeChange(digits+1)} >
           {tolerance && `± ${tolerance}%`}
         </div>}
@@ -87,7 +76,7 @@ const TBody = ({
 
     return (
       <tr key={color} className={`is-${color.toLowerCase()}`}>
-        <td className="d-none d-sm-table-cell">{color}</td>
+        <td className="pl-3 d-none d-sm-table-cell">{color}</td>
         <FiguresTDs />
         <MultiplierTD />
         {bands !== 3 && <ToleranceTD />}
@@ -103,7 +92,7 @@ export default function Chart({
 }) {
   return (
     <div className="Chart d-flex align-items-center">
-      <table>
+      <table  className="w-100">
         <THead bands={code.length} />
         <TBody code={code} onCodeChange={onCodeChange} />
       </table>

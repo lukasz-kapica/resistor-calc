@@ -1,0 +1,12 @@
+.resistor {
+    width: 20em;
+    height: 30%;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 370px) {
+    .resistor {
+        width: 90%;
+    }
+}

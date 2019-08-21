@@ -1,7 +1,4 @@
-
-.inner {
-    padding: 2px;
-
+.noselect {
     /* no-select */
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -11,51 +8,19 @@
                                   supported by Chrome and Opera */
 }
 
-td:last-child .tolerance {
-    padding: 2px 7px;
+.cell {
+    composes: noselect;
+    padding: 2px;
 }
 
-td:last-child .tolerance.is-checked {
-    padding: 0 0 0 5px;
-}
-
-.Chart td {
-    margin: 2px;
-}
-
-.Chart table td:first-child {
-    padding: 0 10px;
-}
-
-.Chart .band, .Chart .multiplier {
-    text-align: center;
-}
-
-.is-clickable:hover {
-    cursor: pointer;
+.clickable:hover {
     box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
+    cursor: pointer;
 }
 
-.Chart table {
-    width: 100%;
-}
-
-.Chart .is-checked {
+.checked {
     box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.3);
     border: 2px dashed;
     font-weight: bold;
     padding: 0;
-}
-
-.Chart {
-    height: 100%;
-    margin-top: 0.5rem;
-}
-
-.Chart th {
-    text-align: center;
-}
-
-.Chart td {
-    border: 1px solid #000;
 }

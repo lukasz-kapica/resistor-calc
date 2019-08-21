@@ -70,3 +70,19 @@
   background-color: silver;
   fill: silver;
 }
+
+a.nav-link.active {
+  font-weight: bold;
+}
+
+.dropdown-toggle.nav-link::after {
+  margin-left: 0.355rem;
+  vertical-align: middle;
+}
+
+.Chart td {
+  border: 1px solid #000;
+  margin: 2px;
+}
+
+

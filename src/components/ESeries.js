@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import {TH} from './shared';
+
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
 import { base, stripZero } from "../lib/utils";
 import { bandsToESeries, eseriesToTolerances, getTriple } from "../lib/eseries";
-
-import '../styles/ESeries.css';
 
 const ButtonLink = ({children, ...props}) =>
   <Button variant="link"
@@ -37,30 +37,14 @@ export default function ESeries({
 
   return (
     <div className="ESeries">
-      <Table striped hover size="sm">
+      <Table striped hover size="sm" className='text-center'>
         <thead>
           <tr>
-            <th>
-              <span className="d-none d-sm-inline">E-Series</span>
-              <span className="d-sm-none">EIA</span>
-            </th>
-            <th>
-              <span className="d-none d-sm-inline">Tolerances </span>
-              <span className="d-sm-none">Tol. </span>
-              [%]
-            </th>
-            <th>
-              <span className="d-none d-sm-inline">Less</span>
-              <span className="d-sm-none">&lt;</span>
-            </th>
-            <th>
-              <span className="d-none d-sm-inline">Equal</span>
-              <span className="d-sm-none">=</span>
-            </th>
-            <th>
-              <span className="d-none d-sm-inline">Greater</span>
-              <span className="d-sm-none">&gt;</span>
-            </th>
+            <TH full='E-Series'       abbr='EIA' />
+            <TH full='Tolerances [%]' abbr='Tol. [%]' />
+            <TH full='Less'           abbr='<' />
+            <TH full='Equal'          abbr='=' />
+            <TH full='Greater'        abbr='>' />
           </tr>
         </thead>
         <tbody>
@@ -94,16 +78,3 @@ ESeries.propTypes = {
   onBaseChange: PropTypes.func.isRequired,
   onToleranceChange: PropTypes.func.isRequired,
 };
-
-/*const QuestionBadge = () => (
-  <Badge pill variant="info"
-    style={{
-      display: 'inline',
-      lineHeight: 2,
-      verticalAlign: 'top',
-      cursor: 'pointer',
-    }}
-  >
-    ?
-  </Badge>
-);*/

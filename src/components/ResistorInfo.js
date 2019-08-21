@@ -4,7 +4,7 @@ import {boundaries, magnitude} from "../lib/utils";
 
 import Badge from "react-bootstrap/Badge";
 
-import '../styles/ResistorInfo.css';
+import styles from '../styles/ResistorInfo.module.css';
 
 export default function ResistorInfo({
   resistor,
@@ -15,11 +15,11 @@ export default function ResistorInfo({
   const boundsStr = `${magnitude(lowerBound)}Ω - ${magnitude(upperBound)}Ω`;
 
   return (
-    <h2 className="resistor-info">
-      <span className="d-block d-md-inline">
+    <h2 className={styles.resistorInfo}>
+      <span className={`d-block d-md-inline ${styles.vertMid}`}>
         {resistanceStr}Ω ± {tolerance}%
       </span>
-      <Badge className="bounds">{boundsStr}</Badge>
+      <Badge className={styles.bounds}>{boundsStr}</Badge>
     </h2>
   );
 }
