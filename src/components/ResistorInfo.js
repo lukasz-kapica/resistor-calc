@@ -15,11 +15,13 @@ export default function ResistorInfo({
   const boundsStr = `${magnitude(lowerBound)}Ω - ${magnitude(upperBound)}Ω`;
 
   return (
-    <h2 className={styles.resistorInfo}>
-      <span className={`d-block d-md-inline ${styles.vertMid}`}>
-        {resistanceStr}Ω ± {tolerance}%
+    <h2 className='m-0 text-center'>
+      <span className='d-block d-md-inline align-middle'>
+        { resistanceStr }Ω ± { tolerance }%
       </span>
-      <Badge className={styles.bounds}>{boundsStr}</Badge>
+      <Badge className={`align-middle ml-0 ml-md-2 ${styles.bounds}`}>
+        { boundsStr }
+      </Badge>
     </h2>
   );
 }

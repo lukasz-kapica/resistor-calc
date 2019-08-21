@@ -45,7 +45,7 @@ export default function Calculator({
       <NBar bands={resistor.bands}
             onBandsChange={handleBandsChange} />
       <div className={styles.wrapper}>
-        <Container className={styles.Container}>
+        <Container className={`p-2 p-sm-4 ${styles.Container}`}>
           <Row>
             <Col lg={6} className="mb-3">
               <ResistorInfo resistor={resistor} />
@@ -59,7 +59,7 @@ export default function Calculator({
                 onBaseChange={handleBaseChange}
                 onToleranceChange={handleToleranceChange} />
             </Col>
-            <Col lg={6} className="mb-3">
+            <Col lg={6} className="mb-1 mt-3">
               <Chart code={code}
                      onCodeChange={setCode} />
             </Col>

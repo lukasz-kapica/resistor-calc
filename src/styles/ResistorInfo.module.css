@@ -1,22 +1,5 @@
-.resistorInfo {
-    margin: 0;
-    text-align: center;
-}
-
-.vertMid {
-    vertical-align: middle;
-}
-
 .bounds {
-    composes: vertMid;
     background-color: var(--theme-color);
     color: #fff;
     font-size: 1.25rem;
-    margin-left: 0.5rem;
-}
-
-@media (max-width: 370px) {
-    .bounds {
-        margin-left: 0 !important;
-    }
 }
