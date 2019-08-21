@@ -2,7 +2,7 @@
 
 exports[`matches snapshot for Green,Blue,Yellow,Gold 1`] = `
 <svg
-  class="resistor-svg"
+  class="resistor"
   height="42.473526mm"
   id="svg2"
   viewBox="0 0 619.03099 150.49675"
@@ -127,7 +127,7 @@ exports[`matches snapshot for Green,Blue,Yellow,Gold 1`] = `
 
 exports[`matches snapshot for Red,Orange,Violet,Black,Brown 1`] = `
 <svg
-  class="resistor-svg"
+  class="resistor"
   height="42.473526mm"
   id="svg2"
   viewBox="0 0 619.03099 150.49675"

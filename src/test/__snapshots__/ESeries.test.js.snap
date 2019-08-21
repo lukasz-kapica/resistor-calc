@@ -5,24 +5,69 @@ exports[`matches snapshot for resistance: undefined 1`] = `
   class="ESeries"
 >
   <table
-    class="table table-sm table-striped table-hover"
+    class="table text-center table-sm table-striped table-hover"
   >
     <thead>
       <tr>
         <th>
-          E-Series
+          <span
+            class="d-none d-sm-inline"
+          >
+            E-Series
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            EIA
+          </span>
         </th>
         <th>
-          Tolerances [%]
+          <span
+            class="d-none d-sm-inline"
+          >
+            Tolerances [%]
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            Tol. [%]
+          </span>
         </th>
         <th>
-          Less
+          <span
+            class="d-none d-sm-inline"
+          >
+            Less
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            &lt;
+          </span>
         </th>
         <th>
-          Equal
+          <span
+            class="d-none d-sm-inline"
+          >
+            Equal
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            =
+          </span>
         </th>
         <th>
-          Greater
+          <span
+            class="d-none d-sm-inline"
+          >
+            Greater
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            &gt;
+          </span>
         </th>
       </tr>
     </thead>
@@ -169,24 +214,69 @@ exports[`matches snapshot for resistance: undefined 2`] = `
   class="ESeries"
 >
   <table
-    class="table table-sm table-striped table-hover"
+    class="table text-center table-sm table-striped table-hover"
   >
     <thead>
       <tr>
         <th>
-          E-Series
+          <span
+            class="d-none d-sm-inline"
+          >
+            E-Series
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            EIA
+          </span>
         </th>
         <th>
-          Tolerances [%]
+          <span
+            class="d-none d-sm-inline"
+          >
+            Tolerances [%]
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            Tol. [%]
+          </span>
         </th>
         <th>
-          Less
+          <span
+            class="d-none d-sm-inline"
+          >
+            Less
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            &lt;
+          </span>
         </th>
         <th>
-          Equal
+          <span
+            class="d-none d-sm-inline"
+          >
+            Equal
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            =
+          </span>
         </th>
         <th>
-          Greater
+          <span
+            class="d-none d-sm-inline"
+          >
+            Greater
+          </span>
+          <span
+            class="d-sm-none"
+          >
+            &gt;
+          </span>
         </th>
       </tr>
     </thead>
