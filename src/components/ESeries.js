@@ -7,6 +7,8 @@ import Button from 'react-bootstrap/Button';
 import { base, stripZero } from "../lib/utils";
 import { bandsToESeries, eseriesToTolerances, getTriple } from "../lib/eseries";
 
+import '../styles/ESeries.css';
+
 const ButtonLink = ({children, ...props}) =>
   <Button variant="link"
           style={{padding: 0}}

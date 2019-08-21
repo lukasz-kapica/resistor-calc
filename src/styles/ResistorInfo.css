@@ -1,0 +1,16 @@
+.resistor-info {
+    margin: 0;
+    text-align: center;
+}
+
+.resistor-info span {
+    vertical-align: middle;
+}
+
+.resistor-info .bounds {
+    background-color: var(--theme-color);
+    color: #fff;
+    vertical-align: middle;
+    font-size: 1.25rem;
+    margin-left: 0.5rem;
+}

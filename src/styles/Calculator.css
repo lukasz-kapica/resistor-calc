@@ -2,26 +2,14 @@
     background-image: linear-gradient(to bottom, var(--theme-color) 10%, var(--secondary-color), #fff);
 }
 
-nav.navbar {
-    background-color: var(--theme-color) !important;
-}
-
-.bounds {
-    background-color: var(--theme-color);
-    color: #fff;
-}
-
 div.main-container {
     background-color: #fff;
     border-radius: 8px 8px 0 0;
     padding: 1.5rem;
 }
 
-.resistor-svg {
-    width: 20em;
-    height: 30%;
-    display: block;
-    margin: 0 auto;
+.Calculator > .container {
+    margin-top: 1rem;
 }
 
 @media (max-width: 370px) {
@@ -40,58 +28,4 @@ div.main-container {
     .row {
         margin: 0;
     }
-}
-
-.resistor-info {
-    margin: 0;
-    text-align: center;
-}
-
-.resistor-info span {
-    vertical-align: middle;
-}
-
-.resistor-info .bounds {
-    vertical-align: middle;
-    font-size: 1.25rem;
-    margin-left: 0.5rem;
-}
-
-.Calculator > .container {
-    margin-top: 1rem;
-}
-
-.resistor-icon {
-    width: 2rem;
-    position: relative;
-    top: -3px;
-    margin-right: 0.75rem;
-}
-
-a.navbar-brand {
-    font-family: 'Lobster Two', sans-serif;
-    font-size: 1.5rem;
-    padding-top: 0;
-}
-
-a.nav-link.active {
-    font-weight: bold;
-}
-
-.ESeries table {
-    width: 100%;
-    text-align: center;
-}
-
-.github-icon {
-    width: 1.25rem;
-}
-
-.dropdown-toggle.nav-link::after {
-    margin-left: 0.355rem;
-    vertical-align: middle;
-}
-
-.ESeries span {
-    vertical-align: middle;
 }

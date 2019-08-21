@@ -6,6 +6,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import ReactSVG from 'react-svg';
 
+import '../styles/NBar.css';
+
 const ResistorIcon = () =>
   <ReactSVG
     className="resistor-icon"

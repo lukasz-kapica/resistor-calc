@@ -4,6 +4,8 @@ import {boundaries, magnitude} from "../lib/utils";
 
 import Badge from "react-bootstrap/Badge";
 
+import '../styles/ResistorInfo.css';
+
 export default function ResistorInfo({
   resistor,
 }) {

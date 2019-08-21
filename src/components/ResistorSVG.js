@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import '../styles/ResistorSVG.css';
+
 export default function ResistorSVG({ code }) {
   const bands = code.length;
 
