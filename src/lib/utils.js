@@ -1,9 +1,24 @@
 import _ from 'lodash';
 
+/**
+ * Rounds number to the second place after a comma
+ * @param {number} x
+ * @returns {number}
+ */
 export const precision = x => _.round(x, 2);
 
+/**
+ * Computes a floor of a decimal logarithm of x
+ * @param {number} x
+ * @returns {number}
+ */
 export const lg10 = x => Math.floor(Math.log10(x));
 
+/**
+ * Replaces maximum number of trailing zeros with a corresponding magnitude symbol
+ * @param {number} number
+ * @returns {string}
+ */
 export const magnitude = number => {
   if (!number) return '0';
 
@@ -21,6 +36,12 @@ export const magnitude = number => {
   return `${precision(number / 10**order)}${symbol}`;
 };
 
+/**
+ * Computes the smallest and largest possible resistances for given resistance and tolerance
+ * @param {number} resistance
+ * @param {number} tolerance
+ * @returns {[number, number]}
+ */
 export const boundaries = (resistance, tolerance) => {
   const fraction = (resistance * tolerance) / 100.00;
   return [
@@ -29,8 +50,18 @@ export const boundaries = (resistance, tolerance) => {
   ];
 };
 
-export const base = n => (n === 0) ? n : precision(n / 10**lg10(n));
+/**
+ * Returns the significand s of number n, such that: 0 <= s < 10
+ * i.e. 1234 -> 1.23, 1000 -> 1, 3.1415 -> 3.14, 0 -> 0
+ * @param {number} n
+ * @returns {number}
+ */
+export const significand = n => (n === 0) ? n : precision(n / 10**lg10(n));
 
-export const stripZero = value =>
-  String(value).substr(value < 1 ? 1 : 0);
+/**
+ * Returns the value as a string with leading zero omitted
+ * @param {number} value
+ * @returns {string}
+ */
+export const stripZero = value => String(value).substr(value < 1 ? 1 : 0);
 

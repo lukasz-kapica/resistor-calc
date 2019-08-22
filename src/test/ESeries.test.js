@@ -6,7 +6,7 @@ import {Resistor} from "../lib/resistor";
 
 beforeEach(cleanup);
 
-test('calls onBaseChange when a new base is clicked', () => {
+test('calls onBaseChange when a new significand is clicked', () => {
   const props = {
     resistor: new Resistor(150, 5, 4),
     onBaseChange: jest.fn(),

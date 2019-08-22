@@ -6,7 +6,7 @@ import {TH} from './shared';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 
-import { base, stripZero } from "../lib/utils";
+import { significand, stripZero } from "../lib/utils";
 import { bandsToESeries, eseriesToTolerances, getTriple } from "../lib/eseries";
 
 const ButtonLink = ({children, ...props}) =>
@@ -32,7 +32,7 @@ export default function ESeries({
   onToleranceChange,
 }) {
   const {resistance, tolerance, bands} = resistor;
-  const baseResistance = base(resistance);
+  const baseResistance = significand(resistance);
   const eseries = bandsToESeries[bands];
 
   return (
