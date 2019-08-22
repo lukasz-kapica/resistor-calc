@@ -2,7 +2,8 @@ import {precision, stripZero} from "./utils";
 import {multiplierToColor, toleranceToColor, figuresToColors} from './chart';
 
 /**
- * Resistor is represented by two values
+ * Represents a resistor
+ * @constructor
  * @param {Number} resistance - resistance in Ohms
  * @param {Number} tolerance - tolerance in percentage
  * @param {Number} bands - number of bands
@@ -13,21 +14,40 @@ export function Resistor(resistance, tolerance, bands) {
   this.bands = +bands;
 }
 
+/**
+ * The maximal resistance by the number of bands
+ * @type {{"3": number, "4": number, "5": number}}
+ */
 const bandsToBounds = {
   3: 99  * 1000000000,
   4: 99  * 1000000000,
   5: 999 * 1000000000,
 };
 
+/**
+ * Number of digits by the number of bands
+ * @param {number} bands
+ * @returns {number} digits
+ */
 export const bandsToDigits = bands => (bands === 5) ? 3 : 2;
 
+/**
+ * Possible tolerances by the number of bands
+ * @type {{"3": [number], "4": number[], "5": number[]}}
+ */
 export const bandsToTolerances = {
   3: [20],
   4: [5, 10],
   5: [2, 1, 0.5, 0.25, 0.1, 0.05],
 };
 
-export function resistorToCode({ resistance, tolerance, bands }) {
+/**
+ * Computes the color code
+ * @param {Resistor} resistor
+ * @returns {string[]} code
+ */
+export function resistorToCode(resistor) {
+  let { resistance, tolerance, bands } = resistor;
   if (!bandsToTolerances[bands].includes(tolerance)) {
     tolerance = bandsToTolerances[bands][0];
   }
@@ -61,6 +81,12 @@ export function resistorToCode({ resistance, tolerance, bands }) {
   return code;
 }
 
+/**
+ * Tests if the resistance and bands pair is valid
+ * @param {number} resistance
+ * @param {number} bands
+ * @returns {boolean}
+ */
 export function validResistance(resistance, bands) {
   resistance = +resistance;
   bands = +bands;

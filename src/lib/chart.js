@@ -1,5 +1,9 @@
 import _ from 'lodash';
 
+/**
+ * All possible color names in the color code
+ * @type {string[]}
+ */
 export const colorNames = [
   "Black",
   "Brown",
@@ -35,6 +39,7 @@ const mapIndexToTolerance = index => {
   return indexOf !== -1 ? tolerances[indexOf] : undefined;
 };
 
+// All colors with all corresponding properties
 export const chart = colorNames.reduce(
   (acc, color, index) => ({
     ...acc,
@@ -47,6 +52,11 @@ export const chart = colorNames.reduce(
   {}
 );
 
+/**
+ * Computes the slice of colors from the slice of figures
+ * @param {number[]} figures
+ * @returns {string[]}
+ */
 export const figuresToColors = figures => figures.map(figure => colorNames[figure]);
 
 const makeMapFromProperty = property =>

@@ -1,5 +1,9 @@
 import _ from "lodash";
 
+/**
+ * Possible tolerances by the E-Series
+ * @type {{E6: [number], E96: [number], E192: number[], E24: [number], E12: [number], E48: [number]}}
+ */
 export const eseriesToTolerances = {
   'E6': [20],
   'E12': [10],
@@ -9,12 +13,20 @@ export const eseriesToTolerances = {
   'E192': [0.5, 0.25, 0.1, 0.05],
 };
 
+/**
+ * Possible E-Series by the number of bands
+ * @type {{"3": [string], "4": [string, string], "5": [string, string, string]}}
+ */
 export const bandsToESeries = {
   3: ['E6'],
   4: ['E12', 'E24'],
   5: ['E48', 'E96', 'E192'],
 };
 
+/**
+ * Possible values by the E-Series
+ * @type {{E6: number[], E96: number[], E192: number[], E24: number[], E12: number[], E48: number[]}}
+ */
 export const eseriesToValues = {
   'E6': [1.0, 1.5, 2.2, 3.3, 4.7, 6.8],
   'E12': [1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2],
@@ -51,15 +63,21 @@ export const eseriesToValues = {
     8.56, 8.66, 8.76, 8.87, 8.98, 9.09, 9.2, 9.31, 9.42, 9.53, 9.65, 9.76, 9.88],
 };
 
-export function getTriple(baseResistance, series) {
+/**
+ * Returns the first smaller, equal and the first greater value of sig in the series sequence
+ * @param {number} sig - significand
+ * @param {string} series - E-Series
+ * @returns {[number|null, number|null, number|null]}
+ */
+export function getTriple(sig, series) {
   const values = eseriesToValues[series];
-  const index = _.sortedIndex(values, baseResistance);
+  const index = _.sortedIndex(values, sig);
 
   const smaller = index > 0 ? values[index-1] : null;
-  const equal = baseResistance === values[index] ? baseResistance : null;
+  const equal = sig === values[index] ? sig : null;
   let greater = index < values.length ? values[index] : null;
 
-  if (greater === baseResistance) {
+  if (greater !== null && greater === sig) {
     greater = null;
     if (index < values.length-1) {
       greater = values[index+1];

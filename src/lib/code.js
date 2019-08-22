@@ -23,6 +23,16 @@ export const codeToResistor = code => {
   return new Resistor(finalResistance, tolerance, bands);
 };
 
+/**
+ * Returns the slice of the code which corresponds to the figures
+ * @param {string[]} code
+ * @returns {string[]}
+ */
 export const figures = code => code.slice(0, bandsToDigits(code.length));
 
+/**
+ * Returns the slice of the code which corresponds to the multiplier and tolerance
+ * @param {string[]} code
+ * @returns {string[]}
+ */
 export const properties = code => code.slice(bandsToDigits(code.length));
