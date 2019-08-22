@@ -8,16 +8,27 @@ beforeEach(cleanup);
 
 test('calls onCodeChange when the code is changed', () => {
   const props = {
-    code: ["Brown", "Green", "Black", "Red"],
+    code: ["Orange", "Orange", "Brown", "Gold"],
     onCodeChange: jest.fn(),
   };
 
-  const { getByText } = render(<Chart {...props} />);
+  const { getByText, getAllByText } = render(<Chart {...props} />);
+
+  const greenFigure = getAllByText('5')[0];
+  fireEvent.click(greenFigure);
+
+  expect(props.onCodeChange)
+    .toHaveBeenCalledWith(["Green", "Orange", "Brown", "Gold"]);
 
   const blueMultiplier = getByText('1MΩ');
-
   fireEvent.click(blueMultiplier);
 
   expect(props.onCodeChange)
-    .toBeCalledWith(["Brown", "Green", "Blue", "Red"])
+    .toHaveBeenCalledWith(["Orange", "Orange", "Blue", "Gold"]);
+
+  const silverTolerance = getByText('± 10%');
+  fireEvent.click(silverTolerance);
+
+  expect(props.onCodeChange)
+    .toHaveBeenCalledWith(["Orange", "Orange", "Brown", "Silver"])
 });

@@ -7,7 +7,7 @@ import {render, cleanup, fireEvent} from "@testing-library/react";
 
 afterEach(cleanup);
 
-let resistanceInput, toleranceInput, props;
+let resistanceInput, toleranceInput, props, root;
 
 const sampleProps = () => ({
   onResistanceChange: jest.fn(),
@@ -18,7 +18,8 @@ const sampleProps = () => ({
 
 beforeEach(() => {
   props = sampleProps();
-  const { getByLabelText } = render(<Resistance {...props} />);
+  const { getByLabelText, container } = render(<Resistance {...props} />);
+  root = container;
   resistanceInput = getByLabelText('Resistance');
   toleranceInput = getByLabelText('Tolerance');
 });
@@ -36,4 +37,17 @@ test('calls onResistanceChange when the resistance is changed', () => {
 test('calls onToleranceChange when the tolerance is changed', () => {
   fireEvent.change(toleranceInput, { target: { value: 0.25 }});
   expect(props.onToleranceChange).toHaveBeenCalledWith(0.25);
+});
+
+test('prevents default on submit', () => {
+  const event = new Event('submit');
+  Object.assign(event, {
+    preventDefault: jest.fn()
+  });
+
+  const form = root.querySelector('form');
+
+  fireEvent(form, event);
+
+  expect(event.preventDefault).toHaveBeenCalled();
 });

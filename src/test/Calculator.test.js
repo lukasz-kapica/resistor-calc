@@ -20,3 +20,11 @@ test('changes bands', () => {
   expect(getByText('2%')).toBeTruthy();
   expect(getByText('E192')).toBeTruthy();
 });
+
+test('changes base', () => {
+  const { getByText, getByDisplayValue } = render(<Calculator code={["Orange", "Orange", "Brown", "Gold"]} />); // 330 Ohms
+  fireEvent.click(getByText('3.6'));
+  expect(getByText("360Ω ± 5%")).toBeTruthy();
+  expect(getByDisplayValue('360')).toBeTruthy();
+  expect(getByDisplayValue('5%')).toBeTruthy();
+});
