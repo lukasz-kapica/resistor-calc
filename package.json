@@ -2,7 +2,6 @@
   "name": "resistor-calc",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://resistor-calc.surge.sh/",
   "dependencies": {
     "bootstrap": "^4.3.1",
     "lodash": "^4.17.11",
@@ -17,9 +16,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "surge build -d resistor-calc.surge.sh"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,7 +35,6 @@
   },
   "devDependencies": {
     "@testing-library/react": "^8.0.5",
-    "prop-types": "^15.7.2",
-    "surge": "^0.21.3"
+    "prop-types": "^15.7.2"
   }
 }

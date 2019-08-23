@@ -33,7 +33,7 @@ export const bandsToDigits = bands => (bands === 5) ? 3 : 2;
 
 /**
  * Possible tolerances by the number of bands
- * @type {{"3": [number], "4": number[], "5": number[]}}
+ * @type {{"3": number[], "4": number[], "5": number[]}}
  */
 export const bandsToTolerances = {
   3: [20],
