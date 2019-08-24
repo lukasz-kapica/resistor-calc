@@ -1,12 +1,12 @@
-import {precision, stripZero} from "./utils";
+import {lg10, precision, significand, stripZero} from "./utils";
 import {multiplierToColor, toleranceToColor, figuresToColors} from './chart';
 
 /**
  * Represents a resistor
  * @constructor
- * @param {Number} resistance - resistance in Ohms
- * @param {Number} tolerance - tolerance in percentage
- * @param {Number} bands - number of bands
+ * @param {number} resistance - resistance in Ohms
+ * @param {number} tolerance - tolerance in percentage
+ * @param {number} bands - number of bands
  */
 export function Resistor(resistance, tolerance, bands) {
   this.resistance = +resistance;
@@ -48,6 +48,7 @@ export const bandsToTolerances = {
  */
 export function resistorToCode(resistor) {
   let { resistance, tolerance, bands } = resistor;
+
   if (!bandsToTolerances[bands].includes(tolerance)) {
     tolerance = bandsToTolerances[bands][0];
   }
@@ -57,18 +58,10 @@ export function resistorToCode(resistor) {
   }
 
   const numberOfDigits = bandsToDigits(bands);
-  const highest10Power = 10**numberOfDigits;
+  const res = Math.floor(significand(resistance) * 10**(numberOfDigits-1));
+  const multiplier = 10 ** (lg10(resistance) - numberOfDigits + 1);
 
-  //const multiplier = x => 10**Math.floor(Math.log10(x));
-
-  let multiplier = 0.01;
-  while (multiplier * highest10Power <= resistance) {
-    multiplier *= 10;
-  }
-
-  const resistanceNumber = Math.floor(precision(resistance / multiplier));
-
-  const figures = String(resistanceNumber)
+  const figures = String(res)
     .padStart(numberOfDigits, '0')
     .split("")
     .map(i => parseInt(i));
