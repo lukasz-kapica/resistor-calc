@@ -1,4 +1,4 @@
-import {lg10, precision, significand, stripZero} from "./utils";
+import {lg10, significand, stripZero} from "./utils";
 import {multiplierToColor, toleranceToColor, figuresToColors} from './chart';
 
 /**
@@ -57,12 +57,12 @@ export function resistorToCode(resistor) {
     resistance /= 10;
   }
 
-  const numberOfDigits = bandsToDigits(bands);
-  const res = Math.floor(significand(resistance) * 10**(numberOfDigits-1));
-  const multiplier = 10 ** (lg10(resistance) - numberOfDigits + 1);
+  const digits = bandsToDigits(bands);
+  const res = Math.floor(significand(resistance) * 10**(digits-1));
+  const multiplier = 10 ** (lg10(resistance) - digits + 1);
 
   const figures = String(res)
-    .padStart(numberOfDigits, '0')
+    .padStart(digits, '0')
     .split("")
     .map(i => parseInt(i));
 
