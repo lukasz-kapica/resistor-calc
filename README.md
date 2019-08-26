@@ -1,3 +1,9 @@
+# Resistor Color Code Calculator
+
+This is a tool for electronics hobbyist to help them in identifying 
+resistors depending on their color code and parameters like: resistance and tolerance.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
