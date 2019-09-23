@@ -29,13 +29,13 @@ export default function About() {
 
           This project is <a target="_blank" rel="noopener noreferrer" href="https://github.com/loocash/resistor-calc">
             open source
-          </a> and licensed under the MIT License.
+          </a> and is licensed under the MIT License.
 
           <br/>
           <br/>
 
-          Last but not least, I strongly recommend you checking all your
-          resistors with multimeter before using them in real projects.
+          Last but not least, I strongly recommend you checking all of
+          your resistors with multimeter before using them in real projects.
 
         </Modal.Body>
       </Modal>
